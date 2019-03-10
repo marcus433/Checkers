@@ -7,7 +7,7 @@ public class Gameboard {
 	public Piece currentPiece;
 
 	Gameboard() {
-		this.pieces = new Piece[gridSize.wiidth * gridSize.height];
+		this.pieces = new Piece[gridSize.width * gridSize.height];
 	}
 
 	public void selectPiece(Location location) {
