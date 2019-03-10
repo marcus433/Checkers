@@ -11,8 +11,7 @@ public class Game {
 	}
 
 	public void switchPlayerTurn() {
-		currentPlayerColor = currentPlayerColor == Piece.Color.RED ? 
-													Piece.Color.BLACK : Piece.Color.RED;
+		currentPlayerColor = currentPlayerColor == Piece.Color.RED ? Piece.Color.BLACK : Piece.Color.RED;
 	}
 
 	public void reset() {
