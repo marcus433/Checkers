@@ -18,4 +18,8 @@ public class GameboardTest {
 	public void movePiece() {
 		fail("Not implemented");
 	}
+	
+	public void foobar() {
+	   System.out.print("This is Sean! Just testing to see if I can push or commit.");
+	}
 }
