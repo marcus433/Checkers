@@ -2,7 +2,6 @@ package edu.sjsu.cs.cs151.checkers.App;
 
 /**
  * Piece represents a single checkers playing piece.
- * 
  */
 public class Piece {
 
