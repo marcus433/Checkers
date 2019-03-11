@@ -8,17 +8,21 @@ public class Piece {
 
 	Color color;
 	Location location;
-	Bool isUnidirectional;
+	boolean isUnidirectional;
+	Size size;
 
-	Piece() {
-		
+	Piece(Color color, Location location) {
+		this.color = color;
+		this.location = location;
+		isUnidirectional = true;
+		size = new Size(1, 1);
 	}
 
 	public Rect getRect() {
-		return null;
+		return new Rect(size, location);
 	}
 
 	public void makeKing() {
-		//
+		isUnidirectional = false;
 	}
 }
