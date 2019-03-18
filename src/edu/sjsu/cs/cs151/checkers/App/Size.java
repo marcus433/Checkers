@@ -1,7 +1,7 @@
 package edu.sjsu.cs.cs151.checkers.App;
 
 /**
- * Size is a representation of size used by the game logic. It will be used by both core and GUI classes. 
+ * Size is a representation of size used by the game logic. It will be used by both core and GUI classes.
  */
 public class Size {
 
