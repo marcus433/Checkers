@@ -5,11 +5,31 @@ package edu.sjsu.cs.cs151.checkers.App;
  */
 public class Rect {
 
-	public Size size;
-	public Location location;
-
 	Rect(Size size, Location location) {
 		this.size = size;
 		this.location = location;
 	}
+	
+// Getters and Setters
+	
+	/**
+	 * getSize returns the size of this rectangle object.
+	 * @return: a Size object that represents this rectangle
+	 */
+	public Size getSize() {
+	   return size;
+	}
+	
+	/**
+	 * getLocation returns the location of this rectangle on the board.
+	 * @return: a Location object for the rectangle
+	 */
+	public Location getLocation() {
+	   return location;
+	}
+	
+// Private fields
+	
+	private Size size;
+   private Location location;
 }

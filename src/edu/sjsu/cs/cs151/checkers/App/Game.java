@@ -5,10 +5,6 @@ package edu.sjsu.cs.cs151.checkers.App;
  */
 public class Game {
 
-	Piece.Color currentPlayerColor;
-	Player[] players;
-	Gameboard gameboard;
-
 	Game() {
 		reset();
 	}
@@ -29,4 +25,28 @@ public class Game {
 		this.players = new Player[2];
 		this.gameboard = new Gameboard();
 	}
+	
+// Getters and Setters	
+	
+	/**
+	 * getCurrentPlayerColor returns the current player's color.
+	 * @return: the current player's color as a Piece.Color object
+	 */
+	public Piece.Color getCurrentPlayerColor() {
+	   return currentPlayerColor;
+	}
+	
+	/**
+	 * getGameboard returns the current game's instance of the gameboard.
+	 * @return: the gameboard currently in play
+	 */
+	public Gameboard getGameboard() {
+	   return gameboard;
+	}
+	
+// Private fields
+	
+	private Piece.Color currentPlayerColor;
+   private Player[] players;
+   private Gameboard gameboard;
 }

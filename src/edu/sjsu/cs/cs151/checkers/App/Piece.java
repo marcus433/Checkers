@@ -9,15 +9,10 @@ public class Piece {
 		RED, BLACK
 	}
 
-	Color color;
-	Location location;
-	boolean isUnidirectional;
-	Size size;
-
 	Piece(Color color, Location location) {
 		this.color = color;
 		this.location = location;
-		isUnidirectional = true;
+		unidirectional = true;
 		size = new Size(1, 1);
 	}
 
@@ -34,6 +29,32 @@ public class Piece {
 	 * makeKing allows the Piece object to be moved both forward and backward.
 	 */
 	public void makeKing() {
-		isUnidirectional = false;
+		unidirectional = false;
 	}
+	
+// Getters and Setters
+	
+	public Color getColor() {
+	   return color;
+	}
+	
+	public Location getLocation() {
+	   return location;
+	}
+	
+	public boolean isUnidirectional() {
+	   return unidirectional;
+	}
+	
+	public Size getSize() {
+	   return size;
+	}
+	
+// Private fields
+	
+	private Color color;
+   private Location location;
+   private boolean unidirectional;
+   private Size size;
+   
 }

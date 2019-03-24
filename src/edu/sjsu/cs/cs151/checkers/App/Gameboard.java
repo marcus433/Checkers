@@ -5,10 +5,6 @@ package edu.sjsu.cs.cs151.checkers.App;
  */
 public class Gameboard {
 
-	public Size gridSize = Size(8, 8); // Unit is blocks
-	public Piece[] pieces;
-	public Piece currentPiece;
-
 	Gameboard() {
 		this.pieces = new Piece[gridSize.width * gridSize.height];
 	}
@@ -41,4 +37,37 @@ public class Gameboard {
 	public void movePiece(Location destination) {
 		this.currentPiece.location = destination; // TODO: use setter & getter so we can add layout hooks.
 	}
+	
+// Getters and Setters
+	/**
+	 * getSize returns the Size of the gameboard.
+	 * @return: the Size object of the board
+	 */
+	public Size getSize() {
+	   return gridSize;
+	}
+	
+	/**
+	 * getPieces returns the array of all pieces in play.
+	 * @return: the Piece[] array, pieces
+	 */
+	public Piece[] getPieces() {
+	   return pieces;
+	}
+	
+	/**
+	 * getCurrentPiece returns the current piece selected by the player.
+	 * @return: the selected Piece object by the current player
+	 */
+	public Piece getCurrentPiece() {
+	   return currentPiece;
+	}
+	
+// Private fields
+	
+	private Size gridSize = Size(8, 8); // Unit is blocks
+   private Piece[] pieces;
+   private Piece currentPiece;
+
+   
 }
