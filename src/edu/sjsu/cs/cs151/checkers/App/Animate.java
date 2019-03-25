@@ -7,7 +7,7 @@ import javax.swing.Timer;
 import javax.swing.JPanel;
 
 public class Animate implements ActionListener {
-	private static int FPS = 60;
+	private static int FPS = 120; // drop back to 60 later
 	private static int MS_S = 1000;
 
 	private int duration = 0; // in milliseconds
