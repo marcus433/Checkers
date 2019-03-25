@@ -5,11 +5,36 @@ package edu.sjsu.cs.cs151.checkers.App;
  */
 public class Location {
 
-	public int x = 0;
-	public int y = 0;
-
-	Location(int x, int y) {
+	Location() {
+	   this.x = DEFAULT_COORDINATE;
+	   this.y = DEFAULT_COORDINATE;
+	}
+   
+   Location(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
+
+// Getters and Setters	
+	/**
+	 * getX returns the x coordinate of this Location.
+	 * @return: an int representing x
+	 */
+	public int getX() {
+	   return x;
+	}
+	
+	/**
+	 * getY returns the y coordinate of this Location.
+	 * @return: an int representing y
+	 */
+	public int getY() {
+	   return y;
+	}
+	
+// Private fields
+	
+	private static final int DEFAULT_COORDINATE = 0;
+	private int x;
+   private int y;
 }

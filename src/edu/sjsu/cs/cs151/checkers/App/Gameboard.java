@@ -4,15 +4,10 @@ package edu.sjsu.cs.cs151.checkers.App;
  * Gameboard tracks the positions of each Piece currently in play.
  */
 public class Gameboard {
-
-	public Size gridSize;
-	public Piece[] pieces;
-	public Piece currentPiece;
-
 	Gameboard() {
-		this.gridSize = new Size(1, 1);
-		this.currentPiece = new Piece(Piece.Type.KING, Piece.Color.BLACK);
+	  gridSize = DEFAULT_GRID_SIZE;
 		this.pieces = new Piece[gridSize.width * gridSize.height];
+		this.currentPiece = new Piece(Piece.Type.KING, Piece.Color.BLACK); // temporary to keep compiler happy
 	}
 
 	/**
@@ -43,4 +38,37 @@ public class Gameboard {
 	public void movePiece(Location destination) {
 		//this.currentPiece.setLocation(destination); // TODO: use setter & getter so we can add layout hooks.
 	}
+	
+	// Getters and Setters
+	/**
+	 * getSize returns the Size of the gameboard.
+	 * @return: the Size object of the board
+	 */
+	public Size getSize() {
+	   return gridSize;
+	}
+	
+	/**
+	 * getPieces returns the array of all pieces in play.
+	 * @return: the Piece[] array, pieces
+	 */
+	public Piece[] getPieces() {
+	   return pieces;
+	}
+	
+	/**
+	 * getCurrentPiece returns the current piece selected by the player.
+	 * @return: the selected Piece object by the current player
+	 */
+	public Piece getCurrentPiece() {
+	   return currentPiece;
+	}
+	
+	// Private fields
+	
+	private static final Size DEFAULT_GRID_SIZE = Size(8, 8);
+	private Size gridSize;
+  private Piece[] pieces;
+  private Piece currentPiece;
+   
 }

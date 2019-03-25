@@ -6,14 +6,10 @@ import javax.swing.JPanel;
  * Game models the game flow of a round of Checkers.
  */
 public class Game extends JPanel {
-
-	private Piece.Color currentPlayerColor;
-	private Player[] players;
-	private Gameboard gameboard;
-
 	Game() {
 		super();
 		reset();
+
 		// FOR ANIMATION TESTING PURPOSES
 		this.setLayout(null);
 		Piece blackKing = new Piece(Piece.Type.KING, Piece.Color.RED);
@@ -41,4 +37,28 @@ public class Game extends JPanel {
 	public Piece.Color getCurrentPlayerColor() {
 		return currentPlayerColor;
 	}
+	
+	// Getters and Setters	
+	
+	/**
+	 * getCurrentPlayerColor returns the current player's color.
+	 * @return: the current player's color as a Piece.Color object
+	 */
+	public Piece.Color getCurrentPlayerColor() {
+	   return currentPlayerColor;
+	}
+	
+	/**
+	 * getGameboard returns the current game's instance of the gameboard.
+	 * @return: the gameboard currently in play
+	 */
+	public Gameboard getGameboard() {
+	   return gameboard;
+	}
+	
+	// Private fields
+	
+	private Piece.Color currentPlayerColor;
+   private Player[] players;
+   private Gameboard gameboard;
 }
