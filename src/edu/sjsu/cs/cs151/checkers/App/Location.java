@@ -15,7 +15,7 @@ public class Location {
 		this.y = y;
 	}
 
-// Getters and Setters	
+   // Getters and Setters	
 	/**
 	 * getX returns the x coordinate of this Location.
 	 * @return: an int representing x
@@ -32,9 +32,9 @@ public class Location {
 	   return y;
 	}
 	
-// Private fields
+	// Private fields
 	
 	private static final int DEFAULT_COORDINATE = 0;
 	private int x;
-   private int y;
+	private int y;
 }

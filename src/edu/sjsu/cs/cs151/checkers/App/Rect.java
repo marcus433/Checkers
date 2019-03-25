@@ -10,7 +10,7 @@ public class Rect {
 		this.location = location;
 	}
 	
-// Getters and Setters
+	// Getters and Setters
 	
 	/**
 	 * getSize returns the size of this rectangle object.
@@ -28,8 +28,8 @@ public class Rect {
 	   return location;
 	}
 	
-// Private fields
+	// Private fields
 	
 	private Size size;
-   private Location location;
+	private Location location;
 }

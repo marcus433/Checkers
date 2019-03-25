@@ -8,8 +8,16 @@ import java.util.ArrayList;
 import javax.swing.Timer;
 import javax.swing.JPanel;
 
+/**
+ * Handles animation interpolation
+ * easing, and chaining.
+ */
 public class Animate implements ActionListener {
 	
+	/*
+	 * Stores information for an animation
+	 * in a chain
+	 * */
 	class AnimationProps {
 		int x = 0;
 		int y = 0;
@@ -20,17 +28,10 @@ public class Animate implements ActionListener {
 		JPanel view = null;
 	}
 	
-	private static int FPS = 120; // drop back to 60 later
-	private static int MS_S = 1000;
-
-	private int duration = 0; // in milliseconds
-	private int timeIncrement = 0;
-	private int timeElapsed = 0;
-	private Timer timer;
-	private ArrayList<AnimationProps> queue;
-	private AnimationProps currentAnimation;
-	private boolean animationRunning = false;
-	
+	/*
+	 * Setup
+	 * @param duration: duration of animation in milliseconds
+	 * */
 	Animate(int duration) {
 		this.duration = duration;
 		currentAnimation = null;
@@ -38,7 +39,13 @@ public class Animate implements ActionListener {
 		timer = new Timer(timeIncrement, this);
 		queue = new ArrayList<>();
 	}
-
+	
+	/*
+	 * Adds animation to queue
+	 * @param view: target JPanel
+	 * @param location: target x, y position
+	 * @return self: for animateTo chaining
+	 * */
 	public Animate animateTo(JPanel view, Location location) {
 		int x = 0;
 		int y = 0;
@@ -63,6 +70,9 @@ public class Animate implements ActionListener {
 		return this;
 	}
 	
+	/*
+	 * Starts next animation
+	 * */
 	private void startAnimation() {
 		if (!animationRunning) {
 			timeElapsed = 0;
@@ -74,6 +84,9 @@ public class Animate implements ActionListener {
 		}
 	}
 	
+	/*
+	 * Ends animation and proceeds down animation chain
+	 * */
 	private void endAnimation() {
 		timer.stop();
 		timeElapsed = 0;
@@ -86,6 +99,10 @@ public class Animate implements ActionListener {
 		}
 	}
 	
+	/*
+	 * Calculates and paints animation frame
+	 * @param e: ActionEvent from timer
+	 * */
 	public void actionPerformed(ActionEvent e) {
 		if (timeElapsed >= duration) {
 			endAnimation();
@@ -105,10 +122,28 @@ public class Animate implements ActionListener {
 		timeElapsed += timeIncrement;
 	}
 	
+	/*
+	 * Easing Function
+	 * @param p: double between 0 and 1 representing interpolation progress
+	 * @return over/under shot progress
+	 * */
 	private double easeInEaseOut(double p) {
 		if (p < 0.5)
 			return 2.0 * Math.pow(p, 2.0);
 		else
 			return (4 - 2 * p) * p - 1;
 	}
+	
+	// Private fields
+	
+	private static int FPS = 120; // drop back to 60 later
+	private static int MS_S = 1000;
+
+	private int duration = 0; // in milliseconds
+	private int timeIncrement = 0;
+	private int timeElapsed = 0;
+	private Timer timer;
+	private ArrayList<AnimationProps> queue;
+	private AnimationProps currentAnimation;
+	private boolean animationRunning = false;
 }

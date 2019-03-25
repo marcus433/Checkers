@@ -30,7 +30,7 @@ public class Player {
 		//
 	}
 	
-// Getters and Setters
+	// Getters and Setters
 	
 	/**
 	 * getNumWonGames returns the number of games a particular player has won.
@@ -63,15 +63,15 @@ public class Player {
 	   this.color = color;
 	}
 	
-// Private fields
+	// Private fields
 	
 	private static final int DEFAULT_NUM_WINS = 0;
 	private static final Piece.Color DEFAULT_COLOR = Piece.Color.RED;
 	private static final int DEFAULT_NUM_PIECES = 12;
 	private Gameboard gameboard; // TODO: gameboard reference. We may implement this with a protocol delegate later.
-   private int numWonGames;
-   private Piece.Color color;
-   private int numPieces; // TODO: adjust based on determined board size.
+	private int numWonGames;
+	private Piece.Color color;
+	private int numPieces; // TODO: adjust based on determined board size.
 
    
 }

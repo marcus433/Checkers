@@ -16,7 +16,7 @@ public class Size {
 		this.height = height;
 	}
 	
-// Getters and Setters
+	// Getters and Setters
 	
 	/**
 	 * getWidth returns the width of this object.
@@ -38,5 +38,5 @@ public class Size {
 	
 	private static final int DEFAULT_SIZE = 0;
 	private int width;
-   private int height;
+	private int height;
 }

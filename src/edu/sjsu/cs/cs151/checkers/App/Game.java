@@ -11,16 +11,22 @@ public class Game extends JPanel {
 		reset();
 
 		// FOR ANIMATION TESTING PURPOSES
+		// This will occur in GameBoard once it is built out
 		this.setLayout(null);
-		Piece blackKing = new Piece(Piece.Type.KING, Piece.Color.RED);
-		Animate gridAnimation = new Animate(100);
-		for (int col = 0; col < 8; col++) {
-			for (int row = 0; row < 8; row++) {
-				//int columnRotated = row % 2 == 0 ? 8 - col : col;
-				gridAnimation.animateTo(blackKing, new Location(row * 100, col * 100));
+		Piece blackKing = new Piece(Piece.Type.KING, Piece.Color.BLACK);
+		Piece redKing = new Piece(Piece.Type.KING, Piece.Color.RED);
+		// only use 1 animate object per view for now
+		Animate gridAnimation = new Animate(500);
+		Animate gridAnimation2 = new Animate(500);
+		for (int row = 0; row < 8; row++) {
+			for (int col = 0; col < 8; col++) {
+				int columnRotated = row % 2 == 0 ? col : 7 - col;
+				gridAnimation.animateTo(blackKing, new Location(columnRotated * 100, row * 100));
+				gridAnimation2.animateTo(redKing, new Location((7 - columnRotated) * 100, (7 - row) * 100));
 			}
 		}
 		add(blackKing);
+		add(redKing);
 	}
 
 	/**
