@@ -26,12 +26,12 @@ public class Piece extends JPanel {
 	}
 	
 	@Override
-  protected void paintComponent(Graphics g) {
-    g.setColor(color == Color.RED ? 
-				java.awt.Color.red :
-				java.awt.Color.black);
-    g.fillOval(0, 0, g.getClipBounds().width, g.getClipBounds().height);
-  }
+	protected void paintComponent(Graphics g) {
+		g.setColor(color == Color.RED ? 
+					java.awt.Color.red :
+					java.awt.Color.black);
+    		g.fillOval(0, 0, g.getClipBounds().width, g.getClipBounds().height);
+	}
 	
 	// Getters and Setters
 	
@@ -43,22 +43,9 @@ public class Piece extends JPanel {
 	   return color;
 	}
 	
-	public Location getLocation() {
-	   return location;
-	}
-	
-	public boolean isUnidirectional() {
-	   return unidirectional;
-	}
-	
-	public Size getSize() {
-	   return size;
-	}
-	
 	// Private fields
 	
 	private static final int DEFAULT_SIZE = 100;
 	private Color color;
-  private Location location;
-  private Type type;
+	private Type type;
 }

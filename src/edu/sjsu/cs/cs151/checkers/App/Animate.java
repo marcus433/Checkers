@@ -31,8 +31,8 @@ public class Animate implements ActionListener {
 		Rectangle bounds = view.getBounds();
 		int x = bounds.x;
 		int y = bounds.y;
-		dX = location.x - x;
-		dY = location.y - y;
+		dX = location.getX() - x;
+		dY = location.getY() - y;
 		timer.start();
 	}
 	

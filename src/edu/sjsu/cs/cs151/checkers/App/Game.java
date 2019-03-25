@@ -33,10 +33,6 @@ public class Game extends JPanel {
 		players = new Player[2];
 		gameboard = new Gameboard();
 	}
-
-	public Piece.Color getCurrentPlayerColor() {
-		return currentPlayerColor;
-	}
 	
 	// Getters and Setters	
 	
@@ -59,6 +55,6 @@ public class Game extends JPanel {
 	// Private fields
 	
 	private Piece.Color currentPlayerColor;
-   private Player[] players;
-   private Gameboard gameboard;
+	private Player[] players;
+	private Gameboard gameboard;
 }
