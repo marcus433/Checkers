@@ -1,10 +1,10 @@
 package edu.sjsu.cs.cs151.checkers.Tests;
 
-import static org.junit.Assert.*;
-import org.junit.Test;
+//import static org.junit.Assert.*;
+//import org.junit.Test;
 
 public class RectTest {
-	@Test
+	/*@Test
 	public void testRect() {
 		Size size = new Size(1, 2);
 		Location location = new Location(3, 4);
@@ -13,5 +13,5 @@ public class RectTest {
 		assertEquals(rect.size.height, 2);
 		assertEquals(rect.location.x, 3);
 		assertEquals(rect.location.y, 4);
-	}
+	}*/
 }

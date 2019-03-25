@@ -1,16 +1,24 @@
 package edu.sjsu.cs.cs151.checkers.App;
 
+import javax.swing.JPanel;
+
 /**
  * Game models the game flow of a round of Checkers.
  */
-public class Game {
+public class Game extends JPanel {
 
-	Piece.Color currentPlayerColor;
-	Player[] players;
-	Gameboard gameboard;
+	private Piece.Color currentPlayerColor;
+	private Player[] players;
+	private Gameboard gameboard;
 
 	Game() {
+		super();
 		reset();
+		// FOR ANIMATION TESTING PURPOSES
+		this.setLayout(null);
+		Piece blackKing = new Piece(Piece.Type.KING, Piece.Color.RED);
+		new Animate(1000).animateTo(blackKing, new Location(100, 500));
+		add(blackKing);
 	}
 
 	/**
@@ -25,8 +33,12 @@ public class Game {
 	 * setting the active player color to RED, instantiating two new players, and instantiating a new board.
 	 */
 	public void reset() {
-		this.currentPlayerColor = Piece.Color.RED;
-		this.players = new Player[2];
-		this.gameboard = new Gameboard();
+		currentPlayerColor = Piece.Color.RED;
+		players = new Player[2];
+		gameboard = new Gameboard();
+	}
+
+	public Piece.Color getCurrentPlayerColor() {
+		return currentPlayerColor;
 	}
 }

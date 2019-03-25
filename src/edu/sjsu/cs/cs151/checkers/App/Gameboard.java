@@ -5,11 +5,13 @@ package edu.sjsu.cs.cs151.checkers.App;
  */
 public class Gameboard {
 
-	public Size gridSize = Size(8, 8); // Unit is blocks
+	public Size gridSize;
 	public Piece[] pieces;
 	public Piece currentPiece;
 
 	Gameboard() {
+		this.gridSize = new Size(1, 1);
+		this.currentPiece = new Piece(Piece.Type.KING, Piece.Color.BLACK);
 		this.pieces = new Piece[gridSize.width * gridSize.height];
 	}
 
@@ -39,6 +41,6 @@ public class Gameboard {
 	 * @param destination: the desired Location on the board to move currentPiece
 	 */
 	public void movePiece(Location destination) {
-		this.currentPiece.location = destination; // TODO: use setter & getter so we can add layout hooks.
+		//this.currentPiece.setLocation(destination); // TODO: use setter & getter so we can add layout hooks.
 	}
 }

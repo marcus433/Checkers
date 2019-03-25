@@ -1,39 +1,42 @@
 package edu.sjsu.cs.cs151.checkers.App;
+import java.awt.Color;
+import java.awt.Graphics;
+
+import javax.swing.JPanel;
 
 /**
  * Piece represents a single Checkers playing piece.
  */
-public class Piece {
+public class Piece extends JPanel {
 
 	public enum Color {
 		RED, BLACK
 	}
+	
+	public enum Type {
+		PAWN, KING
+	}
+	
+	private Color color;
+	private Type type;
 
-	Color color;
-	Location location;
-	boolean isUnidirectional;
-	Size size;
-
-	Piece(Color color, Location location) {
+	Piece(Type type, Color color) {
+		super();
+		this.type = type;
 		this.color = color;
-		this.location = location;
-		isUnidirectional = true;
-		size = new Size(1, 1);
+		setSize(100, 100);
+		this.setOpaque(false);
 	}
-
-	/**
-	 * getRect returns a Rect object that other classes can interact with.
-	 * 
-	 * @return a Rect object with the Piece's size and location
-	 */
-	public Rect getRect() {
-		return new Rect(size, location);
+	
+	public void setType(Type type) {
+		this.type = type;
 	}
-
-	/**
-	 * makeKing allows the Piece object to be moved both forward and backward.
-	 */
-	public void makeKing() {
-		isUnidirectional = false;
-	}
+	
+	@Override
+    protected void paintComponent(Graphics g) {
+        g.setColor(color == Color.RED ? 
+						java.awt.Color.red :
+						java.awt.Color.black);
+        g.fillOval(0, 0, g.getClipBounds().width, g.getClipBounds().height);
+    }
 }
