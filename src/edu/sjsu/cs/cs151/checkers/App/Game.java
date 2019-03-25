@@ -13,7 +13,13 @@ public class Game extends JPanel {
 		// FOR ANIMATION TESTING PURPOSES
 		this.setLayout(null);
 		Piece blackKing = new Piece(Piece.Type.KING, Piece.Color.RED);
-		new Animate(1000).animateTo(blackKing, new Location(100, 500));
+		Animate gridAnimation = new Animate(100);
+		for (int col = 0; col < 8; col++) {
+			for (int row = 0; row < 8; row++) {
+				//int columnRotated = row % 2 == 0 ? 8 - col : col;
+				gridAnimation.animateTo(blackKing, new Location(row * 100, col * 100));
+			}
+		}
 		add(blackKing);
 	}
 
