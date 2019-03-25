@@ -16,13 +16,13 @@ public class Game extends JPanel {
 		Piece blackKing = new Piece(Piece.Type.KING, Piece.Color.BLACK);
 		Piece redKing = new Piece(Piece.Type.KING, Piece.Color.RED);
 		// only use 1 animate object per view for now
-		Animate gridAnimation = new Animate(500);
-		Animate gridAnimation2 = new Animate(500);
+		Animate gridAnimation = new Animate(blackKing);
+		Animate gridAnimation2 = new Animate(redKing);
 		for (int row = 0; row < 8; row++) {
 			for (int col = 0; col < 8; col++) {
 				int columnRotated = row % 2 == 0 ? col : 7 - col;
-				gridAnimation.animateTo(blackKing, new Location(columnRotated * 100, row * 100));
-				gridAnimation2.animateTo(redKing, new Location((7 - columnRotated) * 100, (7 - row) * 100));
+				gridAnimation.animateTo(500, new Location(columnRotated * 100, row * 100));
+				gridAnimation2.animateTo(500, new Location((7 - columnRotated) * 100, (7 - row) * 100));
 			}
 		}
 		add(blackKing);

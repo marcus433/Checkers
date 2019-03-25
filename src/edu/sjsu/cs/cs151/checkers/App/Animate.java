@@ -23,17 +23,15 @@ public class Animate implements ActionListener {
 		int y = 0;
 		int dX = 0;
 		int dY = 0;
-		int tX = 0;
-		int tY = 0;
-		JPanel view = null;
+		int duration = 0; // in milliseconds
 	}
 	
 	/*
 	 * Setup
-	 * @param duration: duration of animation in milliseconds
+	 * @param view: view to animate
 	 * */
-	Animate(int duration) {
-		this.duration = duration;
+	Animate(JPanel view) {
+		this.view = view;
 		currentAnimation = null;
 		timeIncrement = MS_S / FPS;
 		timer = new Timer(timeIncrement, this);
@@ -42,11 +40,11 @@ public class Animate implements ActionListener {
 	
 	/*
 	 * Adds animation to queue
-	 * @param view: target JPanel
+	 * @param duration: duration of aniamtion in milliseconds
 	 * @param location: target x, y position
 	 * @return self: for animateTo chaining
 	 * */
-	public Animate animateTo(JPanel view, Location location) {
+	public Animate animateTo(int duration, Location location) {
 		int x = 0;
 		int y = 0;
 		if (queue.size() == 0) {
@@ -54,17 +52,16 @@ public class Animate implements ActionListener {
 			x = bounds.x;
 			y = bounds.y;
 		} else {
-			x = queue.get(queue.size() - 1).tX;
-			y = queue.get(queue.size() - 1).tY;
+			AnimationProps lastAnimation = queue.get(queue.size() - 1);
+			x = lastAnimation.x + lastAnimation.dX;
+			y = lastAnimation.y + lastAnimation.dY;
 		}
 		AnimationProps props = new AnimationProps();
-		props.view = view;
 		props.x = x;
 		props.y = y;
 		props.dX = location.getX() - x;
 		props.dY = location.getY() - y;
-		props.tX = x + props.dX;
-		props.tY = y + props.dY;
+		props.duration = duration;
 		queue.add(props);
 		startAnimation();
 		return this;
@@ -104,21 +101,21 @@ public class Animate implements ActionListener {
 	 * @param e: ActionEvent from timer
 	 * */
 	public void actionPerformed(ActionEvent e) {
-		if (timeElapsed >= duration) {
+		if (timeElapsed >= currentAnimation.duration) {
 			endAnimation();
 			return;
 		}
 		// TODO: need to smooth animation
-		double progress = (double)timeElapsed / Math.max(1.0, (double)duration);
+		double progress = (double)timeElapsed / Math.max(1.0, (double)currentAnimation.duration);
 		double easeProgress = easeInEaseOut(progress);
 		int xIntermediate = (int) Math.ceil((double)currentAnimation.dX * easeProgress);
 		int yIntermediate = (int) Math.ceil((double)currentAnimation.dY * easeProgress);
 		
-		currentAnimation.view.setBounds(currentAnimation.x + xIntermediate,
+		view.setBounds(currentAnimation.x + xIntermediate,
 										currentAnimation.y + yIntermediate, 
-										currentAnimation.view.getWidth(), 
-										currentAnimation.view.getHeight());
-		currentAnimation.view.repaint();
+										view.getWidth(), 
+										view.getHeight());
+		view.repaint();
 		timeElapsed += timeIncrement;
 	}
 	
@@ -139,7 +136,7 @@ public class Animate implements ActionListener {
 	private static int FPS = 120; // drop back to 60 later
 	private static int MS_S = 1000;
 
-	private int duration = 0; // in milliseconds
+	private JPanel view = null;
 	private int timeIncrement = 0;
 	private int timeElapsed = 0;
 	private Timer timer;
