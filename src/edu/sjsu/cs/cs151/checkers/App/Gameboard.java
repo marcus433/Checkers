@@ -6,7 +6,7 @@ package edu.sjsu.cs.cs151.checkers.App;
 public class Gameboard {
 	Gameboard() {
 		gridSize = DEFAULT_GRID_SIZE;
-	  	this.pieces = new Piece[gridSize.getWidth() * gridSize.getHeight()];
+	  this.pieces = new Piece[gridSize.getWidth() * gridSize.getHeight()];
 		this.currentPiece = new Piece(Piece.Type.KING, Piece.Color.BLACK); // temporary to keep compiler happy
 	}
 

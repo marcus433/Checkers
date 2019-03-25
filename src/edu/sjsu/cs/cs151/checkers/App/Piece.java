@@ -30,7 +30,7 @@ public class Piece extends JPanel {
 		g.setColor(color == Color.RED ? 
 					java.awt.Color.red :
 					java.awt.Color.black);
-    		g.fillOval(0, 0, g.getClipBounds().width, g.getClipBounds().height);
+    g.fillOval(0, 0, g.getClipBounds().width, g.getClipBounds().height);
 	}
 	
 	// Getters and Setters

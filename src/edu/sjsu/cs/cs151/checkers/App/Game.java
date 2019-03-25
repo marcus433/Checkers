@@ -13,11 +13,13 @@ public class Game extends JPanel {
 		// FOR ANIMATION TESTING PURPOSES
 		// This will occur in GameBoard once it is built out
 		this.setLayout(null);
-		Piece blackKing = new Piece(Piece.Type.KING, Piece.Color.BLACK);
-		Piece redKing = new Piece(Piece.Type.KING, Piece.Color.RED);
-		// only use 1 animate object per view for now
-		Animate gridAnimation = new Animate(blackKing);
-		Animate gridAnimation2 = new Animate(redKing);
+		Piece blackPawn = new Piece(Piece.Type.PAWN, Piece.Color.BLACK);
+		Piece redPawn = new Piece(Piece.Type.PAWN, Piece.Color.RED);
+		Animate gridAnimation = new Animate(blackPawn);
+		Animate gridAnimation2 = new Animate(redPawn);
+		//gridAnimation.animateTo(500, new Location(300, 500));
+		add(blackPawn);
+		add(redPawn);
 		for (int row = 0; row < 8; row++) {
 			for (int col = 0; col < 8; col++) {
 				int columnRotated = row % 2 == 0 ? col : 7 - col;
@@ -25,8 +27,6 @@ public class Game extends JPanel {
 				gridAnimation2.animateTo(500, new Location((7 - columnRotated) * 100, (7 - row) * 100));
 			}
 		}
-		add(blackKing);
-		add(redKing);
 	}
 
 	/**
