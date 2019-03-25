@@ -13,7 +13,7 @@ public class Piece {
 		this.color = color;
 		this.location = location;
 		unidirectional = true;
-		size = new Size(1, 1);
+		size = new Size(DEFAULT_SIZE, DEFAULT_SIZE);
 	}
 
 	/**
@@ -52,6 +52,7 @@ public class Piece {
 	
 // Private fields
 	
+	private static final int DEFAULT_SIZE = 1;
 	private Color color;
    private Location location;
    private boolean unidirectional;

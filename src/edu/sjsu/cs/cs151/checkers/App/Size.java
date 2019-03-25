@@ -4,6 +4,11 @@ package edu.sjsu.cs.cs151.checkers.App;
  * Size is a representation of size used by the game logic. It will be used by both core and GUI classes.
  */
 public class Size {
+   
+   Size() {
+      this.width = DEFAULT_SIZE;
+      this.height = DEFAULT_SIZE;
+   }
 
 	// Since layout is grid, don't really need float level precision
 	Size(int width, int height) {
@@ -31,6 +36,7 @@ public class Size {
 	
 // Private fields
 	
-	private int width = 0;
-   private int height = 0;
+	private static final int DEFAULT_SIZE = 0;
+	private int width;
+   private int height;
 }

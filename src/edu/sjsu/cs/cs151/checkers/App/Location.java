@@ -5,7 +5,12 @@ package edu.sjsu.cs.cs151.checkers.App;
  */
 public class Location {
 
-	Location(int x, int y) {
+	Location() {
+	   this.x = DEFAULT_COORDINATE;
+	   this.y = DEFAULT_COORDINATE;
+	}
+   
+   Location(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -29,6 +34,7 @@ public class Location {
 	
 // Private fields
 	
-	private int x = 0;
-   private int y = 0;
+	private static final int DEFAULT_COORDINATE = 0;
+	private int x;
+   private int y;
 }

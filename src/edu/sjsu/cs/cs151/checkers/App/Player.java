@@ -6,7 +6,9 @@ package edu.sjsu.cs.cs151.checkers.App;
 public class Player {
 
 	Player() {
-		
+		this.numWonGames = DEFAULT_NUM_WINS;
+		this.color = DEFAULT_COLOR;
+		this.numPieces = DEFAULT_NUM_PIECES;
 	}
 
 	/**
@@ -54,13 +56,22 @@ public class Player {
 	   return numPieces;
 	}
 	
+	/**
+	 * setColor sets the player's color to either red or black, allowing them to interact with the same color pieces.
+	 */
+	public void setColor(Piece.Color color) {
+	   this.color = color;
+	}
+	
 // Private fields
 	
-	private Gameboard gameboard; // gameboard reference. We may implement this with a protocol delegate later.
-
-   private int numWonGames = 0;
+	private static final int DEFAULT_NUM_WINS = 0;
+	private static final Piece.Color DEFAULT_COLOR = Piece.Color.RED;
+	private static final int DEFAULT_NUM_PIECES = 12;
+	private Gameboard gameboard; // TODO: gameboard reference. We may implement this with a protocol delegate later.
+   private int numWonGames;
    private Piece.Color color;
-   private int numPieces = 0; // TODO: adjust based on determined board size.
+   private int numPieces; // TODO: adjust based on determined board size.
 
    
 }

@@ -6,6 +6,7 @@ package edu.sjsu.cs.cs151.checkers.App;
 public class Gameboard {
 
 	Gameboard() {
+	   gridSize = DEFAULT_GRID_SIZE;
 		this.pieces = new Piece[gridSize.width * gridSize.height];
 	}
 
@@ -65,9 +66,9 @@ public class Gameboard {
 	
 // Private fields
 	
-	private Size gridSize = Size(8, 8); // Unit is blocks
+	private static final Size DEFAULT_GRID_SIZE = Size(8, 8);
+	private Size gridSize;
    private Piece[] pieces;
    private Piece currentPiece;
-
    
 }
