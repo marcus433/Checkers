@@ -11,28 +11,15 @@ public class Game {
 
 	public void reset() {
 		currentColor = Piece.Color.BLACK;
-		board = new Board();
+		board = new Board(this);
 		redCount = Board.PIECES_PER_SIDE;
 		blackCount = Board.PIECES_PER_SIDE;
 	}
 	
-	// TODO
 	// Getters and Setters	
-	
-	/**
-	 * getCurrentPlayerColor returns the current player's color.
-	 * @return: the current player's color as a Piece.Color object
-	 */
-	public Piece.Color getCurrentPlayerColor() {
-	   return currentPlayerColor;
-	}
-	
-	/**
-	 * getGameboard returns the current game's instance of the gameboard.
-	 * @return: the gameboard currently in play
-	 */
-	public Gameboard getGameboard() {
-	   return gameboard;
+
+	public Piece.Color getCurrentColor() {
+	   return currentColor;
 	}
 	
 	// Private fields
