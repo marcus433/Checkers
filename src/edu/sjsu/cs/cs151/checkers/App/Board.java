@@ -20,7 +20,21 @@ public class Board {
 	}
 
 	public void movePiece(Position position) throws Error {
-		// TODO: the main logic happens here
+		if (lastSelected == null) {
+			throw new Error("No piece selected"); // TODO: add custom error
+		}
+		// TODO: how will double-jumps work? automatic, or manual?
+		if (isPositionValid(position)) {
+			Checker currentChecker = checkerForPosition(this.lastSelected);
+			Checker newChecker = checkerForPosition(position);
+			newChecker.setPiece(currentChecker.getPiece());
+			currentChecker.clearPiece();
+		} else {
+			throw new Error("Invalid destination position"); // TODO: add custom error
+		}
+		// NOTE: this implementation automatically jumps for the player.
+		// if any corner has piece of other player then attempt to move to it's diagonal recursively
+		// TODO: determine whether player colors switch or if there is a winner, make players kings
 	}
 
 	public void removePiece(Position position) {
@@ -30,6 +44,58 @@ public class Board {
 
 	public Checker checkerForPosition(Position position) {
 		return this.checker[position.getRow()][position.getColumn()];
+	}
+
+	private boolean isPositionValid(Position position) {
+		Checker currentChecker = checkerForPosition(this.lastSelected);
+		Piece piece = currentChecker.getPiece();
+		int row = this.lastSelected.getRow();
+		int column = this.lastSelected.getColumn();
+		int destRow = position.getRow();
+		int destCol = position.getColumn();
+		if (destRow > DEFAULT_SIZE - 1 || destRow < 0) // destination position out of bounds
+			return false;
+		if (destCol > DEFAULT_SIZE - 1 || destCol < 0) // destination position out of bounds
+			return false;
+		// TODO: cleanup implementation, lots of repetition
+		if (piece.isKing()) {
+				if (row - 1 == destRow && column - 1 == destCol) {
+					// top left
+					return !checkerForPosition(new Position(destRow, destCol)).hasPiece();
+				} else if (row - 1 == destRow && column + 1 == destCol) {
+					// top right
+					return !checkerForPosition(new Position(destRow, destCol)).hasPiece();
+				} else if (row + 1 == destRow && column - 1 == destCol) {
+					// bottom left
+					return !checkerForPosition(new Position(destRow, destCol)).hasPiece();
+				} else if (row + 1 == destRow && column + 1 == destCol) {
+					// bottom right
+					return !checkerForPosition(new Position(destRow, destCol)).hasPiece();
+				}
+		} else {
+			if (piece.getColor() == TOP_COLOR) {
+				if (row + 1 == destRow && column - 1 == destCol) {
+					// bottom left
+					return !checkerForPosition(new Position(destRow, destCol)).hasPiece();
+				} else if (row + 1 == destRow && column + 1 == destCol) {
+					// bottom right
+					return !checkerForPosition(new Position(destRow, destCol)).hasPiece();
+				}
+			} else if (piece.getColor() == BOTTOM_COLOR) {
+				if (row - 1 == destRow && column - 1 == destCol) {
+					// top left
+					return !checkerForPosition(new Position(destRow, destCol)).hasPiece();
+				} else if (row - 1 == destRow && column + 1 == destCol) {
+					// top right
+					return !checkerForPosition(new Position(destRow, destCol)).hasPiece();
+				}
+			}
+		}
+		return false;
+	}
+
+	private Position positionForJump(Checker checker) {
+		//
 	}
 
 	private Checker genCheckerForPosition(Position position) {
