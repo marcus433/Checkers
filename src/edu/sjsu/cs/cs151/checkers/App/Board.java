@@ -1,74 +1,63 @@
 package edu.sjsu.cs.cs151.checkers.App;
 
-/**
- * Gameboard tracks the positions of each Piece currently in play.
- */
-public class Gameboard {
-	Gameboard() {
-		gridSize = DEFAULT_GRID_SIZE;
-	  this.pieces = new Piece[gridSize.getWidth() * gridSize.getHeight()];
-		this.currentPiece = new Piece(Piece.Type.KING, Piece.Color.BLACK); // temporary to keep compiler happy
+public class Board {
+	Board() {
+	  this.checkers = new Checker[DEFAULT_SIZE][DEFAULT_SIZE];
+	  this.generate();
 	}
 
-	/**
-	 * selectPiece enables players to choose an individual piece on the board to interact with.
-	 * 
-	 * @param location: the Location on the board that the desired piece occupies
-	 */
-	public void selectPiece(Location location) {
+	public void selectPiece(Position position) {
 		//TODO: implement selectPiece
 	}
 
-	/**
-	 * isValidMove determines whether an intended destination for the currentPiece is possible.
-	 * 
-	 * @param destination: the desired Location on the board to move currentPiece
-	 * @return true if move is legal; false otherwise
-	 */
-	public boolean isValidMove(Location destination) {
-	   //TODO: implement isValidMove
-	   return false;
+	public void movePiece(Position position) throws Error {
+		// TODO
 	}
 
-	/**
-	 * movePiece moves the currentPiece from its current Location to a valid destination Location.
-	 * 
-	 * @param destination: the desired Location on the board to move currentPiece
-	 */
-	public void movePiece(Location destination) {
-		//this.currentPiece.setLocation(destination); // TODO: use setter & getter so we can add layout hooks.
+	public void removePiece(Position position) {
+		// TODO
 	}
-	
+
+	private Checker checkerForPosition(Position position) {
+		int rowMod = position.getRow() % 2;
+		int positionMod = (position.getColumn() + rowMod) % 2;
+		Piece piece = null;
+		if (positionMod == 1) {
+			int checkerIdx = (position.getRow() * DEFAULT_SIZE) + position.getColumn() + 1;
+			if (checkerIdx <= PIECES_PER_SIDE * 2)
+				piece = new Piece(TOP_COLOR);
+			else if (checkerIdx >= ((DEFAULT_SIZE * DEFAULT_SIZE) - (PIECES_PER_SIDE * 2)) + 1)
+				piece = new Piece(BOTTOM_COLOR);
+		}
+		return new Checker(positionMod == 1, piece);
+	}
+
+	private void generate() {
+		for (int row = 0; row < this.checkers.length; row++) {
+			for (int col = 0; col < this.checkers[row].length; col++) {
+				this.checkers[row][col] = this.checkerForPosition(new Position(row, col));
+			}
+		}
+	}
+
 	// Getters and Setters
-	/**
-	 * getSize returns the Size of the gameboard.
-	 * @return: the Size object of the board
-	 */
-	public Size getSize() {
-	   return gridSize;
-	}
 	
-	/**
-	 * getPieces returns the array of all pieces in play.
-	 * @return: the Piece[] array, pieces
-	 */
 	public Piece[] getPieces() {
-	   return pieces;
+		return pieces;
 	}
 	
-	/**
-	 * getCurrentPiece returns the current piece selected by the player.
-	 * @return: the selected Piece object by the current player
-	 */
 	public Piece getCurrentPiece() {
-	   return currentPiece;
+		return currentPiece;
 	}
 	
+	// Public constants
+
+	public static final int DEFAULT_SIZE = 8;
+	public static final int PIECES_PER_SIDE = 12;
+	public static final Piece.Color TOP_COLOR = Piece.Color.RED;
+	public static final Piece.Color BOTTOM_COLOR = Piece.Color.BLACK;
+
 	// Private fields
-	
-	private static final Size DEFAULT_GRID_SIZE = new Size(8, 8);
-	private Size gridSize;
-	private Piece[] pieces;
-	private Piece currentPiece;
-   
+
+	private Checker[][] checkers;
 }

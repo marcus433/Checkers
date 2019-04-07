@@ -1,51 +1,32 @@
 package edu.sjsu.cs.cs151.checkers.App;
-import java.awt.Color;
-import java.awt.Graphics;
 
-import javax.swing.JPanel;
-
-/**
- * Piece represents a single Checkers playing piece.
- */
-public class Piece extends JPanel {
+public class Piece {
 
 	public enum Color {
 		RED, BLACK
 	}
-	
-	public enum Type {
-		PAWN, KING
-	}
 
-	Piece(Type type, Color color) {
-		super();
-		this.type = type;
+	Piece(Color color) {
 		this.color = color;
-		setSize(DEFAULT_SIZE, DEFAULT_SIZE);
-		this.setOpaque(false);
-	}
-	
-	@Override
-	protected void paintComponent(Graphics g) {
-		g.setColor(color == Color.RED ? 
-					java.awt.Color.red :
-					java.awt.Color.black);
-    g.fillOval(0, 0, g.getClipBounds().width, g.getClipBounds().height);
+		this.isKing = false;
 	}
 	
 	// Getters and Setters
-	
-	public void setType(Type type) {
-		this.type = type;
-	}
 
 	public Color getColor() {
-	   return color;
+	   return this.color;
+	}
+
+	public boolean isKing() {
+		return this.isKing;
+	}
+
+	public void makeKing() {
+		this.isKing = true;
 	}
 	
 	// Private fields
-	
-	private static final int DEFAULT_SIZE = 100;
+
 	private Color color;
-	private Type type;
+	private boolean isKing;
 }

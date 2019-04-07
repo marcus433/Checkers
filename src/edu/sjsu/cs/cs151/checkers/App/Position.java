@@ -1,40 +1,29 @@
 package edu.sjsu.cs.cs151.checkers.App;
 
-/**
- * Location is a Cartesian representation of position used by the game logic.
- */
-public class Location {
-
-	Location() {
-	   this.x = DEFAULT_COORDINATE;
-	   this.y = DEFAULT_COORDINATE;
-	}
+public class Position {
    
-   Location(int x, int y) {
-		this.x = x;
-		this.y = y;
+  Position(int row, int column) throws Error {
+  	if (row >= this.MIN_POSITION && column >= this.MIN_POSITION) {
+			this.row = row;
+			this.column = column;
+		} else {
+			throw new Error("Invalid position"); // TODO: make custom error type
+		}
 	}
 
-   // Getters and Setters	
-	/**
-	 * getX returns the x coordinate of this Location.
-	 * @return: an int representing x
-	 */
-	public int getX() {
-	   return x;
+  // Getters and Setters	
+
+	public int getRow() {
+	   return this.row;
 	}
 	
-	/**
-	 * getY returns the y coordinate of this Location.
-	 * @return: an int representing y
-	 */
-	public int getY() {
-	   return y;
+	public int getColumn() {
+	   return this.column;
 	}
 	
 	// Private fields
 	
-	private static final int DEFAULT_COORDINATE = 0;
-	private int x;
-	private int y;
+	private static final int MIN_POSITION = 0;
+	private int row;
+	private int column;
 }

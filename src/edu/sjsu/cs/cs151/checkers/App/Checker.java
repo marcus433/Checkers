@@ -1,51 +1,46 @@
 package edu.sjsu.cs.cs151.checkers.App;
-import java.awt.Color;
-import java.awt.Graphics;
 
-import javax.swing.JPanel;
+public class Checker {
 
-/**
- * Piece represents a single Checkers playing piece.
- */
-public class Piece extends JPanel {
-
-	public enum Color {
-		RED, BLACK
+	Checker(boolean canHoldPiece, Piece piece) {
+		this.canHoldPiece = canHoldPiece;
+		this.isSelected = false;
+		this.piece = piece;
 	}
 	
-	public enum Type {
-		PAWN, KING
+	public boolean hasPiece() {
+		return this.piece != null;
 	}
 
-	Piece(Type type, Color color) {
-		super();
-		this.type = type;
-		this.color = color;
-		setSize(DEFAULT_SIZE, DEFAULT_SIZE);
-		this.setOpaque(false);
+	public void clearPiece() {
+		this.piece = null;
 	}
-	
-	@Override
-	protected void paintComponent(Graphics g) {
-		g.setColor(color == Color.RED ? 
-					java.awt.Color.red :
-					java.awt.Color.black);
-    g.fillOval(0, 0, g.getClipBounds().width, g.getClipBounds().height);
-	}
-	
+
 	// Getters and Setters
 	
-	public void setType(Type type) {
-		this.type = type;
+	public Piece getPiece() {
+		return this.piece;
 	}
 
-	public Color getColor() {
-	   return color;
+	public void setPiece(Piece piece) {
+		this.piece = piece;
+	}
+
+	public boolean isSelected() {
+		return this.isSelected;
+	}
+
+	public void select() {
+		this.isSelected = true;
+	}
+
+	public void deselect() {
+		this.isSelected = false;
 	}
 	
 	// Private fields
 	
-	private static final int DEFAULT_SIZE = 100;
-	private Color color;
-	private Type type;
+	private boolean canHoldPiece;
+	private Piece piece;
+	private boolean isSelected;
 }
