@@ -23,22 +23,35 @@ public class Board {
 		if (lastSelected == null) {
 			throw new Error("No piece selected"); // TODO: add custom error
 		}
-		// TODO: how will double-jumps work? automatic, or manual?
+		Position finalPos = position;
 		if (isPositionValid(position)) {
 			Checker currentChecker = checkerForPosition(this.lastSelected);
 			Checker newChecker = checkerForPosition(position);
 			newChecker.setPiece(currentChecker.getPiece());
 			currentChecker.clearPiece();
+			Piece piece = newChecker.getPiece();
+			// NOTE: this implementation automatically jumps for the player. We will make this optional in future
+			// if any corner has piece of other player then attempt to move to it's diagonal recursively
+			// Jump logic here. set finalPos 
+
+			// TODO: determine whether player colors switch or if there is a winner, make players kings
+			if (piece.getColor() == TOP_COLOR) {
+				if (finalPos.getRow() == DEFAULT_SIZE - 1)
+					piece.makeKing();
+					
+			} else if (piece.getColor() == BOTTOM_COLOR) {
+				if (finalPos.getRow() == 0)
+					piece.makeKing();
+			}
+			this.game.checkForWinner();
 		} else {
 			throw new Error("Invalid destination position"); // TODO: add custom error
 		}
-		// NOTE: this implementation automatically jumps for the player.
-		// if any corner has piece of other player then attempt to move to it's diagonal recursively
-		// TODO: determine whether player colors switch or if there is a winner, make players kings
 	}
 
 	public void removePiece(Position position) {
 		Checker checker = checkerForPosition(position);
+		this.game.decrementPiecesByColor(checker.getPiece().getColor());
 		checker.clearPiece();
 	}
 
