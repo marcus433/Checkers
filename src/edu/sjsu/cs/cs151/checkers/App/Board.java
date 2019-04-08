@@ -23,8 +23,6 @@ public class Board {
 		if (lastSelected == null) {
 			throw new Error("No piece selected"); // TODO: add custom error
 		}
-		int dRow = this.lastSelected.getRow() - position.getRow();
-		int dCol = this.lastSelected.getColumn() - position.getColumn();
 		if (!moveFrom(this.lastSelected, position)) {
 			throw new Error("Invalid destination position"); // TODO: add custom error
 		}
