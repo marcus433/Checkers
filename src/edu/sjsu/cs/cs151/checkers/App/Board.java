@@ -23,29 +23,40 @@ public class Board {
 		if (lastSelected == null) {
 			throw new Error("No piece selected"); // TODO: add custom error
 		}
+		int dRow = this.lastSelected.getRow() - position.getRow();
+		int dCol = this.lastSelected.getColumn() - position.getColumn();
+		if (!moveFrom(this.lastSelected, position)) {
+			throw new Error("Invalid destination position"); // TODO: add custom error
+		}
+		this.lastSelected = null;
 		Position finalPos = position;
+		Checker newChecker = checkerForPosition(position);
+		Piece piece = newChecker.getPiece();
+
+		// NOTE: this implementation automatically jumps for the player. We will make this optional in future
+
+		finalPos = positionAfterJump(finalPos);
+
+		if (piece.getColor() == TOP_COLOR) {
+			if (finalPos.getRow() == DEFAULT_SIZE - 1)
+				piece.makeKing();
+		} else if (piece.getColor() == BOTTOM_COLOR) {
+			if (finalPos.getRow() == 0)
+				piece.makeKing();
+		}
+		this.game.checkForWinner();
+	}
+
+	private boolean moveFrom(Position from, Position position) {
 		if (isPositionValid(position)) {
-			Checker currentChecker = checkerForPosition(this.lastSelected);
+			Checker currentChecker = checkerForPosition(from);
 			Checker newChecker = checkerForPosition(position);
 			newChecker.setPiece(currentChecker.getPiece());
 			currentChecker.clearPiece();
-			Piece piece = newChecker.getPiece();
-			// NOTE: this implementation automatically jumps for the player. We will make this optional in future
-			// if any corner has piece of other player then attempt to move to it's diagonal recursively
-			// Jump logic here. set finalPos 
-
-			// TODO: determine whether player colors switch or if there is a winner, make players kings
-			if (piece.getColor() == TOP_COLOR) {
-				if (finalPos.getRow() == DEFAULT_SIZE - 1)
-					piece.makeKing();
-					
-			} else if (piece.getColor() == BOTTOM_COLOR) {
-				if (finalPos.getRow() == 0)
-					piece.makeKing();
-			}
-			this.game.checkForWinner();
+			currentChecker.deselect();
+			return true;
 		} else {
-			throw new Error("Invalid destination position"); // TODO: add custom error
+			return false;
 		}
 	}
 
@@ -107,8 +118,14 @@ public class Board {
 		return false;
 	}
 
-	private Position positionForJump(Checker checker) {
-		//
+	private Position positionAfterJump(Position finalPos) {
+		Position position = finalPos;
+		// TODO: will behave recursively
+		// moveFrom(Position from, Position position)
+		// top-left, top-right, bottom-left, bottom-right
+		// considered valid if has opposing piece & has blank space after in the diagonal
+		// removePiece after jumping
+		return position
 	}
 
 	private Checker genCheckerForPosition(Position position) {
