@@ -1,8 +1,11 @@
 package edu.sjsu.cs.cs151.checkers.App;
 
+/**
+ * Position is a coordinate representation of location on the board.
+ */
 public class Position {
-   
-  Position(int row, int column) throws Error {
+  
+   Position(int row, int column) throws Error {
   	if (row >= this.MIN_POSITION && column >= this.MIN_POSITION) {
 			this.row = row;
 			this.column = column;
@@ -13,10 +16,18 @@ public class Position {
 
   // Getters and Setters	
 
+   /**
+    * getRow returns the row element of the current position.
+    * @return - which row the current position is located, as an int
+    */
 	public int getRow() {
 	   return this.row;
 	}
 	
+	/**
+    * getColumn returns the column element of the current position.
+    * @return - which column the current position is located, as an int
+    */
 	public int getColumn() {
 	   return this.column;
 	}
