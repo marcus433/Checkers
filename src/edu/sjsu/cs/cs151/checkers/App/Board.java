@@ -117,42 +117,58 @@ public class Board {
 	}
 
 	private Position positionAfterJump(Position finalPos) {
+		// TODO: clean code up
 		Position position = finalPos;
 		Checker checker = checkerForPosition(position);
 		Piece currentPiece = checker.getPiece();
-
-		/*if () {
-			// TODO: check bounds
-			Position pos = new Position(position.getRow() - 1, position.getColumn() - 1);
-			Checker checker = checkerForPosition(pos);
-			Piece piece = checker.getPiece();
-			if (piece != null && piece.getColor() != currentPiece.getColor()) {
-				Position pos = new Position(position.getRow() - 2, position.getColumn() - 2);
-				Checker checker = checkerForPosition(pos);
-				if (!checker.hasPiece()) {
-					// remove piece and jump piece
-				}
-			}
-			// -1, -1
-		} else if () {
-			// -1, 1
-		} else if () {
-			// 1, -1
-		} else if () {
-			// 1, 1
-		}*/
-
-		// TODO: will behave recursively
-		// moveFrom(Position from, Position position)
-		// top-left, top-right, bottom-left, bottom-right
-		// considered valid if has opposing piece & has blank space after in the diagonal
-		// removePiece after jumping
+		Position pos = jumpToPosition(1, -1, position, currentPiece, checker);
+		if (pos != null) {
+			return positionAfterJump(pos);
+		}
+		pos = jumpToPosition(-1, -1, position, currentPiece, checker);
+		if (pos != null) {
+			return positionAfterJump(pos);
+		}
+		pos = jumpToPosition(-1, 1, position, currentPiece, checker);
+		if (pos != null) {
+			return positionAfterJump(pos);
+		}
+		pos = jumpToPosition(1, 1, position, currentPiece, checker);
+		if (pos != null) {
+			return positionAfterJump(pos);
+		}
+		// -1, -1
+		// -1, 1
+		// 1, -1
+		// 1, 1
 		return position;
 	}
 
-	private boolean jumpToPosition() {
-		// TODO
-		return false;
+	private Position jumpToPosition(int dX, int dY, Position position, Piece currentPiece, Checker checker) {
+		try {
+			// TODO: switch to using moveFrom
+			// moveFrom(Position from, Position position)
+			// top-left, top-right, bottom-left, bottom-right
+			// considered valid if has opposing piece & has blank space after in the diagonal
+			// removePiece after jumping
+			Position pos = new Position(position.getRow() + dY, position.getColumn() + dX);
+			Checker nextChecker = checkerForPosition(pos);
+			Piece piece = nextChecker.getPiece();
+			if (piece != null && piece.getColor() != currentPiece.getColor()) {
+				Position nextPos = new Position(position.getRow() + dY + 1, position.getColumn() + dX + 1);
+				Checker jumpTarget = checkerForPosition(nextPos);
+				if (!jumpTarget.hasPiece()) {
+					nextChecker.clearPiece();
+					jumpTarget.setPiece(checker.getPiece());
+					checker.clearPiece();
+					return nextPos;
+					// remove piece and jump piece
+				}
+			}
+		} catch (Error e) {
+			System.out.println("Position was out of bounds");
+		}
+		return null;
 	}
 
 	private Checker genCheckerForPosition(Position position) {
