@@ -1,7 +1,7 @@
 package edu.sjsu.cs.cs151.checkers.App;
 
 /**
- * Checker is a representation of a given tile on the checkerboard.
+ * Checker is a representation of a given tile on the checkerboard. 
  */
 public class Checker {
 
