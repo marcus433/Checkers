@@ -1,5 +1,6 @@
 package edu.sjsu.cs.cs151.checkers.App;
 
+import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,7 +41,7 @@ public class Animate implements ActionListener {
 	
 	/*
 	 * Adds animation to queue
-	 * @param duration: duration of aniamtion in milliseconds
+	 * @param duration: duration of animation in milliseconds
 	 * @param location: target x, y position
 	 * @return self: for animateTo chaining
 	 * */
@@ -105,7 +106,7 @@ public class Animate implements ActionListener {
 			endAnimation();
 			return;
 		}
-		// TODO: need to smooth animation
+
 		double progress = (double)timeElapsed / Math.max(1.0, (double)currentAnimation.duration);
 		double easeProgress = easeInEaseOut(progress);
 		int xIntermediate = (int) Math.ceil((double)currentAnimation.dX * easeProgress);
@@ -128,12 +129,12 @@ public class Animate implements ActionListener {
 		if (p < 0.5)
 			return 2.0 * Math.pow(p, 2.0);
 		else
-			return (4 - 2 * p) * p - 1;
+			return (4.0 - 2.0 * p) * p - 1.0;
 	}
 	
 	// Private fields
 	
-	private static int FPS = 120; // drop back to 60 later
+	private static int FPS = 60;
 	private static int MS_S = 1000;
 
 	private JPanel view = null;
