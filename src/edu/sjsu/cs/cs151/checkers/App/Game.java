@@ -54,6 +54,7 @@ public class Game {
 
 	/**
 	 * decrementPiecesByColor reduces the total number of pieces of a particular color.
+	 * @param color: the color of the group of Pieces to decrement
 	 */
 	public void decrementPiecesByColor(Piece.Color color) {
 		if (color == Piece.Color.RED)

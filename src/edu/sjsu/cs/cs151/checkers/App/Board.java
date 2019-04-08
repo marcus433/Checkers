@@ -1,5 +1,9 @@
 package edu.sjsu.cs.cs151.checkers.App;
 
+/**
+ * Board is a representation of the checkerboard used to play the game.
+ * While Game handles the flow of a game session, Board handles the available actions a player can take.
+ */
 public class Board {
 	Board(Game game) {
 		this.game = game;
@@ -7,6 +11,9 @@ public class Board {
 	  this.generate();
 	}
 
+	/**
+	 * selectChecker selects a given Checker object with a valid colored Piece on it.
+	 */
 	public void selectChecker(Position position) {
 		Checker currentChecker = checkerForPosition(position);
 		if (currentChecker.getPiece().getColor() == this.game.getCurrentColor()) {
@@ -19,6 +26,13 @@ public class Board {
 		}
 	}
 
+	/**
+	 * movePiece removes a Piece from its current Checker and Position, and rewrites it in a new valid pair.
+	 * 
+	 * This current iteration of movePiece moves automatically, rather than allowing a player to select a location.
+	 * 
+	 * @param Position position: the current Position that the Piece occupies
+	 */
 	public void movePiece(Position position) throws Error {
 		if (lastSelected == null) {
 			throw new Error("No piece selected"); // TODO: add custom error
@@ -45,6 +59,16 @@ public class Board {
 		this.game.checkForWinner();
 	}
 
+	
+	/**
+	 * moveFrom removes a Piece from its current Checker and Position, and rewrites it in a new valid pair.
+	 * 
+	 * This version requires an origin and a destination, and does not move automatically.
+	 * 
+	 * @param Position from: the origin Position of the moving Piece
+	 * @param Position position: the destination of the moving piece
+	 * @return: 1 if the move was successful; 0 otherwise
+	 */
 	private boolean moveFrom(Position from, Position position) {
 		if (isPositionValid(position)) {
 			Checker currentChecker = checkerForPosition(from);
@@ -58,16 +82,35 @@ public class Board {
 		}
 	}
 
+	
+	/**
+	 * removePiece removes a Piece from play and frees up the Checker and Position it occupied.
+	 * 
+	 * @param Position position: the position to remove the Piece from
+	 */
 	public void removePiece(Position position) {
 		Checker checker = checkerForPosition(position);
 		this.game.decrementPiecesByColor(checker.getPiece().getColor());
 		checker.clearPiece();
 	}
 
+	/**
+	 * checkerForPosition translates a Position object into a Checker object
+	 * by mapping a Position's coordinates to a single element in the checkers array element.
+	 * 
+	 * @param Position position: the position to convert into a Checker
+	 * @return: the Checker object located at the given Position
+	 */
 	public Checker checkerForPosition(Position position) {
 		return this.checkers[position.getRow()][position.getColumn()];
 	}
 
+	/**
+	 * isPositionValid determines whether a given position is a valid location the Piece at the lastSelected Checker to move to.
+	 * 
+	 * @param Position position: the position to analyze
+	 * @return: 1 if the position is a valid location to move to; 0 otherwise
+	 */
 	private boolean isPositionValid(Position position) {
 		Checker currentChecker = checkerForPosition(this.lastSelected);
 		Piece piece = currentChecker.getPiece();
@@ -116,6 +159,13 @@ public class Board {
 		return false;
 	}
 
+	/**
+	 * positionAfterJump checks the positions surrounding a given position, and automatically repeatedly
+	 * jumps the given position's piece over the first available opponent piece.
+	 * 
+	 * @param Position finalPos: the current position after a move
+	 * @return: recursively, the final position the Piece lands at after successive jumps
+	 */
 	private Position positionAfterJump(Position finalPos) {
 		// TODO: clean code up
 		Position position = finalPos;
@@ -144,6 +194,16 @@ public class Board {
 		return position;
 	}
 
+	/**
+	 * jumpToPosition moves a Piece by jumping it over an opponent Piece and removing it from play.
+	 * 
+	 * @param int dX: the distance (in columns) from the currentPiece's position
+	 * @param int dY: the distance (in rows) from the currentPiece's position
+	 * @param Position position: the destination position to analyze
+	 * @param Piece currentPiece: the piece to move
+	 * @param Checker checker: the checker tile that holds the current piece
+	 * @return: the position that has been moved to
+	 */
 	private Position jumpToPosition(int dX, int dY, Position position, Piece currentPiece, Checker checker) {
 		try {
 			// TODO: switch to using moveFrom
@@ -155,7 +215,7 @@ public class Board {
 			Checker nextChecker = checkerForPosition(pos);
 			Piece piece = nextChecker.getPiece();
 			if (piece != null && piece.getColor() != currentPiece.getColor()) {
-				Position nextPos = new Position(position.getRow() + dY + 1, position.getColumn() + dX + 1);
+				Position nextPos = new Position(position.getRow() + dY + 1, position.getColumn() + dX + 1);    // direction and boundary checks needed
 				Checker jumpTarget = checkerForPosition(nextPos);
 				if (!jumpTarget.hasPiece()) {
 					nextChecker.clearPiece();
@@ -171,6 +231,13 @@ public class Board {
 		return null;
 	}
 
+	/**
+	 * genCheckerForPosition produces a new Checker object at a given Position, and places a Piece on it if it is a valid space.
+	 * This method is called exclusively by generate(), and is meant to be called at the beginning of the game.
+	 * 
+	 * @param Position position: the position to generate a Checker at
+	 * @return: a Checker, with or without a particularly colored Piece element in it, given the Position
+	 */
 	private Checker genCheckerForPosition(Position position) {
 		int rowMod = position.getRow() % 2;
 		int positionMod = (position.getColumn() + rowMod) % 2;
@@ -185,6 +252,10 @@ public class Board {
 		return new Checker(positionMod == 1, piece);
 	}
 
+	/**
+	 * generate populates new Checkers objects for each entry in the checkers array element
+	 * by calling genCheckerForPosition at each position.
+	 */
 	private void generate() {
 		for (int row = 0; row < this.checkers.length; row++) {
 			for (int col = 0; col < this.checkers[row].length; col++) {
