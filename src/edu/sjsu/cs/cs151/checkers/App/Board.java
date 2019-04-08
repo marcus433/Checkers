@@ -9,7 +9,7 @@ public class Board {
 
 	public void selectChecker(Position position) {
 		Checker currentChecker = checkerForPosition(position);
-		if (currentChecker.getColor() == this.game.getCurrentColor()) {
+		if (currentChecker.getPiece().getColor() == this.game.getCurrentColor()) {
 			if (this.lastSelected != null) {
 				Checker lastChecker = checkerForPosition(this.lastSelected);
 				lastChecker.deselect();
@@ -65,7 +65,7 @@ public class Board {
 	}
 
 	public Checker checkerForPosition(Position position) {
-		return this.checker[position.getRow()][position.getColumn()];
+		return this.checkers[position.getRow()][position.getColumn()];
 	}
 
 	private boolean isPositionValid(Position position) {
@@ -118,12 +118,41 @@ public class Board {
 
 	private Position positionAfterJump(Position finalPos) {
 		Position position = finalPos;
+		Checker checker = checkerForPosition(position);
+		Piece currentPiece = checker.getPiece();
+
+		/*if () {
+			// TODO: check bounds
+			Position pos = new Position(position.getRow() - 1, position.getColumn() - 1);
+			Checker checker = checkerForPosition(pos);
+			Piece piece = checker.getPiece();
+			if (piece != null && piece.getColor() != currentPiece.getColor()) {
+				Position pos = new Position(position.getRow() - 2, position.getColumn() - 2);
+				Checker checker = checkerForPosition(pos);
+				if (!checker.hasPiece()) {
+					// remove piece and jump piece
+				}
+			}
+			// -1, -1
+		} else if () {
+			// -1, 1
+		} else if () {
+			// 1, -1
+		} else if () {
+			// 1, 1
+		}*/
+
 		// TODO: will behave recursively
 		// moveFrom(Position from, Position position)
 		// top-left, top-right, bottom-left, bottom-right
 		// considered valid if has opposing piece & has blank space after in the diagonal
 		// removePiece after jumping
-		return position
+		return position;
+	}
+
+	private boolean jumpToPosition() {
+		// TODO
+		return false;
 	}
 
 	private Checker genCheckerForPosition(Position position) {
@@ -146,16 +175,6 @@ public class Board {
 				this.checkers[row][col] = this.genCheckerForPosition(new Position(row, col));
 			}
 		}
-	}
-
-	// Getters and Setters
-	
-	public Piece[] getPieces() {
-		return pieces;
-	}
-	
-	public Piece getCurrentPiece() {
-		return currentPiece;
 	}
 	
 	// Public constants

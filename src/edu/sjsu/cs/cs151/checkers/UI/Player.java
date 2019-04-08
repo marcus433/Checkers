@@ -1,4 +1,4 @@
-package edu.sjsu.cs.cs151.checkers.App;
+package edu.sjsu.cs.cs151.checkers.UI;
 
 /**
  * Player is a representation of data tied to invididual players in a given game of Checkers.

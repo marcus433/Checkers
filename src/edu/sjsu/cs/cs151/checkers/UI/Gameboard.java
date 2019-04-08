@@ -1,4 +1,4 @@
-package edu.sjsu.cs.cs151.checkers.App;
+package edu.sjsu.cs.cs151.checkers.UI;
 
 /**
  * Gameboard tracks the positions of each Piece currently in play.

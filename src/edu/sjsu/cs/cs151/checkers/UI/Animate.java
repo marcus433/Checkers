@@ -1,4 +1,4 @@
-package edu.sjsu.cs.cs151.checkers.App;
+package edu.sjsu.cs.cs151.checkers.UI;
 
 import java.awt.Color;
 import java.awt.Rectangle;
