@@ -1,11 +1,11 @@
-package edu.sjsu.cs.cs151.checkers.App;
+package edu.sjsu.cs.cs151.checkers.controller;
 
 /**
  * Checker is a representation of a given tile on the checkerboard. 
  */
 public class Checker {
 
-	Checker(boolean canHoldPiece, Piece piece) {
+	public Checker(boolean canHoldPiece, Piece piece) {
 		this.canHoldPiece = canHoldPiece;
 		this.isSelected = false;
 		this.piece = piece;

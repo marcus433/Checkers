@@ -1,17 +1,17 @@
-package edu.sjsu.cs.cs151.checkers.UI;
+package edu.sjsu.cs.cs151.checkers.view;
 
 /**
  * Size is a representation of size used by the game logic. It will be used by both core and GUI classes.
  */
 public class Size {
    
-   Size() {
-      this.width = DEFAULT_SIZE;
-      this.height = DEFAULT_SIZE;
-   }
+  public Size() {
+		this.width = DEFAULT_SIZE;
+		this.height = DEFAULT_SIZE;
+	}
 
 	// Since layout is grid, don't really need float level precision
-	Size(int width, int height) {
+	public Size(int width, int height) {
 		this.width = width;
 		this.height = height;
 	}
@@ -23,7 +23,7 @@ public class Size {
 	 * @return: an integer representation of width
 	 */
 	public int getWidth() {
-	   return width;
+		return width;
 	}
 	
 	/**
@@ -31,7 +31,7 @@ public class Size {
 	 * @return: an integer representation of height
 	 */
 	public int getHeight() {
-	   return height;
+		return height;
 	}
 	
 // Private fields

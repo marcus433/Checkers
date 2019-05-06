@@ -1,11 +1,11 @@
-package edu.sjsu.cs.cs151.checkers.App;
+package edu.sjsu.cs.cs151.checkers.controller;
 
 /**
  * Board is a representation of the checkerboard used to play the game.
  * While Game handles the flow of a game session, Board handles the available actions a player can take.
  */
 public class Board {
-	Board(Game game) {
+	public Board(Game game) {
 		this.game = game;
 	  this.checkers = new Checker[DEFAULT_SIZE][DEFAULT_SIZE];
 	  this.generate();

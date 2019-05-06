@@ -1,4 +1,4 @@
-package edu.sjsu.cs.cs151.checkers.App;
+package edu.sjsu.cs.cs151.checkers.controller;
 
 /**
  * Piece represents an individual piece used by a player in a game of checkers.
@@ -9,7 +9,7 @@ public class Piece {
 		RED, BLACK
 	}
 
-	Piece(Color color) {
+	public Piece(Color color) {
 		this.color = color;
 		this.isKing = false;
 	}

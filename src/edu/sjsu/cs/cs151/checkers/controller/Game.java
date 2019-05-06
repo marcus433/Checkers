@@ -1,10 +1,10 @@
-package edu.sjsu.cs.cs151.checkers.App;
+package edu.sjsu.cs.cs151.checkers.controller;
 
 /**
  * Game determines the game logic and flow of the current game session.
  */
 public class Game {
-	Game() {
+	public Game() {
 		reset();
 	}
 

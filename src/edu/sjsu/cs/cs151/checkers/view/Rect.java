@@ -1,11 +1,11 @@
-package edu.sjsu.cs.cs151.checkers.UI;
+package edu.sjsu.cs.cs151.checkers.view;
 
 /**
  * Rect is a collection of Size and Location objects; together, they represent the space a Piece or a Board object occupies.
  */
 public class Rect {
 
-	Rect(Size size, Location location) {
+	public Rect(Size size, Location location) {
 		this.size = size;
 		this.location = location;
 	}

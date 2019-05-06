@@ -1,10 +1,10 @@
-package edu.sjsu.cs.cs151.checkers.UI;
+package edu.sjsu.cs.cs151.checkers.view;
 
 /**
  * Gameboard tracks the positions of each Piece currently in play.
  */
 public class Gameboard {
-	Gameboard() {
+	public Gameboard() {
 		gridSize = DEFAULT_GRID_SIZE;
 	  this.pieces = new Piece[gridSize.getWidth() * gridSize.getHeight()];
 		this.currentPiece = new Piece(Piece.Type.KING, Piece.Color.BLACK); // temporary to keep compiler happy

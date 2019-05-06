@@ -1,4 +1,4 @@
-package edu.sjsu.cs.cs151.checkers.UI;
+package edu.sjsu.cs.cs151.checkers.view;
 
 import java.awt.Color;
 import java.awt.Rectangle;
@@ -31,7 +31,7 @@ public class Animate implements ActionListener {
 	 * Setup
 	 * @param view: view to animate
 	 * */
-	Animate(JPanel view) {
+	public Animate(JPanel view) {
 		this.view = view;
 		currentAnimation = null;
 		timeIncrement = MS_S / FPS;

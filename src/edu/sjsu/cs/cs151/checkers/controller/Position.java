@@ -1,11 +1,11 @@
-package edu.sjsu.cs.cs151.checkers.App;
+package edu.sjsu.cs.cs151.checkers.controller;
 
 /**
  * Position is a coordinate representation of location on the board.
  */
 public class Position {
   
-   Position(int row, int column) throws Error {
+   public Position(int row, int column) throws Error {
   	if (row >= this.MIN_POSITION && column >= this.MIN_POSITION) {
 			this.row = row;
 			this.column = column;

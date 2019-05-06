@@ -1,16 +1,16 @@
-package edu.sjsu.cs.cs151.checkers.UI;
+package edu.sjsu.cs.cs151.checkers.view;
 
 /**
  * Location is a Cartesian representation of position used by the game logic.
  */
 public class Location {
 
-	Location() {
+	public Location() {
 	   this.x = DEFAULT_COORDINATE;
 	   this.y = DEFAULT_COORDINATE;
 	}
    
-   Location(int x, int y) {
+  public Location(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}

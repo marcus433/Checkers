@@ -1,4 +1,4 @@
-package edu.sjsu.cs.cs151.checkers.UI;
+package edu.sjsu.cs.cs151.checkers.view;
 
 import javax.swing.JPanel;
 
@@ -6,7 +6,7 @@ import javax.swing.JPanel;
  * Game models the game flow of a round of Checkers.
  */
 public class Game extends JPanel {
-	Game() {
+	public Game() {
 		super();
 		reset();
 

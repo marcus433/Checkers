@@ -1,11 +1,11 @@
-package edu.sjsu.cs.cs151.checkers.UI;
+package edu.sjsu.cs.cs151.checkers.view;
 
 /**
  * Player is a representation of data tied to invididual players in a given game of Checkers.
  */
 public class Player {
 
-	Player() {
+	public Player() {
 		this.numWonGames = DEFAULT_NUM_WINS;
 		this.color = DEFAULT_COLOR;
 		this.numPieces = DEFAULT_NUM_PIECES;
