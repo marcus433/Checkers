@@ -16,7 +16,7 @@ public class Toolbar extends JPanel {
 	}
 
 	public void updateCurrentPlayer(Player player) {
-		if (player.DEFAULT_COLOR === Piece.Color.RED) {
+		if (player.getColor() == Piece.Color.RED) {
 			// TODO: update toolbar
 		} else {
 			// TODO: update toolbar
