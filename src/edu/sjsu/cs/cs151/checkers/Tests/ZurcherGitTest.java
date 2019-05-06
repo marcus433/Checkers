@@ -1,4 +1,4 @@
-package edu.sjsu.cs.cs151.checkers.Tests;
+package edu.sjsu.cs.cs151.checkers.tests;
 
 public class ZurcherGitTest {
    public void dummy() {

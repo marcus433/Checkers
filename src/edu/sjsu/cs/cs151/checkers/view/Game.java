@@ -1,5 +1,7 @@
 package edu.sjsu.cs.cs151.checkers.view;
 
+import java.awt.Color;
+
 import javax.swing.JPanel;
 
 /**
@@ -13,6 +15,7 @@ public class Game extends JPanel {
 		// FOR ANIMATION TESTING PURPOSES
 		// This will occur in GameBoard once it is built out
 		this.setLayout(null);
+		setBackground(Color.BLUE);
 		Piece blackPawn = new Piece(Piece.Type.PAWN, Piece.Color.BLACK);
 		Piece redPawn = new Piece(Piece.Type.PAWN, Piece.Color.RED);
 		Animate gridAnimation = new Animate(blackPawn);
@@ -20,6 +23,7 @@ public class Game extends JPanel {
 		//gridAnimation.animateTo(500, new Location(300, 500));
 		add(blackPawn);
 		add(redPawn);
+		add(new Toolbar());
 		for (int row = 0; row < 8; row++) {
 			for (int col = 0; col < 8; col++) {
 				int columnRotated = row % 2 == 0 ? col : 7 - col;
