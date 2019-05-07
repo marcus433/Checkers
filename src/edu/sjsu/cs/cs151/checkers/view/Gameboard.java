@@ -1,5 +1,25 @@
 package edu.sjsu.cs.cs151.checkers.view;
 
+/*
+this.setLayout(null);
+setBackground(Color.BLUE);
+Piece blackPawn = new Piece(Piece.Type.PAWN, Piece.Color.BLACK);
+Piece redPawn = new Piece(Piece.Type.PAWN, Piece.Color.RED);
+Animate gridAnimation = new Animate(blackPawn);
+Animate gridAnimation2 = new Animate(redPawn);
+//gridAnimation.animateTo(500, new Location(300, 500));
+add(blackPawn);
+add(redPawn);
+add(new Toolbar());
+for (int row = 0; row < 8; row++) {
+	for (int col = 0; col < 8; col++) {
+		int columnRotated = row % 2 == 0 ? col : 7 - col;
+		gridAnimation.animateTo(500, new Location(columnRotated * 100, row * 100));
+		gridAnimation2.animateTo(500, new Location((7 - columnRotated) * 100, (7 - row) * 100));
+	}
+}
+*/
+
 /**
  * Gameboard tracks the positions of each Piece currently in play.
  */

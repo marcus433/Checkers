@@ -4,7 +4,7 @@ package edu.sjsu.cs.cs151.checkers.controller;
  * Game determines the game logic and flow of the current game session.
  */
 public class Game {
-	public Game() {
+	private Game() {
 		reset();
 	}
 
@@ -63,8 +63,12 @@ public class Game {
 			blackCount--;
 	}
 	
+	// Singleton Instance
+
+	public static final Game instance = new Game();
+
 	// Private fields
-	
+
 	private Piece.Color currentColor;
 	private int redCount;
 	private int blackCount;
