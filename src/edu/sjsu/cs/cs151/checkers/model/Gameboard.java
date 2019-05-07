@@ -71,79 +71,104 @@ public class Gameboard {
       this.currentPiece = board[pos.getRow()][pos.getColumn()].getPiece();
    }
    
+   /**
+    * determineValidMoves decides which Positions around the origin and currentPiece contain
+    * Checkers that can be safely moved to.
+    * @return Position[] validMoves - an array of Positions that correspond to valid Checkers.
+    *    0 corresponds to single-space moves.
+    *    1, 2, 3, and 4 are jump moves, going from lower left, to lower right, to upper left, to upper right.
+    */
+   public Position[] determineValidMoves() {
+      Position[] validMoves = new Position[5];
+      if (currentPiece.getColor() == Color.BLACK || currentPiece.isKing()) {
+         // Adjacent space; lower left
+         if (!board[origin.getRow() + 1][origin.getColumn() - 1].hasPiece())
+            validMoves[0] = new Position(origin.getRow() + 1, origin.getColumn() - 1);
+         // Jump; lower left
+         else if (!board[origin.getRow() + 2][origin.getColumn() - 2].hasPiece() 
+               && board[origin.getRow() + 1][origin.getColumn() - 1].getPiece().getColor() != currentPiece.getColor())
+            validMoves[1] = new Position(origin.getRow() + 2, origin.getColumn() - 2);
+            
+         // Adjacent space; lower right
+         if (!board[origin.getRow() + 1][origin.getColumn() + 1].hasPiece())
+            validMoves[0] = new Position(origin.getRow() + 1, origin.getColumn() + 1);
+         // Jump; lower right
+         else if (!board[origin.getRow() + 2][origin.getColumn() + 2].hasPiece() 
+               && board[origin.getRow() + 1][origin.getColumn() + 1].getPiece().getColor() != currentPiece.getColor())
+            validMoves[2] = new Position(origin.getRow() + 2, origin.getColumn() + 2);
+      }
+      else if (currentPiece.getColor() == Color.RED || currentPiece.isKing()) {
+         // Adjacent space; upper left
+         if (!board[origin.getRow() - 1][origin.getColumn() - 1].hasPiece())
+            validMoves[0] = new Position(origin.getRow() - 1, origin.getColumn() - 1);
+         // Jump; upper left
+         else if (!board[origin.getRow() - 2][origin.getColumn() - 2].hasPiece() 
+               && board[origin.getRow() - 1][origin.getColumn() - 1].getPiece().getColor() != currentPiece.getColor())
+            validMoves[3] = new Position(origin.getRow() - 2, origin.getColumn() - 2);
+            
+         // Adjacent space; upper right
+         if (!board[origin.getRow() - 1][origin.getColumn() + 1].hasPiece())
+            validMoves[0] = new Position(origin.getRow() - 1, origin.getColumn() + 1);
+         // Jump; upper right
+         else if (!board[origin.getRow() - 2][origin.getColumn() + 2].hasPiece() 
+               && board[origin.getRow() - 1][origin.getColumn() + 1].getPiece().getColor() != currentPiece.getColor())
+            validMoves[4] = new Position(origin.getRow() - 2, origin.getColumn() + 2);
+      }
+      
+      // Set any invalid Positions to null.
+      for (int i = 0; i < validMoves.length; i++) {
+         if (validMoves[i].getRow() < 0 || validMoves[i].getColumn() < 0)
+            validMoves[i] = null;
+      }
+      return validMoves;
+   }
+   
+   /**
+    * movePiece moves a piece from one Position and Checker to another user-specified one.
+    * If the selected destination is invalid, movePiece will simply return.
+    * @param dest - the user-selected destination Position.
+    */
    public void movePiece(Position dest) {
       // Do nothing if the destination isn't valid, or if it's already occupied
       if (!board[dest.getRow()][dest.getColumn()].isValid() 
             || board[dest.getRow()][dest.getColumn()].hasPiece())
          return;
       
-      // Valid King moves
-      if (currentPiece.isKing()) {
-         
-         // Move to an adjacent checker. No piece removal
-         if (Math.abs(dest.getRow() - origin.getRow()) == 1
-               && Math.abs(dest.getColumn() - origin.getColumn()) == 1) {
-            board[origin.getRow()][origin.getColumn()].clearPiece();
-            board[dest.getRow()][dest.getColumn()].setPiece(currentPiece);
-            return;
+      // Determine if the destination corresponds to a valid Position to move to
+      int whichMove = -1;
+      Position[] validMoves = determineValidMoves();
+      for (int i = 0; i < validMoves.length; i++) {
+         if (validMoves[i] != null && dest.equals(validMoves[i])) {
+            whichMove = i;
+            continue;
          }
-         // Jump - toward upper left
-         else if (dest.getRow() - origin.getRow() == -2
-               && dest.getColumn() - origin.getColumn() == -2
-               && board[dest.getRow() + 1][dest.getColumn() + 1].hasPiece()
-               && board[dest.getRow() + 1][dest.getColumn() + 1].getPiece().getColor() != currentPiece.getColor()) {
-            board[origin.getRow()][origin.getColumn()].clearPiece();
-            board[dest.getRow()][dest.getColumn()].setPiece(currentPiece);
-            board[dest.getRow() + 1][dest.getColumn() + 1].clearPiece();
-            if (currentPiece.getColor() == Color.BLACK)
-               remainingRedPieces--;
-            else // if (currentPiece.getColor() == Color.RED)
-               remainingBlackPieces--;
-         }
-         // Jump - toward upper right
-         else if (dest.getRow() - origin.getRow() == -2
-               && dest.getColumn() - origin.getColumn() == 2
-               && board[dest.getRow() + 1][dest.getColumn() - 1].hasPiece()
-               && board[dest.getRow() + 1][dest.getColumn() - 1].getPiece().getColor() != currentPiece.getColor()) {
-            board[origin.getRow()][origin.getColumn()].clearPiece();
-            board[dest.getRow()][dest.getColumn()].setPiece(currentPiece);
-            board[dest.getRow() + 1][dest.getColumn() - 1].clearPiece();
-         }
-         // Jump - toward lower left
-         else if (dest.getRow() - origin.getRow() == 2
-               && dest.getColumn() - origin.getColumn() == -2
-               && board[dest.getRow() - 1][dest.getColumn() + 1].hasPiece()
-               && board[dest.getRow() - 1][dest.getColumn() + 1].getPiece().getColor() != currentPiece.getColor()) {
-            board[origin.getRow()][origin.getColumn()].clearPiece();
-            board[dest.getRow()][dest.getColumn()].setPiece(currentPiece);
-            board[dest.getRow() - 1][dest.getColumn() + 1].clearPiece();
-         }
-         // Jump - toward lower right
-         else if (dest.getRow() - origin.getRow() == 2
-               && dest.getColumn() - origin.getColumn() == 2
-               && board[dest.getRow() - 1][dest.getColumn() - 1].hasPiece()
-               && board[dest.getRow() - 1][dest.getColumn() - 1].getPiece().getColor() != currentPiece.getColor()) {
-            board[origin.getRow()][origin.getColumn()].clearPiece();
-            board[dest.getRow()][dest.getColumn()].setPiece(currentPiece);
-            board[dest.getRow() - 1][dest.getColumn() - 1].clearPiece();
-         }
-         
-         // All Jump actions remove an opponent piece.
+      }
+      if (whichMove == -1)
+         return;
+      
+      // If whichMove corresponds to a jump move, determine where to remove the opponent piece.
+      switch (whichMove) {
+      // Jump, lower left
+      case 1: board[dest.getRow() - 1][dest.getColumn() + 1].clearPiece();
+      // Jump, lower right
+      case 2: board[dest.getRow() - 1][dest.getColumn() - 1].clearPiece();
+      // Jump, upper left
+      case 3: board[dest.getRow() + 1][dest.getColumn() + 1].clearPiece();
+      // Jump, upper right
+      case 4: board[dest.getRow() + 1][dest.getColumn() - 1].clearPiece();
+      default: {
+         // All jump moves reduce the total number of pieces on the opponent side.
          if (currentPiece.getColor() == Color.BLACK)
-            remainingRedPieces--;
+               remainingRedPieces--;
          else // if (currentPiece.getColor() == Color.RED)
-            remainingBlackPieces--;
+               remainingBlackPieces--;
+      }
       }
       
-      // Valid Black pawn moves
-      else if (currentPiece.getColor() == Color.BLACK) {
-         
-      }
+      // Update the current piece's Position and Checker.
+      board[origin.getRow()][origin.getColumn()].clearPiece();
+      board[dest.getRow()][dest.getColumn()].setPiece(currentPiece);
       
-      // Valid Red pawn moves
-      else if (currentPiece.getColor() == Color.RED) {
-         
-      }
    }
    
 // Private fields
