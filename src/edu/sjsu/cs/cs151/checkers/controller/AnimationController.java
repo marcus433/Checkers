@@ -1,4 +1,4 @@
-package edu.sjsu.cs.cs151.checkers.view;
+package edu.sjsu.cs.cs151.checkers.controller;
 
 import java.awt.Color;
 import java.awt.Rectangle;
@@ -7,13 +7,16 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.Timer;
+
+import edu.sjsu.cs.cs151.checkers.model.Location;
+
 import javax.swing.JPanel;
 
 /**
  * Handles animation interpolation
  * easing, and chaining.
  */
-public class Animate implements ActionListener {
+public class AnimationController implements ActionListener {
 	
 	/*
 	 * Stores information for an animation
@@ -31,7 +34,7 @@ public class Animate implements ActionListener {
 	 * Setup
 	 * @param view: view to animate
 	 * */
-	public Animate(JPanel view) {
+	public AnimationController(JPanel view) {
 		this.view = view;
 		currentAnimation = null;
 		timeIncrement = MS_S / FPS;
@@ -45,7 +48,7 @@ public class Animate implements ActionListener {
 	 * @param location: target x, y position
 	 * @return self: for animateTo chaining
 	 * */
-	public Animate animateTo(int duration, Location location) {
+	public AnimationController animateTo(int duration, Location location) {
 		int x = 0;
 		int y = 0;
 		if (queue.size() == 0) {

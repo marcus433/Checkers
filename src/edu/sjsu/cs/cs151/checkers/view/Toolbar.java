@@ -15,13 +15,13 @@ public class Toolbar extends JPanel {
 		setSize(200, 50);
 	}
 
-	public void updateCurrentPlayer(Player player) {
+	/*public void updateCurrentPlayer(Player player) {
 		if (player.getColor() == Piece.Color.RED) {
 			// TODO: update toolbar
 		} else {
 			// TODO: update toolbar
 		}
-	}
+	}*/
 
 	private void undoMove() {
 		// TODO: from button listener

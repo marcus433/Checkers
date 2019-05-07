@@ -1,5 +1,7 @@
 package edu.sjsu.cs.cs151.checkers.view;
 
+import edu.sjsu.cs.cs151.checkers.model.Size;
+import edu.sjsu.cs.cs151.checkers.model.Location;
 /*
 this.setLayout(null);
 setBackground(Color.BLUE);

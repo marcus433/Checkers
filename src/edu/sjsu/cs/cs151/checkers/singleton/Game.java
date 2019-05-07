@@ -1,5 +1,7 @@
-package edu.sjsu.cs.cs151.checkers.controller;
+package edu.sjsu.cs.cs151.checkers.singleton;
 
+import edu.sjsu.cs.cs151.checkers.model.*;
+import edu.sjsu.cs.cs151.checkers.controller.*;
 /**
  * Game determines the game logic and flow of the current game session.
  */
@@ -22,9 +24,9 @@ public class Game {
 	 */
 	public void reset() {
 		currentColor = Piece.Color.BLACK;
-		board = new Board(this);
-		redCount = Board.PIECES_PER_SIDE;
-		blackCount = Board.PIECES_PER_SIDE;
+		//board = new Board(this);
+		redCount = BoardController.PIECES_PER_SIDE;
+		blackCount = BoardController.PIECES_PER_SIDE;
 	}
 
 	/**
@@ -72,5 +74,5 @@ public class Game {
 	private Piece.Color currentColor;
 	private int redCount;
 	private int blackCount;
-	private Board board;
+	private BoardController board;
 }
