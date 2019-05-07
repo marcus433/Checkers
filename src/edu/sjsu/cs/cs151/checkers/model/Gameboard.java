@@ -157,17 +157,21 @@ public class Gameboard {
       // Jump, upper right
       case 4: board[dest.getRow() + 1][dest.getColumn() - 1].clearPiece();
       default: {
-         // All jump moves reduce the total number of pieces on the opponent side.
-         if (currentPiece.getColor() == Color.BLACK)
-               remainingRedPieces--;
-         else // if (currentPiece.getColor() == Color.RED)
-               remainingBlackPieces--;
+         System.out.println("Something's wrong.");
       }
       }
       
       // Update the current piece's Position and Checker.
       board[origin.getRow()][origin.getColumn()].clearPiece();
       board[dest.getRow()][dest.getColumn()].setPiece(currentPiece);
+      
+      // All jump moves reduce the total number of pieces on the opponent side.
+      if (whichMove > 0 || whichMove <= 4) {
+         if (currentPiece.getColor() == Color.BLACK)
+            remainingRedPieces--;
+         else // if (currentPiece.getColor() == Color.RED)
+            remainingBlackPieces--;
+      }
       
    }
    
