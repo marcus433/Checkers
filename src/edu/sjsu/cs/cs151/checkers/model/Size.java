@@ -1,4 +1,4 @@
-package edu.sjsu.cs.cs151.checkers.view;
+package edu.sjsu.cs.cs151.checkers.model;
 
 /**
  * Size is a representation of size used by the game logic. It will be used by both core and GUI classes.

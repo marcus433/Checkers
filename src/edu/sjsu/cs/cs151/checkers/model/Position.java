@@ -1,4 +1,4 @@
-package edu.sjsu.cs.cs151.checkers.controller;
+package edu.sjsu.cs.cs151.checkers.model;
 
 /**
  * Position is a coordinate representation of location on the board.

@@ -1,4 +1,4 @@
-package edu.sjsu.cs.cs151.checkers.controller;
+package edu.sjsu.cs.cs151.checkers.model;
 
 /**
  * Piece represents an individual piece used by a player in a game of checkers.
