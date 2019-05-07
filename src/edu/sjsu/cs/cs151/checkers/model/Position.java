@@ -34,6 +34,10 @@ public class Position {
 	   return this.column;
 	}
 	
+	public boolean equals(Position pos) {
+	   return (this.row == pos.row && this.column == pos.column);
+	}
+	
 	// Private fields
 	
 	private static final int MIN_POSITION = 0;
