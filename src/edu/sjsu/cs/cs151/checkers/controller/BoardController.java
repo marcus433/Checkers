@@ -1,11 +1,16 @@
 package edu.sjsu.cs.cs151.checkers.controller;
 
+import edu.sjsu.cs.cs151.checkers.model.Checker;
+import edu.sjsu.cs.cs151.checkers.model.Piece;
+import edu.sjsu.cs.cs151.checkers.model.Position;
+import edu.sjsu.cs.cs151.checkers.singleton.Game;
+
 /**
  * Board is a representation of the checkerboard used to play the game.
  * While Game handles the flow of a game session, Board handles the available actions a player can take.
  */
-public class Board {
-	public Board(Game game) {
+public class BoardController {
+	public BoardController(Game game) {
 		this.game = game;
 	  this.checkers = new Checker[DEFAULT_SIZE][DEFAULT_SIZE];
 	  this.generate();

@@ -1,4 +1,4 @@
-package edu.sjsu.cs.cs151.checkers.view;
+package edu.sjsu.cs.cs151.checkers.model;
 
 /**
  * Location is a Cartesian representation of position used by the game logic.

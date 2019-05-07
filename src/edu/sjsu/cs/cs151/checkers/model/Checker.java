@@ -1,4 +1,4 @@
-package edu.sjsu.cs.cs151.checkers.controller;
+package edu.sjsu.cs.cs151.checkers.model;
 
 /**
  * Checker is a representation of a given tile on the checkerboard. 
