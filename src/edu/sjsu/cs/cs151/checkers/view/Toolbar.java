@@ -40,7 +40,7 @@ public class Toolbar extends View {
 	}
 
 	public void updateState(Model model) {
-		//
+		currentTurn.updateState(model);
 	}
 
 	@Override

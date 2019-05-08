@@ -93,7 +93,7 @@ public class Controller {
          if (!model.selectChecker(selectAt))
             return Valve.ValveResponse.EXECUTED;
          
-         Position[] validMoves = model.determineValidMoves();
+         //Position[] validMoves = model.determineValidMoves();
          
          // actions in View
          // TODO: highlight valid move destinations

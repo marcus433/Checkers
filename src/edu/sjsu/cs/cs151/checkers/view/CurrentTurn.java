@@ -1,6 +1,7 @@
 package edu.sjsu.cs.cs151.checkers.view;
 
 import edu.sjsu.cs.cs151.checkers.layout.*;
+import edu.sjsu.cs.cs151.checkers.model.Model;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -30,6 +31,14 @@ public class CurrentTurn extends View {
 		children.add(piece);
 		children.add(currentTurnLabel);
 		return new StackLayout(StackLayout.Direction.HORIZONTAL, 10, children);
+	}
+	
+	public void updateState(Model model) {
+		edu.sjsu.cs.cs151.checkers.model.Piece.Color color = model.getCurrentColor();
+		if (color == edu.sjsu.cs.cs151.checkers.model.Piece.Color.RED)
+			piece.setColor(Piece.Color.RED);
+		else
+			piece.setColor(Piece.Color.BLACK);
 	}
 
 	public static final int DEFAULT_HEIGHT = 40;
