@@ -81,6 +81,7 @@ public class Model {
             && board[pos.getRow()][pos.getColumn()].getPiece().getColor() == currentColor) {
          this.origin = pos;
          this.currentPiece = board[pos.getRow()][pos.getColumn()].getPiece();
+         board[pos.getRow()][pos.getColumn()].select();
          return true;
       }
       deselect();
@@ -236,6 +237,7 @@ public class Model {
    public void deselect() {
       origin = null;
       currentPiece = null;
+      board[origin.getRow()][origin.getColumn()].deselect();
    }
    
    /**
