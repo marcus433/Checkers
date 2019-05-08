@@ -111,7 +111,7 @@ public class Model {
                && board[down][right].getPiece().getColor() != currentPiece.getColor())
             validMoves[3] = new Position(jumpDown, jumpRight);
       }
-      else if (currentPiece.getColor() == Color.RED || currentPiece.isKing()) {
+      if (currentPiece.getColor() == Color.RED || currentPiece.isKing()) {
          // Adjacent space; upper left
          if (up >= 0 && left >= 0 && !board[up][left].hasPiece())
             validMoves[4] = new Position(up, left);
@@ -228,8 +228,8 @@ public class Model {
       origin = dest;
       Position[] validMoves = determineValidMoves();
       canJumpAgain = false;
-      // validMoves[0] assumes a single space move; start analyzing from i=1.
-      for (int i = 1; i < validMoves.length; i++) {
+      // validMoves contains jump moves on odd numbers; only probe these.
+      for (int i = 1; i < validMoves.length; i+=2) {
          if (validMoves[i] != null)
             canJumpAgain = true;
       }
