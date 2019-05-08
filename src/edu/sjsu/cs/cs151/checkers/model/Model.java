@@ -154,7 +154,7 @@ public class Model {
       board[dest.getRow()][dest.getColumn()].setPiece(currentPiece);
       
       // Check if the move was a jump; if it was, remove the correct pieces.
-      if (whichMove > 0 || whichMove <= 4)
+      if (whichMove > 0)
          jump(whichMove, dest);
       
       // If the current piece made it all the way to the other side of the board, make it a king.
