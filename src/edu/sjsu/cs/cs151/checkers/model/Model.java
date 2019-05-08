@@ -21,7 +21,6 @@ public class Model {
       this.redWon = false;
       this.currentColor = Color.RED;
       this.canJumpAgain = false;
-      deselect();
       
       // Checker tile generation loop
       for (int row = 0; row < DEFAULT_SIZE; row++) {
@@ -81,6 +80,7 @@ public class Model {
             && board[pos.getRow()][pos.getColumn()].getPiece().getColor() == currentColor) {
          this.origin = pos;
          this.currentPiece = board[pos.getRow()][pos.getColumn()].getPiece();
+         deselect();
          board[pos.getRow()][pos.getColumn()].select();
          return true;
       }
@@ -237,7 +237,11 @@ public class Model {
    public void deselect() {
       origin = null;
       currentPiece = null;
-      board[origin.getRow()][origin.getColumn()].deselect();
+      for (int row = 0; row < board.length; row++) {
+	    	  for (int column = 0; column < board[row].length; column++) {
+	    		  board[row][column].deselect();
+	    	  }
+      }
    }
    
    /**
@@ -264,6 +268,8 @@ public class Model {
     * @return instance - the instance of Model
     */
    public static Model getInstance() {
+	  if (instance == null)
+		  instance = new Model();
       return instance;
    }
    
@@ -286,7 +292,7 @@ public class Model {
    
 // Private fields
    
-   private static Model instance = new Model();
+   private static Model instance;
    private static final int DEFAULT_SIZE = 8;
    private static final int DEFAULT_NUM_PIECES_PER_PLAYER = 12;
    private int remainingRedPieces;

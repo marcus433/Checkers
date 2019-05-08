@@ -9,7 +9,10 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -28,6 +31,11 @@ public class Window extends JFrame implements ComponentListener {
 		setLayout(null);
 		getContentPane().add(this.view);
 		layoutViews();
+		try {
+		    setIconImage(ImageIO.read(new File("assets/icon.png")));
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
 	}
 
 	private Window(String title) {

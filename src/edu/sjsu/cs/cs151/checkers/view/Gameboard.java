@@ -51,7 +51,7 @@ public class Gameboard extends View {
 	public void updateState(Model model) {
 		Checker[][] checkers = model.getBoard();
 		for (int row = 0; row < checkers.length; row++) {
-			for (int column = 0; column < checkers.length; column++) {
+			for (int column = 0; column < checkers[row].length; column++) {
 				Checker checker = checkers[row][column];
 				edu.sjsu.cs.cs151.checkers.model.Piece piece = checker.getPiece();
 				Tile tile = (Tile) tiles.get(((row + 1) * (column + 1) - 1));
