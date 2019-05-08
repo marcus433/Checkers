@@ -279,6 +279,10 @@ public class Model {
 	   return currentColor;
    }
    
+   public Piece getCurrentPiece() {
+      return currentPiece;
+   }
+   
 // Private fields
    
    private static Model instance;

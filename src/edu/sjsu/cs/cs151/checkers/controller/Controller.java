@@ -31,7 +31,6 @@ public class Controller {
       this.messageQueue = queue;
       
       valves.add(new SelectMessageValve());
-      valves.add(new ReleaseMessageValve());
       valves.add(new ResetMessageValve());
       valves.add(new SkipTurnMessageValve());
    }
@@ -87,37 +86,24 @@ public class Controller {
             return Valve.ValveResponse.MISS;
          
          SelectMessage selectMsg = (SelectMessage) message;
-         Position selectAt = new Position(selectMsg.getRow(), selectMsg.getColumn());
+         Position atClick = new Position(selectMsg.getRow(), selectMsg.getColumn());
          
          // actions in Model
-         if (!model.selectChecker(selectAt))
-            return Valve.ValveResponse.EXECUTED;
+         // selecting a piece
+         if (model.getCurrentPiece() == null) {
+            if (!model.selectChecker(atClick))
+               return Valve.ValveResponse.EXECUTED;
+         }
+         // moving a piece
+         else { // if (model.getCurrentPiece != null)
+            if (!model.movePiece(atClick))
+               return Valve.ValveResponse.EXECUTED;
+         }
          
          //Position[] validMoves = model.determineValidMoves();
          
          // actions in View
          // TODO: highlight valid move destinations
-         view.updateState(model);
-         
-         return Valve.ValveResponse.EXECUTED;
-      }
-   }
-   
-   private class ReleaseMessageValve implements Valve {
-      
-      public ValveResponse execute(Message message) {
-         if (message.getClass() != ReleaseMessage.class)
-            return Valve.ValveResponse.MISS;
-         
-         ReleaseMessage releaseMsg = (ReleaseMessage) message;
-         Position dest = new Position(releaseMsg.getRow(), releaseMsg.getColumn());
-         
-         // actions in Model
-         if (!model.movePiece(dest))
-            return Valve.ValveResponse.EXECUTED;
-         
-         // actions in View
-         // TODO: update the game board
          view.updateState(model);
          
          return Valve.ValveResponse.EXECUTED;
