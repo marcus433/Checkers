@@ -82,40 +82,50 @@ public class Model {
     * @precondition selectChecker has been called previously
     */
    public Position[] determineValidMoves() {
+      if (origin == null)
+         return null;
       Position[] validMoves = new Position[5];
+      int down = origin.getRow() + 1;
+      int up = origin.getRow() - 1;
+      int left = origin.getColumn() - 1;
+      int right = origin.getColumn() + 1;
+      int jumpDown = down + 1;
+      int jumpUp = up - 1;
+      int jumpLeft = left - 1;
+      int jumpRight = right + 1;
       if (currentPiece.getColor() == Color.BLACK || currentPiece.isKing()) {
          // Adjacent space; lower left
-         if (!board[origin.getRow() + 1][origin.getColumn() - 1].hasPiece())
-            validMoves[0] = new Position(origin.getRow() + 1, origin.getColumn() - 1);
+         if (down < DEFAULT_SIZE && left >= 0 && !board[down][left].hasPiece())
+            validMoves[0] = new Position(down, left);
          // Jump; lower left
-         else if (!board[origin.getRow() + 2][origin.getColumn() - 2].hasPiece() 
-               && board[origin.getRow() + 1][origin.getColumn() - 1].getPiece().getColor() != currentPiece.getColor())
-            validMoves[1] = new Position(origin.getRow() + 2, origin.getColumn() - 2);
+         else if (jumpDown < DEFAULT_SIZE && jumpLeft >= 0 && !board[jumpDown][jumpLeft].hasPiece() 
+               && board[down][left].getPiece().getColor() != currentPiece.getColor())
+            validMoves[1] = new Position(jumpDown, jumpLeft);
             
          // Adjacent space; lower right
-         if (!board[origin.getRow() + 1][origin.getColumn() + 1].hasPiece())
-            validMoves[0] = new Position(origin.getRow() + 1, origin.getColumn() + 1);
+         if (down < DEFAULT_SIZE && right < DEFAULT_SIZE && !board[down][right].hasPiece())
+            validMoves[0] = new Position(down, right);
          // Jump; lower right
-         else if (!board[origin.getRow() + 2][origin.getColumn() + 2].hasPiece() 
-               && board[origin.getRow() + 1][origin.getColumn() + 1].getPiece().getColor() != currentPiece.getColor())
-            validMoves[2] = new Position(origin.getRow() + 2, origin.getColumn() + 2);
+         else if (jumpDown < DEFAULT_SIZE && jumpRight < DEFAULT_SIZE && !board[jumpDown][jumpRight].hasPiece() 
+               && board[down][right].getPiece().getColor() != currentPiece.getColor())
+            validMoves[2] = new Position(jumpDown, jumpRight);
       }
       else if (currentPiece.getColor() == Color.RED || currentPiece.isKing()) {
          // Adjacent space; upper left
-         if (!board[origin.getRow() - 1][origin.getColumn() - 1].hasPiece())
-            validMoves[0] = new Position(origin.getRow() - 1, origin.getColumn() - 1);
+         if (up >= 0 && left >= 0 && !board[up][left].hasPiece())
+            validMoves[0] = new Position(up, left);
          // Jump; upper left
-         else if (!board[origin.getRow() - 2][origin.getColumn() - 2].hasPiece() 
-               && board[origin.getRow() - 1][origin.getColumn() - 1].getPiece().getColor() != currentPiece.getColor())
-            validMoves[3] = new Position(origin.getRow() - 2, origin.getColumn() - 2);
+         else if (jumpUp >= 0 && jumpLeft >= 0 && !board[jumpUp][jumpLeft].hasPiece() 
+               && board[up][left].getPiece().getColor() != currentPiece.getColor())
+            validMoves[3] = new Position(jumpUp, jumpLeft);
             
          // Adjacent space; upper right
-         if (!board[origin.getRow() - 1][origin.getColumn() + 1].hasPiece())
-            validMoves[0] = new Position(origin.getRow() - 1, origin.getColumn() + 1);
+         if (up >= 0 && right < DEFAULT_SIZE && !board[up][right].hasPiece())
+            validMoves[0] = new Position(up, right);
          // Jump; upper right
-         else if (!board[origin.getRow() - 2][origin.getColumn() + 2].hasPiece() 
-               && board[origin.getRow() - 1][origin.getColumn() + 1].getPiece().getColor() != currentPiece.getColor())
-            validMoves[4] = new Position(origin.getRow() - 2, origin.getColumn() + 2);
+         else if (jumpUp >= 0 && jumpRight < DEFAULT_SIZE && !board[jumpUp][jumpRight].hasPiece() 
+               && board[up][right].getPiece().getColor() != currentPiece.getColor())
+            validMoves[4] = new Position(jumpUp, jumpRight);
       }
       
       // Set any invalid Positions to null.
@@ -140,6 +150,8 @@ public class Model {
       // Determine if the destination corresponds to a valid Position to move to
       int whichMove = -1;
       Position[] validMoves = determineValidMoves();
+      if (validMoves == null)
+         return false;
       for (int i = 0; i < validMoves.length; i++) {
          if (validMoves[i] != null && dest.equals(validMoves[i])) {
             whichMove = i;
@@ -154,7 +166,7 @@ public class Model {
       board[dest.getRow()][dest.getColumn()].setPiece(currentPiece);
       
       // Check if the move was a jump; if it was, remove the correct pieces.
-      if (whichMove > 0 || whichMove <= 4)
+      if (whichMove > 0)
          jump(whichMove, dest);
       
       // If the current piece made it all the way to the other side of the board, make it a king.
@@ -189,14 +201,18 @@ public class Model {
       switch (whichMove) {
       // Jump, lower left
       case 1: board[dest.getRow() - 1][dest.getColumn() + 1].clearPiece();
+      break;
       // Jump, lower right
       case 2: board[dest.getRow() - 1][dest.getColumn() - 1].clearPiece();
+      break;
       // Jump, upper left
       case 3: board[dest.getRow() + 1][dest.getColumn() + 1].clearPiece();
+      break;
       // Jump, upper right
       case 4: board[dest.getRow() + 1][dest.getColumn() - 1].clearPiece();
+      break;
       default: {
-         System.out.println("Something's wrong.");
+         System.out.println("No more jumps.");
       }
       }
       
