@@ -1,5 +1,6 @@
 package edu.sjsu.cs.cs151.checkers.view;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FontMetrics;
@@ -67,8 +68,11 @@ public class Button extends View implements Layout {
 
 	@Override
 	public void paint(Graphics g) {
+		super.paint(g);
 		Graphics2D g2 = (Graphics2D)g;
-		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		g2.setRenderingHint(
+	            RenderingHints.KEY_ANTIALIASING,
+	            RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.setColor(new Color(pressed ? 0x061941 : 0x0A2663));
 		int arc = 40;
 		g2.fillRoundRect(0, 0, g2.getClipBounds().width, g.getClipBounds().height, arc, arc);

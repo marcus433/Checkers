@@ -16,12 +16,11 @@ import javax.swing.border.EmptyBorder;
 public class CurrentTurn extends View {
 	public CurrentTurn() {
 		super();
-		this.setOpaque(false);
+		this.setOpaque(true);
 		piece = new Piece(Piece.Type.PAWN, Piece.Color.RED);
 		currentTurnLabel = new Label("Current Turn");
 		currentTurnLabel.setDisplaySize(currentTurnLabel.getSize());
 		piece.setDisplaySize(new Dimension(30, 30));
-		piece.setBackground(Color.WHITE);
 		add(piece);
 		add(currentTurnLabel);
 	}
