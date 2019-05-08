@@ -17,6 +17,11 @@ import javax.swing.JPanel;
  */
 public class AnimationController implements ActionListener {
 	
+	public interface Callback {
+	    void onSuccess();
+	    void onError(String err);
+	}
+	
 	/*
 	 * Stores information for an animation
 	 * in a chain
@@ -96,7 +101,13 @@ public class AnimationController implements ActionListener {
 			timer.start();
 		} else {
 			animationRunning = false;
+			if (onComplete != null)
+				onComplete.onSuccess();
 		}
+	}
+	
+	public void onComplete(Callback callback) {
+		onComplete = callback;
 	}
 	
 	/*
@@ -146,4 +157,5 @@ public class AnimationController implements ActionListener {
 	private ArrayList<AnimationProps> queue;
 	private AnimationProps currentAnimation;
 	private boolean animationRunning = false;
+	private Callback onComplete = null;
 }

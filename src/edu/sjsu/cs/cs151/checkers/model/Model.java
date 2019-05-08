@@ -172,6 +172,8 @@ public class Model {
       // See if a win condition was reached.
       checkWinCondition();
       
+      // origin.getRow()][origin.getColumn()
+      // destination [dest.getRow()][dest.getColumn()]
       return true;
    }
    

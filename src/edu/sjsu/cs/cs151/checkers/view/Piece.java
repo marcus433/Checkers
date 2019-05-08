@@ -79,8 +79,8 @@ public class Piece extends View {
 		repaint();
 	}
 	
-	public void moveTo(Point location) {
-		// TODO
+	public Piece copy() {
+		return new Piece(this.type, this.color);
 	}
 	
 	// Getters and Setters
