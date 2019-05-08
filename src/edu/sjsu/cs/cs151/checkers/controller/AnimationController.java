@@ -129,7 +129,7 @@ public class AnimationController implements ActionListener {
 										currentAnimation.y + yIntermediate, 
 										view.getWidth(), 
 										view.getHeight());
-		view.repaint();
+		//view.repaint();
 		timeElapsed += timeIncrement;
 	}
 	

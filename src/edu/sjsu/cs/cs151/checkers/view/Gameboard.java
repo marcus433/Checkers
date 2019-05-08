@@ -39,6 +39,7 @@ import edu.sjsu.cs.cs151.checkers.model.Model;
 public class Gameboard extends View {
 	public Gameboard() {
 		//this.setLayout(new GridLayout(8, 8));
+		setLayout(null);
 		tiles = new ArrayList<>();
 		this.setOpaque(false);
 		for (int i = 0; i < 64; i++) {
@@ -54,9 +55,9 @@ public class Gameboard extends View {
 		Point changeOrigin = new Point(0, 0);
 		Point changeDestination = new Point(0, 0);
 		Boolean isChange = false;
-		JPanel view = new JPanel();
+		edu.sjsu.cs.cs151.checkers.view.Piece view = null;
+		Tile originTile = null;
 		Checker[][] checkers = model.getBoard();
-		edu.sjsu.cs.cs151.checkers.view.Piece temp = null;
 		
 		for (int row = 0; row < checkers.length; row++) {
 			for (int column = 0; column < checkers[row].length; column++) {
@@ -72,28 +73,27 @@ public class Gameboard extends View {
 					changeOrigin = tile.getLocation();
 					changeOrigin = new Point((int)changeOrigin.getX() + 5, (int)changeOrigin.getY() + 5);
 					view = pieceView;
-					temp = pieceView.copy();
 					isChange = true;
+					originTile = tile;
 				}
 			}
 		}
-		/*if (isChange && temp != null && view != null) {
+
+		if (isChange && originTile != null && view != null) {
 			view.setVisible(false);
-			add(temp);
-			temp.setSize(view.getSize());
-			temp.setLocation(new Point(50, 50));//changeOrigin);
-			temp.setVisible(true);
-			
-			System.out.println(temp.getBounds());
-			System.out.println(changeOrigin);
-			System.out.println(changeDestination);
-			Gameboard that = this;
-			new AnimationController(temp)
+			final edu.sjsu.cs.cs151.checkers.view.Piece tempView = view.copy();
+			tempView.setVisible(true);
+			tempView.setLocation(changeOrigin);
+			tempView.setSize(view.getSize());
+			add(tempView, 0);
+			final JPanel _view = view;
+			final Gameboard that = this;
+			new AnimationController(tempView)
 				.animateTo(500, changeDestination)
 				.onComplete(new AnimationController.Callback(){
 		            @Override
 		            public void onSuccess() {
-		            		//that.remove(temp);
+		            		that.remove(tempView);
 			    			for (int row = 0; row < checkers.length; row++) {
 			    				for (int column = 0; column < checkers[row].length; column++) {
 			    					Checker checker = checkers[row][column];
@@ -114,15 +114,17 @@ public class Gameboard extends View {
 			    					}
 			    				}
 			    			}
-			    			repaint();
+			    			that.repaint();
 		            }
 
 		            @Override
 		            public void onError(String err) {
+		            		_view.setVisible(true);
+		            		that.remove(tempView);
 		                System.out.println(err);
 		            }
 		        });
-		} else {*/
+		} else {
 			for (int row = 0; row < checkers.length; row++) {
 				for (int column = 0; column < checkers[row].length; column++) {
 					Checker checker = checkers[row][column];
@@ -142,7 +144,7 @@ public class Gameboard extends View {
 						pieceView.setVisible(false);
 					}
 				}
-			//}
+			}
 		}
 		repaint();
 	}

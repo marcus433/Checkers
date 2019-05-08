@@ -69,8 +69,8 @@ public class Button extends View implements Layout {
 	}
 
 	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		g2.setRenderingHint(
 	            RenderingHints.KEY_ANTIALIASING,
