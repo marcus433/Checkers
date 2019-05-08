@@ -239,7 +239,7 @@ public class Model {
     * getInstance returns the static instance of Model. (Singleton Pattern)
     * @return instance - the instance of Model
     */
-   public Model getInstance() {
+   public static Model getInstance() {
       return instance;
    }
    
@@ -253,7 +253,7 @@ public class Model {
    
 // Private fields
    
-   private static Model instance;
+   private static Model instance = new Model();
    private static final int DEFAULT_SIZE = 8;
    private static final int DEFAULT_NUM_PIECES_PER_PLAYER = 12;
    private int remainingRedPieces;

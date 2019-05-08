@@ -10,10 +10,16 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import javax.swing.JFrame;
 
+import edu.sjsu.cs.cs151.checkers.controller.Controller;
 import edu.sjsu.cs.cs151.checkers.controller.GameController;
+import edu.sjsu.cs.cs151.checkers.controller.Message;
+import edu.sjsu.cs.cs151.checkers.model.Model;
 import edu.sjsu.cs.cs151.checkers.view.Button;
 import edu.sjsu.cs.cs151.checkers.view.Gameboard;
 import edu.sjsu.cs.cs151.checkers.view.MainView;
@@ -25,14 +31,16 @@ import edu.sjsu.cs.cs151.checkers.view.Window;
 
 public class Main {
 	public static void main(String[] args) {
-		Window window = new Window("Checkers", new MainView());
-		//window.getContentPane().add(view);
-		GameController gc = new GameController();
-		//Gameboard gb = new Gameboard(gc.checkers);
-		//.setMargin(new Insets(0, 0, 0, 0));
-		/*Button b = new Button("Undo Move");
-		window.getContentPane().add(b);
-		window.setLayout(new GridLayout(3,3));*/
+		BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
+		Model model = Model.getInstance();
+		MainView view = new MainView();
+		Window window = new Window("Checkers", view);
+		Controller controller = new Controller(view, model, queue);
 		window.setVisible(true);
+		
+		controller.mainLoop();
+
+		window.dispose();
+		queue.clear();
 	}
 }

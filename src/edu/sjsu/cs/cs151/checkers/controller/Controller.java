@@ -36,7 +36,7 @@ public class Controller {
     * Method body taken from lecture slides.
     * @throws Exception
     */
-   public void mainLoop() throws Exception {
+   public void mainLoop() {
       Valve.ValveResponse response = Valve.ValveResponse.EXECUTED;
       Message message = null;
       
