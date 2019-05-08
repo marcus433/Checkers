@@ -53,12 +53,11 @@ public class Controller {
          catch (InterruptedException e) {
             e.printStackTrace();
          }
-      }
-      
-      for (Valve valve : valves) {
-         response = valve.execute(message);
-         if (response != Valve.ValveResponse.MISS)
-            break;
+         for (Valve valve : valves) {
+             response = valve.execute(message);
+             if (response != Valve.ValveResponse.MISS)
+                break;
+          }
       }
    }
    
