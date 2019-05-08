@@ -41,6 +41,8 @@ public class Gameboard extends View {
 		this.setOpaque(false);
 		for (int i = 0; i < 64; i++) {
 			Tile tile = new Tile((i + i / 8 % 2) % 2 == 1);
+			tile.setRow((int)Math.floor((i + 1) / 8) - 1);
+			tile.setColumn((int)Math.floor(i + 1) - 1);
 			tiles.add(tile);
 			add(tile);
 		}
@@ -51,6 +53,7 @@ public class Gameboard extends View {
 		for (int row = 0; row < checkers.length; row++) {
 			for (int column = 0; column < checkers.length; column++) {
 				Checker checker = checkers[row][column];
+				System.out.println(checker.hasPiece());
 				edu.sjsu.cs.cs151.checkers.model.Piece piece = checker.getPiece();
 				Tile tile = (Tile) tiles.get(((row + 1) * (column + 1) - 1));
 				edu.sjsu.cs.cs151.checkers.view.Piece pieceView = tile.getPiece();
@@ -58,11 +61,17 @@ public class Gameboard extends View {
 					pieceView.setType(piece.isKing() ? edu.sjsu.cs.cs151.checkers.view.Piece.Type.KING : edu.sjsu.cs.cs151.checkers.view.Piece.Type.PAWN);
 					pieceView.setColor(piece.getColor() == edu.sjsu.cs.cs151.checkers.model.Piece.Color.RED ? edu.sjsu.cs.cs151.checkers.view.Piece.Color.RED : edu.sjsu.cs.cs151.checkers.view.Piece.Color.BLACK);
 					pieceView.setVisible(true);
+					if (checker.isSelected()) {
+						pieceView.select();
+					} else {
+						pieceView.deselect();
+					}
 				} else if (pieceView != null) {
 					pieceView.setVisible(false);
 				}
 			}
 		}
+		repaint();
 	}
 	
 	// Getters and Setters

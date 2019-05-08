@@ -26,7 +26,8 @@ public class Model {
       // Checker tile generation loop
       for (int row = 0; row < DEFAULT_SIZE; row++) {
          for (int col = 0; col < DEFAULT_SIZE; col++) {
-            if (row % 2 == 0) {
+        	 	board[row][col] = new Checker((((row % 2) + 1) % 2) == 0, null);
+            /*if (row % 2 == 0) {
                if (col % 2 == 0) {
                   board[row][col] = new Checker(true, null);
                }
@@ -41,7 +42,7 @@ public class Model {
                else { // if (col % 2 == 1)
                   board[row][col] = new Checker(true, null);
                }
-            }
+            }*/
          }
       }
       

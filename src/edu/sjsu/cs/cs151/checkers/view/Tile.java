@@ -1,5 +1,7 @@
 package edu.sjsu.cs.cs151.checkers.view;
 
+import edu.sjsu.cs.cs151.checkers.app.Main;
+import edu.sjsu.cs.cs151.checkers.controller.SelectMessage;
 import edu.sjsu.cs.cs151.checkers.layout.*;
 import edu.sjsu.cs.cs151.checkers.model.Checker;
 
@@ -22,7 +24,12 @@ public class Tile extends View {
 		addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent e) {
 				if (that.piece != null) {
-					that.piece.select();
+					System.out.println("Selected");
+					try {
+						Main.queue.put(new SelectMessage(that.row, that.column));
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
+					}
 				}
 			}
 		});
@@ -40,7 +47,25 @@ public class Tile extends View {
 		return piece;
 	}
 	
+	public int getColumn() {
+		return column;
+	}
+	
+	public int getRow() {
+		return row;
+	}
+	
+	public void setColumn(int column) {
+		this.column = column;
+	}
+	
+	public void setRow(int row) {
+		this.row = row;
+	}
+	
 	// Private fields
 	
 	private Piece piece = null;
+	private int row = 0;
+	private int column = 0;
 }

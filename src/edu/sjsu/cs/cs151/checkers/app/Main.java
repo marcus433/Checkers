@@ -30,8 +30,9 @@ import edu.sjsu.cs.cs151.checkers.view.Window;
  * */
 
 public class Main {
+	public static BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
+	
 	public static void main(String[] args) {
-		BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
 		Model model = Model.getInstance();
 		MainView view = new MainView();
 		Window window = new Window("Checkers", view);
