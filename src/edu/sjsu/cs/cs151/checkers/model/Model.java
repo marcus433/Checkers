@@ -120,7 +120,7 @@ public class Model {
       
       // Set any invalid Positions to null.
       for (int i = 0; i < validMoves.length; i++) {
-         if (validMoves[i].getRow() < 0 || validMoves[i].getColumn() < 0)
+         if (validMoves[i] != null && (validMoves[i].getRow() < 0 || validMoves[i].getColumn() < 0))
             validMoves[i] = null;
       }
       return validMoves;
@@ -137,7 +137,6 @@ public class Model {
       if (!board[dest.getRow()][dest.getColumn()].isValid() 
             || board[dest.getRow()][dest.getColumn()].hasPiece())
          return false;
-      
       // Determine if the destination corresponds to a valid Position to move to
       int whichMove = -1;
       Position[] validMoves = determineValidMoves();
