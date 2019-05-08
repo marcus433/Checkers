@@ -110,7 +110,7 @@ public class Model {
                && board[down][right].getPiece().getColor() != currentPiece.getColor())
             validMoves[3] = new Position(jumpDown, jumpRight);
       }
-      else if (currentPiece.getColor() == Color.RED || currentPiece.isKing()) {
+      if (currentPiece.getColor() == Color.RED || currentPiece.isKing()) {
          // Adjacent space; upper left
          if (up >= 0 && left >= 0 && !board[up][left].hasPiece())
             validMoves[4] = new Position(up, left);
