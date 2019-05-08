@@ -1,5 +1,9 @@
 package edu.sjsu.cs.cs151.checkers.view;
 
+import edu.sjsu.cs.cs151.checkers.app.Main;
+import edu.sjsu.cs.cs151.checkers.controller.ResetMessage;
+import edu.sjsu.cs.cs151.checkers.controller.SelectMessage;
+import edu.sjsu.cs.cs151.checkers.controller.SkipTurnMessage;
 import edu.sjsu.cs.cs151.checkers.layout.*;
 import edu.sjsu.cs.cs151.checkers.layout.AlignLayout.Alignment;
 import edu.sjsu.cs.cs151.checkers.layout.AlignLayout.Direction;
@@ -37,6 +41,24 @@ public class Toolbar extends View {
 		add(currentTurn);
 		add(skipTurnButton);
 		add(restartButton);
+		skipTurnButton.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent e) {
+				try {
+					Main.queue.put(new SkipTurnMessage());
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		restartButton.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseClicked(java.awt.event.MouseEvent e) {
+				try {
+					Main.queue.put(new ResetMessage());
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 	}
 
 	public void updateState(Model model) {

@@ -21,6 +21,7 @@ public class CurrentTurn extends View {
 		currentTurnLabel = new Label("Current Turn");
 		currentTurnLabel.setDisplaySize(currentTurnLabel.getSize());
 		piece.setDisplaySize(new Dimension(30, 30));
+		piece.setBackground(Color.WHITE);
 		add(piece);
 		add(currentTurnLabel);
 	}
@@ -39,6 +40,7 @@ public class CurrentTurn extends View {
 			piece.setColor(Piece.Color.RED);
 		else
 			piece.setColor(Piece.Color.BLACK);
+		piece.repaint();
 	}
 
 	public static final int DEFAULT_HEIGHT = 40;
