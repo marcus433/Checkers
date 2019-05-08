@@ -20,8 +20,8 @@ public class Model {
       this.blackWon = false;
       this.redWon = false;
       this.currentColor = Color.RED;
-      this.origin = null;
-      this.currentPiece = null;
+      this.canJumpAgain = false;
+      deselect();
       
       // Checker tile generation loop
       for (int row = 0; row < DEFAULT_SIZE; row++) {
@@ -79,6 +79,7 @@ public class Model {
          this.currentPiece = board[pos.getRow()][pos.getColumn()].getPiece();
          return true;
       }
+      deselect();
       return false;
    }
    
@@ -172,9 +173,9 @@ public class Model {
             || dest.getRow() == 7 && currentPiece.getColor() == Color.BLACK)
          currentPiece.makeKing();
       
-      // Deselect the previous piece and checker.
-      currentPiece = null;
-      origin = null;
+      // Deselect the previous piece and checker if done moving.
+      if (!canJumpAgain) 
+         deselect();
       
       // Switch player control to the opposite color.
       switchTurn();
@@ -213,6 +214,24 @@ public class Model {
          remainingRedPieces--;
       else // if (currentColor == Color.RED)
          remainingBlackPieces--;
+      
+      // Update the current piece's position/Checker, and see if it can jump again.
+      origin = dest;
+      Position[] validMoves = determineValidMoves();
+      canJumpAgain = false;
+      // validMoves[0] assumes a single space move; start analyzing from i=1.
+      for (int i = 1; i < validMoves.length; i++) {
+         if (validMoves[i] != null)
+            canJumpAgain = true;
+      }
+   }
+   
+   /**
+    * deselect sets the origin and currentPiece fields to null, resetting them.
+    */
+   public void deselect() {
+      origin = null;
+      currentPiece = null;
    }
    
    /**
@@ -220,8 +239,7 @@ public class Model {
     */
    public void switchTurn() {
       currentColor = currentColor == Color.RED ? Color.BLACK : Color.RED;
-      origin = null;
-      currentPiece = null;
+      deselect();
    }
    
    /**
@@ -251,6 +269,15 @@ public class Model {
       return board;
    }
    
+   /**
+    * canJumpAgain returns whether a piece that has just previously jumped has remaining jump moves.
+    * @return canJumpAgain - whether the currentPiece has any valid jump moves
+    * @precondition jump() has already been called
+    */
+   public boolean canJumpAgain() {
+      return canJumpAgain;
+   }
+   
 // Private fields
    
    private static Model instance = new Model();
@@ -264,4 +291,5 @@ public class Model {
    private boolean blackWon;
    private boolean redWon;
    private Piece.Color currentColor;
+   private boolean canJumpAgain;
 }
