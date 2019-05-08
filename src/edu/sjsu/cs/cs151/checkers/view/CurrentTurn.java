@@ -17,17 +17,23 @@ public class CurrentTurn extends View {
 		super();
 		this.setOpaque(false);
 		piece = new Piece(Piece.Type.PAWN, Piece.Color.RED);
+		currentTurnLabel = new Label("Current Turn");
+		currentTurnLabel.setDisplaySize(currentTurnLabel.getSize());
+		piece.setDisplaySize(new Dimension(30, 30));
 		add(piece);
+		add(currentTurnLabel);
 	}
 
 	@Override
 	public Layout layoutThatFits() {
 		ArrayList<Layout> children = new ArrayList<>();
 		children.add(piece);
-		return new StackLayout(StackLayout.Direction.HORIZONTAL, 0, children);
+		children.add(currentTurnLabel);
+		return new StackLayout(StackLayout.Direction.HORIZONTAL, 10, children);
 	}
 
 	public static final int DEFAULT_HEIGHT = 40;
 
 	private Piece piece;
+	private Label currentTurnLabel;
 }

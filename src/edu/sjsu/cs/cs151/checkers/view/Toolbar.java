@@ -53,8 +53,15 @@ public class Toolbar extends View {
 	public Dimension getDisplaySize(Dimension size, Point location) {
 		return new Dimension(size.width, DEFAULT_HEIGHT); // temporary hack until layoutManager allows to fill on only 1 dimension
 	}
+	
+	@Override
+	public
+	Layout layoutThatFits() {
+		return new InsetLayout(new EdgeInsets(PADDING, PADDING, PADDING, PADDING), currentTurn);
+	}
 
 	public static final int DEFAULT_HEIGHT = 50;
 
 	private CurrentTurn currentTurn;
+	private int PADDING = 5;
 }

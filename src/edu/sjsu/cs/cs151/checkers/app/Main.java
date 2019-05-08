@@ -25,18 +25,6 @@ import edu.sjsu.cs.cs151.checkers.view.Window;
 
 public class Main {
 	public static void main(String[] args) {
-		/*try {
-			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			InputStream stream = new BufferedInputStream(new FileInputStream("assets/CircularStd-Black.otf"));
-			ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, stream));
-		} catch (FontFormatException e) {
-			System.out.println(e);
-			System.out.println("Failed to load font");
-		} catch (IOException e) {
-			System.out.println(e);
-			System.out.println("Failed to load font");
-		}*/
-		
 		Window window = new Window("Checkers", new MainView());
 		//window.getContentPane().add(view);
 		GameController gc = new GameController();

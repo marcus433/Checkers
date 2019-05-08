@@ -27,7 +27,7 @@ public class View extends JPanel implements Layout {
 	}
 
 	public Dimension getDisplaySize(Dimension size, Point location) {
-		return null;
+		return displaySize;
 	}
 
 	public void setDisplaySize(Dimension size) {

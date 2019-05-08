@@ -58,13 +58,15 @@ public class Piece extends View {
 			g2.fillOval(0, 0, g.getClipBounds().width, g.getClipBounds().height);
 		}
 		
-		double iconWidth = g2.getClipBounds().width * 0.50;
-		int iconHeight = (int) (iconWidth * (kingIcon.getHeight() / kingIcon.getWidth()));
-		
-		int x = (int) (g2.getClipBounds().width / 2.0 - (iconWidth / 2.0));
-		int y = (int) (g2.getClipBounds().height / 2.0 - (iconHeight / 2.0));
-		
-		g.drawImage(kingIcon, x, y, (int)iconWidth, iconHeight, g2.getColor(), null);
+		if (type == Type.KING) {
+			double iconWidth = g2.getClipBounds().width * 0.50;
+			int iconHeight = (int) (iconWidth * (kingIcon.getHeight() / kingIcon.getWidth()));
+			
+			int x = (int) (g2.getClipBounds().width / 2.0 - (iconWidth / 2.0));
+			int y = (int) (g2.getClipBounds().height / 2.0 - (iconHeight / 2.0));
+			
+			g.drawImage(kingIcon, x, y, (int)iconWidth, iconHeight, g2.getColor(), null);
+		}
 	}
 	
 	public void select() {
