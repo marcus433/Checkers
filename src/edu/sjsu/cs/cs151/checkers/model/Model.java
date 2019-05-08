@@ -166,7 +166,7 @@ public class Model {
       // Update the current piece's Position and Checker.
       board[origin.getRow()][origin.getColumn()].clearPiece();
       board[dest.getRow()][dest.getColumn()].setPiece(currentPiece);
-      
+      currentChecker = board[dest.getRow()][dest.getColumn()];
       // Check if the move was a jump; if it was, remove the correct pieces.
       if (whichMove % 2 == 1)
          jump(whichMove, dest);
@@ -239,6 +239,8 @@ public class Model {
     * deselect sets the origin and currentPiece fields to null, resetting them.
     */
    public void deselect() {
+      if (currentChecker != null)
+        currentChecker.deselect();
       origin = null;
       currentPiece = null;
       currentChecker = null;
