@@ -56,7 +56,7 @@ public class Gameboard extends View {
 		Boolean isChange = false;
 		JPanel view = new JPanel();
 		Checker[][] checkers = model.getBoard();
-		for (int row = 0; row < checkers.length; row++) {
+		/*for (int row = 0; row < checkers.length; row++) {
 			for (int column = 0; column < checkers[row].length; column++) {
 				Checker checker = checkers[row][column];
 				edu.sjsu.cs.cs151.checkers.model.Piece piece = checker.getPiece();
@@ -72,8 +72,9 @@ public class Gameboard extends View {
 				}
 			}
 		}
-		if (isChange)
+		if (isChange) {
 			new AnimationController(view).animateTo(1000, changeDestination);
+		}*/
 		for (int row = 0; row < checkers.length; row++) {
 			for (int column = 0; column < checkers[row].length; column++) {
 				Checker checker = checkers[row][column];

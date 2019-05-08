@@ -90,7 +90,7 @@ public class Controller {
          
          // actions in Model
          // selecting a piece
-         if (model.getCurrentPiece() == null) {
+         if (model.getBoard()[selectMsg.getRow()][selectMsg.getColumn()].hasPiece()) {
             if (!model.selectChecker(atClick))
                return Valve.ValveResponse.EXECUTED;
          }

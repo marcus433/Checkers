@@ -58,14 +58,14 @@ public class Model {
     */
    public boolean selectChecker(Position pos) {
       // If canJumpAgain is true, then lock selectChecker - no other Pieces can be selected other than the current one.
-	   if (board[pos.getRow()][pos.getColumn()].hasPiece()) System.out.println(board[pos.getRow()][pos.getColumn()].getPiece().getColor());
-      if (canJumpAgain)
+	  if (canJumpAgain)
          return true;
       else if (board[pos.getRow()][pos.getColumn()].hasPiece()
             && board[pos.getRow()][pos.getColumn()].getPiece().getColor() == currentColor) {
          this.origin = pos;
+         /*if (this.currentPiece != null)
+        	 	this.currentPiece.deselect();*/
          this.currentPiece = board[pos.getRow()][pos.getColumn()].getPiece();
-         deselect();
          board[pos.getRow()][pos.getColumn()].select();
          return true;
       }
@@ -222,11 +222,6 @@ public class Model {
    public void deselect() {
       origin = null;
       currentPiece = null;
-      for (int row = 0; row < board.length; row++) {
-	    	  for (int column = 0; column < board[row].length; column++) {
-	    		  board[row][column].deselect();
-	    	  }
-      }
    }
    
    /**
