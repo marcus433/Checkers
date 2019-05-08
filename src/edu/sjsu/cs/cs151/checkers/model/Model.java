@@ -58,7 +58,7 @@ public class Model {
     */
    public boolean selectChecker(Position pos) {
       // If canJumpAgain is true, then lock selectChecker - no other Pieces can be selected other than the current one.
-	  System.out.println(board[pos.getRow()][pos.getColumn()].getPiece().getColor());
+	   if (board[pos.getRow()][pos.getColumn()].hasPiece()) System.out.println(board[pos.getRow()][pos.getColumn()].getPiece().getColor());
       if (canJumpAgain)
          return true;
       else if (board[pos.getRow()][pos.getColumn()].hasPiece()
@@ -277,6 +277,10 @@ public class Model {
    
    public Piece.Color getCurrentColor() {
 	   return currentColor;
+   }
+   
+   public Piece getCurrentPiece() {
+      return currentPiece;
    }
    
 // Private fields
