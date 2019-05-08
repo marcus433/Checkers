@@ -77,14 +77,14 @@ public class Model {
     * determineValidMoves decides which Positions around the origin and currentPiece contain
     * Checkers that can be safely moved to.
     * @return Position[] validMoves - an array of Positions that correspond to valid Checkers.
-    *    0 corresponds to single-space moves.
-    *    1, 2, 3, and 4 are jump moves, going from lower left, to lower right, to upper left, to upper right.
+    *    0, 2, 4, and 6 correspond to single-space moves.
+    *    1, 3, 5, and 7 are jump moves, going from lower left, to lower right, to upper left, to upper right.
     * @precondition selectChecker has been called previously
     */
    public Position[] determineValidMoves() {
       if (origin == null)
          return null;
-      Position[] validMoves = new Position[5];
+      Position[] validMoves = new Position[8];
       int down = origin.getRow() + 1;
       int up = origin.getRow() - 1;
       int left = origin.getColumn() - 1;
@@ -104,28 +104,28 @@ public class Model {
             
          // Adjacent space; lower right
          if (down < DEFAULT_SIZE && right < DEFAULT_SIZE && !board[down][right].hasPiece())
-            validMoves[0] = new Position(down, right);
+            validMoves[2] = new Position(down, right);
          // Jump; lower right
          else if (jumpDown < DEFAULT_SIZE && jumpRight < DEFAULT_SIZE && !board[jumpDown][jumpRight].hasPiece() 
                && board[down][right].getPiece().getColor() != currentPiece.getColor())
-            validMoves[2] = new Position(jumpDown, jumpRight);
+            validMoves[3] = new Position(jumpDown, jumpRight);
       }
       else if (currentPiece.getColor() == Color.RED || currentPiece.isKing()) {
          // Adjacent space; upper left
          if (up >= 0 && left >= 0 && !board[up][left].hasPiece())
-            validMoves[0] = new Position(up, left);
+            validMoves[4] = new Position(up, left);
          // Jump; upper left
          else if (jumpUp >= 0 && jumpLeft >= 0 && !board[jumpUp][jumpLeft].hasPiece() 
                && board[up][left].getPiece().getColor() != currentPiece.getColor())
-            validMoves[3] = new Position(jumpUp, jumpLeft);
+            validMoves[5] = new Position(jumpUp, jumpLeft);
             
          // Adjacent space; upper right
          if (up >= 0 && right < DEFAULT_SIZE && !board[up][right].hasPiece())
-            validMoves[0] = new Position(up, right);
+            validMoves[6] = new Position(up, right);
          // Jump; upper right
          else if (jumpUp >= 0 && jumpRight < DEFAULT_SIZE && !board[jumpUp][jumpRight].hasPiece() 
                && board[up][right].getPiece().getColor() != currentPiece.getColor())
-            validMoves[4] = new Position(jumpUp, jumpRight);
+            validMoves[7] = new Position(jumpUp, jumpRight);
       }
       
       // Set any invalid Positions to null.
@@ -133,6 +133,7 @@ public class Model {
          if (validMoves[i] != null && (validMoves[i].getRow() < 0 || validMoves[i].getColumn() < 0))
             validMoves[i] = null;
       }
+      
       return validMoves;
    }
    
@@ -166,7 +167,7 @@ public class Model {
       board[dest.getRow()][dest.getColumn()].setPiece(currentPiece);
       
       // Check if the move was a jump; if it was, remove the correct pieces.
-      if (whichMove > 0)
+      if (whichMove % 2 == 1)
          jump(whichMove, dest);
       
       // If the current piece made it all the way to the other side of the board, make it a king.
@@ -203,13 +204,13 @@ public class Model {
       case 1: board[dest.getRow() - 1][dest.getColumn() + 1].clearPiece();
       break;
       // Jump, lower right
-      case 2: board[dest.getRow() - 1][dest.getColumn() - 1].clearPiece();
+      case 3: board[dest.getRow() - 1][dest.getColumn() - 1].clearPiece();
       break;
       // Jump, upper left
-      case 3: board[dest.getRow() + 1][dest.getColumn() + 1].clearPiece();
+      case 5: board[dest.getRow() + 1][dest.getColumn() + 1].clearPiece();
       break;
       // Jump, upper right
-      case 4: board[dest.getRow() + 1][dest.getColumn() - 1].clearPiece();
+      case 7: board[dest.getRow() + 1][dest.getColumn() - 1].clearPiece();
       break;
       default: {
          System.out.println("No more jumps.");
