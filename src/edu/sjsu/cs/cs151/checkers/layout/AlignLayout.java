@@ -23,19 +23,20 @@ public class AlignLayout implements Layout {
 	}
 
 	public void renderWithSize(Dimension size, Point location) {
-		Dimension displaySize = getDisplaySize(size, location);
+		Dimension displaySize = child.getDisplaySize(size, location);
 		if (displaySize != null) {
+			child.setSize(displaySize.width, displaySize.height);
 			if (direction == Direction.VERTICAL) {
 				if (alignment == Alignment.CENTER) {
-					child.setLocation((int)location.getX(), (int)(size.getHeight() / 2.0 - displaySize.getHeight() / 2.0));
+					child.setLocation((int)location.getX(), (int)location.getY() + (int)(size.getHeight() / 2.0 - displaySize.getHeight() / 2.0));
 				} else if (alignment == Alignment.END) {
-					child.setLocation((int)location.getX(), (int)size.getHeight() - (int)displaySize.getHeight());
+					child.setLocation((int)location.getX(), (int)location.getY() + (int)size.getHeight() - (int)displaySize.getHeight());
 				}
 			} else {
 				if (alignment == Alignment.CENTER) {
-					child.setLocation((int)(size.getWidth() / 2.0 - displaySize.getWidth() / 2.0), (int)location.getY());
+					child.setLocation((int)location.getX() + (int)(size.getWidth() / 2.0 - displaySize.getWidth() / 2.0), (int)location.getY());
 				} else if (alignment == Alignment.END) {
-					child.setLocation((int)size.getWidth() - (int)displaySize.getWidth(), (int)location.getY());
+					child.setLocation((int)location.getX() + (int)size.getWidth() - (int)displaySize.getWidth(), (int)location.getY());
 				}
 			}
 			child.renderWithSize(child.getSize(), child.getLocation());

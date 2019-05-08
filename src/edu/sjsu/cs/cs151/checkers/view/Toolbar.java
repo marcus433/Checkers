@@ -1,14 +1,19 @@
 package edu.sjsu.cs.cs151.checkers.view;
 
 import edu.sjsu.cs.cs151.checkers.layout.*;
+import edu.sjsu.cs.cs151.checkers.layout.AlignLayout.Alignment;
+import edu.sjsu.cs.cs151.checkers.layout.AlignLayout.Direction;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -21,7 +26,16 @@ public class Toolbar extends View {
 		this.setLayout(null);
 		this.setOpaque(false);
 		currentTurn = new CurrentTurn();
+		skipTurnButton = new Button("Skip Turn");
+		try {
+			restartButton = new Button(ImageIO.read(new File("assets/restart.png")));
+		} catch (IOException e) {
+			e.printStackTrace();
+			restartButton = new Button("Restart");
+		}
 		add(currentTurn);
+		add(skipTurnButton);
+		add(restartButton);
 		//setBorder(new EmptyBorder(20, 20, 20, 20));
 	}
 
@@ -57,11 +71,18 @@ public class Toolbar extends View {
 	@Override
 	public
 	Layout layoutThatFits() {
-		return new InsetLayout(new EdgeInsets(PADDING, PADDING, PADDING, PADDING), currentTurn);
+		ArrayList<Layout> children = new ArrayList<Layout>();
+		children.add(currentTurn);
+		children.add(new AlignLayout(AlignLayout.Direction.HORIZONTAL, AlignLayout.Alignment.CENTER, skipTurnButton));
+		children.add(new AlignLayout(AlignLayout.Direction.HORIZONTAL, AlignLayout.Alignment.END, restartButton));
+		return new InsetLayout(new EdgeInsets(PADDING, PADDING, PADDING, PADDING), 
+				new StackLayout(StackLayout.Direction.HORIZONTAL, 0, children));
 	}
 
 	public static final int DEFAULT_HEIGHT = 50;
 
 	private CurrentTurn currentTurn;
+	private Button skipTurnButton;
+	private Button restartButton;
 	private int PADDING = 5;
 }

@@ -21,7 +21,9 @@ public class Tile extends View {
 		Tile that = this;
 		addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent e) {
-				that.piece.select();
+				if (that.piece != null) {
+					that.piece.select();
+				}
 			}
 		});
 		

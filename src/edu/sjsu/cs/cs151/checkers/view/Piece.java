@@ -79,6 +79,10 @@ public class Piece extends View {
 		repaint();
 	}
 	
+	public void moveTo(Point location) {
+		// TODO
+	}
+	
 	// Getters and Setters
 	
 	public void setType(Type type) {

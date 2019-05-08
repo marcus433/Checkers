@@ -22,21 +22,16 @@ public class MainView extends View {
 		this.add(toolbar);
 		this.add(board);
 		board.setBackground(Color.BLUE);
-		//renderWithSize(new Dimension(800, 800));
-		//addComponentListener(this);
 	}
 	
 	@Override
 	public
 	Layout layoutThatFits() {
-		ArrayList<Layout> al2 = new ArrayList<Layout>();
-		al2.add(toolbar);
-		al2.add(board);
-		// top left bottom right
-		// new StackLayout(StackLayout.Direction.HORIZONTAL, 0, al)
+		ArrayList<Layout> children = new ArrayList<Layout>();
+		children.add(toolbar);
+		children.add(board);
 		return new InsetLayout(new EdgeInsets(0, PADDING, PADDING, PADDING), 
-													 new StackLayout(StackLayout.Direction.VERTICAL, PADDING, al2));
-		//return new InsetLayout(new EdgeInsets(10, 10, 10, 10), board);
+										new StackLayout(StackLayout.Direction.VERTICAL, PADDING, children));
 	}
 	
 	// Private fields
