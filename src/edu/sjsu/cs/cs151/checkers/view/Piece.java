@@ -29,8 +29,8 @@ public class Piece extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		g.setColor(color == Color.RED ? 
-					java.awt.Color.red :
-					java.awt.Color.black);
+					new java.awt.Color(0xDC245E) :
+					new java.awt.Color(0x393BF9));
 		g.fillOval(0, 0, g.getClipBounds().width, g.getClipBounds().height);
 	}
 	

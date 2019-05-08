@@ -7,15 +7,11 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 public class Tile extends JPanel {
-	public Tile(Checker checker) {
+	public Tile(boolean isDark) {
 		super();
-		this.setSize(DEFAULT_SIZE, DEFAULT_SIZE);
-		if (checker.canHoldPiece())
+		if (isDark)
 			this.setBackground(new Color(0x0A2663));
 		else
 			this.setBackground(new Color(0xAAD6FD));
-		//this.setOpaque(false);
 	}
-
-	public static final int DEFAULT_SIZE = 100;
 }

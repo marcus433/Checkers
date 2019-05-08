@@ -1,5 +1,7 @@
 package edu.sjsu.cs.cs151.checkers.view;
 
+
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
