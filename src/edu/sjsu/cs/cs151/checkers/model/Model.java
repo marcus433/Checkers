@@ -199,12 +199,16 @@ public class Model {
       switch (whichMove) {
       // Jump, lower left
       case 1: board[dest.getRow() - 1][dest.getColumn() + 1].clearPiece();
+      break;
       // Jump, lower right
       case 2: board[dest.getRow() - 1][dest.getColumn() - 1].clearPiece();
+      break;
       // Jump, upper left
       case 3: board[dest.getRow() + 1][dest.getColumn() + 1].clearPiece();
+      break;
       // Jump, upper right
       case 4: board[dest.getRow() + 1][dest.getColumn() - 1].clearPiece();
+      break;
       default: {
          System.out.println("No more jumps.");
       }
