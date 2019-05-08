@@ -3,6 +3,7 @@ package edu.sjsu.cs.cs151.checkers.model;
 /**
  * Location is a Cartesian representation of position used by the game logic.
  */
+// We can probably remove this but i'll keep it for now
 public class Location {
 
 	public Location() {
