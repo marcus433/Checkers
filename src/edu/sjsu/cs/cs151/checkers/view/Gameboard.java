@@ -58,7 +58,7 @@ public class Gameboard extends View {
 		Checker[][] checkers = model.getBoard();
 		edu.sjsu.cs.cs151.checkers.view.Piece temp = null;
 		
-		/*for (int row = 0; row < checkers.length; row++) {
+		for (int row = 0; row < checkers.length; row++) {
 			for (int column = 0; column < checkers[row].length; column++) {
 				Checker checker = checkers[row][column];
 				edu.sjsu.cs.cs151.checkers.model.Piece piece = checker.getPiece();
@@ -77,17 +77,19 @@ public class Gameboard extends View {
 				}
 			}
 		}
-		if (isChange && temp != null && view != null) {
+		/*if (isChange && temp != null && view != null) {
 			view.setVisible(false);
-			temp.setSize(view.getSize());
-			temp.setLocation(changeOrigin);
 			add(temp);
+			temp.setSize(view.getSize());
+			temp.setLocation(new Point(50, 50));//changeOrigin);
 			temp.setVisible(true);
+			
+			System.out.println(temp.getBounds());
 			System.out.println(changeOrigin);
 			System.out.println(changeDestination);
 			Gameboard that = this;
 			new AnimationController(temp)
-				.animateTo(1000, changeDestination)
+				.animateTo(500, changeDestination)
 				.onComplete(new AnimationController.Callback(){
 		            @Override
 		            public void onSuccess() {
@@ -121,25 +123,26 @@ public class Gameboard extends View {
 		            }
 		        });
 		} else {*/
-		for (int row = 0; row < checkers.length; row++) {
-			for (int column = 0; column < checkers[row].length; column++) {
-				Checker checker = checkers[row][column];
-				edu.sjsu.cs.cs151.checkers.model.Piece piece = checker.getPiece();
-				Tile tile = (Tile) tiles.get((8 * row) + column);
-				edu.sjsu.cs.cs151.checkers.view.Piece pieceView = tile.getPiece();
-				if (piece != null && pieceView != null) {
-					pieceView.setType(piece.isKing() ? edu.sjsu.cs.cs151.checkers.view.Piece.Type.KING : edu.sjsu.cs.cs151.checkers.view.Piece.Type.PAWN);
-					pieceView.setColor(piece.getColor() == edu.sjsu.cs.cs151.checkers.model.Piece.Color.RED ? edu.sjsu.cs.cs151.checkers.view.Piece.Color.RED : edu.sjsu.cs.cs151.checkers.view.Piece.Color.BLACK);
-					pieceView.setVisible(true);
-					if (checker.isSelected()) {
-						pieceView.select();
-					} else {
-						pieceView.deselect();
+			for (int row = 0; row < checkers.length; row++) {
+				for (int column = 0; column < checkers[row].length; column++) {
+					Checker checker = checkers[row][column];
+					edu.sjsu.cs.cs151.checkers.model.Piece piece = checker.getPiece();
+					Tile tile = (Tile) tiles.get((8 * row) + column);
+					edu.sjsu.cs.cs151.checkers.view.Piece pieceView = tile.getPiece();
+					if (piece != null && pieceView != null) {
+						pieceView.setType(piece.isKing() ? edu.sjsu.cs.cs151.checkers.view.Piece.Type.KING : edu.sjsu.cs.cs151.checkers.view.Piece.Type.PAWN);
+						pieceView.setColor(piece.getColor() == edu.sjsu.cs.cs151.checkers.model.Piece.Color.RED ? edu.sjsu.cs.cs151.checkers.view.Piece.Color.RED : edu.sjsu.cs.cs151.checkers.view.Piece.Color.BLACK);
+						pieceView.setVisible(true);
+						if (checker.isSelected()) {
+							pieceView.select();
+						} else {
+							pieceView.deselect();
+						}
+					} else if (pieceView != null) {
+						pieceView.setVisible(false);
 					}
-				} else if (pieceView != null) {
-					pieceView.setVisible(false);
 				}
-			}
+			//}
 		}
 		repaint();
 	}

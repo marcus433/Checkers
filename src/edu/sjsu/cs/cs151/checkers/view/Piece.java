@@ -42,6 +42,7 @@ public class Piece extends View {
 	
 	@Override
 	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 		
@@ -65,7 +66,7 @@ public class Piece extends View {
 			int x = (int) (g2.getClipBounds().width / 2.0 - (iconWidth / 2.0));
 			int y = (int) (g2.getClipBounds().height / 2.0 - (iconHeight / 2.0));
 			
-			g.drawImage(kingIcon, x, y, (int)iconWidth, iconHeight, g2.getColor(), null);
+			g2.drawImage(kingIcon, x, y, (int)iconWidth, iconHeight, g2.getColor(), null);
 		}
 	}
 	

@@ -24,7 +24,6 @@ public class Tile extends View {
 		addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent e) {
 				try {
-					System.out.println("Select");
 					Main.queue.put(new SelectMessage(that.row, that.column));
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();

@@ -42,7 +42,7 @@ public class Toolbar extends View {
 		add(skipTurnButton);
 		add(restartButton);
 		skipTurnButton.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent e) {
+			public void mousePressed(java.awt.event.MouseEvent e) {
 				try {
 					Main.queue.put(new SkipTurnMessage());
 				} catch (InterruptedException e1) {
@@ -51,7 +51,7 @@ public class Toolbar extends View {
 			}
 		});
 		restartButton.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent e) {
+			public void mousePressed(java.awt.event.MouseEvent e) {
 				try {
 					Main.queue.put(new ResetMessage());
 				} catch (InterruptedException e1) {
