@@ -1,4 +1,4 @@
-package edu.sjsu.cs.cs151.checkers.tests;
+package edu.sjsu.cs.cs151.checkers.Tests;
 
 //import static org.junit.Assert.*;
 //import org.junit.Test;
