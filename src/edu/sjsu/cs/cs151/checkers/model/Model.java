@@ -220,6 +220,8 @@ public class Model {
     */
    public void switchTurn() {
       currentColor = currentColor == Color.RED ? Color.BLACK : Color.RED;
+      origin = null;
+      currentPiece = null;
    }
    
    /**

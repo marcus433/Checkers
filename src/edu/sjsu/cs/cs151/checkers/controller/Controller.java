@@ -116,6 +116,37 @@ public class Controller {
          return Valve.ValveResponse.EXECUTED;
       }
    }
+   
+   private class ResetMessageValve implements Valve {
+      
+      public ValveResponse execute(Message message) {
+         if (message.getClass() != ResetMessage.class)
+            return Valve.ValveResponse.MISS;
+         
+         // actions in Model
+         model.reset();
+         
+         // actions in View
+         // TODO: reset the game board
+         
+         return Valve.ValveResponse.EXECUTED;
+      }
+   }
+   
+   private class SkipTurnMessageValve implements Valve {
+      
+      public ValveResponse execute(Message message) {
+         if (message.getClass() != SkipTurnMessage.class)
+            return Valve.ValveResponse.MISS;
+         
+         // actions in Model
+         model.switchTurn();
+         
+         // actions in View
+         
+         return Valve.ValveResponse.EXECUTED;
+      }
+   }
 }
 
 
