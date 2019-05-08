@@ -4,7 +4,7 @@ import edu.sjsu.cs.cs151.checkers.model.Piece.Color;
 
 public class Model {
    
-   public Model() {
+   private Model() {
       board = new Checker[DEFAULT_SIZE][DEFAULT_SIZE];
       reset();
    }
@@ -70,13 +70,16 @@ public class Model {
     * selectChecker sets the origin and currentPiece private fields.
     * origin currentPiece are used in other methods like movePiece.
     * @param pos - a user selected Position
+    * @return true if a valid piece was selected, false otherwise
     */
-   public void selectChecker(Position pos) {
+   public boolean selectChecker(Position pos) {
       if (board[pos.getRow()][pos.getColumn()].hasPiece()
             && board[pos.getRow()][pos.getColumn()].getPiece().getColor() == currentColor) {
          this.origin = pos;
          this.currentPiece = board[pos.getRow()][pos.getColumn()].getPiece();
+         return true;
       }
+      return false;
    }
    
    /**
@@ -138,11 +141,11 @@ public class Model {
     * @param dest - the user-selected destination Position.
     * @precondition selectChecker has been called previously
     */
-   public void movePiece(Position dest) {
+   public boolean movePiece(Position dest) {
       // Do nothing if the destination isn't valid, or if it's already occupied
       if (!board[dest.getRow()][dest.getColumn()].isValid() 
             || board[dest.getRow()][dest.getColumn()].hasPiece())
-         return;
+         return false;
       
       // Determine if the destination corresponds to a valid Position to move to
       int whichMove = -1;
@@ -150,11 +153,11 @@ public class Model {
       for (int i = 0; i < validMoves.length; i++) {
          if (validMoves[i] != null && dest.equals(validMoves[i])) {
             whichMove = i;
-            continue;
+            break;
          }
       }
       if (whichMove == -1)
-         return;
+         return false;
       
       // Update the current piece's Position and Checker.
       board[origin.getRow()][origin.getColumn()].clearPiece();
@@ -178,6 +181,8 @@ public class Model {
       
       // See if a win condition was reached.
       checkWinCondition();
+      
+      return true;
    }
    
    /**
@@ -228,8 +233,25 @@ public class Model {
          redWon = true;
    }
    
+   /**
+    * getInstance returns the static instance of Model. (Singleton Pattern)
+    * @return instance - the instance of Model
+    */
+   public Model getInstance() {
+      return instance;
+   }
+   
+   /**
+    * getBoard returns board, a private field.
+    * @return board - a 2d Checker array
+    */
+   public Checker[][] getBoard() {
+      return board;
+   }
+   
 // Private fields
    
+   private static Model instance;
    private static final int DEFAULT_SIZE = 8;
    private static final int DEFAULT_NUM_PIECES_PER_PLAYER = 12;
    private int remainingRedPieces;
