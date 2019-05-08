@@ -16,7 +16,7 @@ public class InsetLayout implements Layout {
 			Dimension displaySize = child.getDisplaySize(size, location);
 			child.setSize((int)displaySize.getWidth(), (int)displaySize.getHeight());
 		}
-		child.setLocation((int)location.getX() + insets.getLeft(), (int)location.getY() + insets.getTop());
+		child.setLocation(insets.getLeft(), insets.getTop());
 		child.renderWithSize(child.getSize(), child.getLocation());
 	}
 
