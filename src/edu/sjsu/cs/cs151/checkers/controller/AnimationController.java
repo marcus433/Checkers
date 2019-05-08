@@ -1,14 +1,13 @@
 package edu.sjsu.cs.cs151.checkers.controller;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.Timer;
-
-import edu.sjsu.cs.cs151.checkers.model.Location;
 
 import javax.swing.JPanel;
 
@@ -48,7 +47,7 @@ public class AnimationController implements ActionListener {
 	 * @param location: target x, y position
 	 * @return self: for animateTo chaining
 	 * */
-	public AnimationController animateTo(int duration, Location location) {
+	public AnimationController animateTo(int duration, Point location) {
 		int x = 0;
 		int y = 0;
 		if (queue.size() == 0) {
@@ -63,8 +62,8 @@ public class AnimationController implements ActionListener {
 		AnimationProps props = new AnimationProps();
 		props.x = x;
 		props.y = y;
-		props.dX = location.getX() - x;
-		props.dY = location.getY() - y;
+		props.dX = (int)location.getX() - x;
+		props.dY = (int)location.getY() - y;
 		props.duration = duration;
 		queue.add(props);
 		startAnimation();

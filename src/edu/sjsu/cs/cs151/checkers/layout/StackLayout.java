@@ -31,7 +31,7 @@ public class StackLayout implements Layout {
 		}
 
 		if (this.direction == Direction.VERTICAL) {
-			int rowHeight = Math.max(((int)size.getHeight() - staticSpace - (this.spacing * (children.size() - 1))) / (children.size() - sizedChildren), 0);
+			int rowHeight = children.size() == sizedChildren ? 0 : Math.max(((int)size.getHeight() - staticSpace - (this.spacing * (children.size() - 1))) / (children.size() - sizedChildren), 0);
 			for (int i = 0; i < children.size(); i++) {
 				Layout child = children.get(i);
 				if (child.getDisplaySize(size, location) != null) {
@@ -47,7 +47,7 @@ public class StackLayout implements Layout {
 				child.renderWithSize(child.getSize(), child.getLocation());
 			}
 		} else {
-			int columnWidth = Math.max(((int)size.getWidth() - staticSpace - (this.spacing * (children.size() - 1))) / (children.size() - sizedChildren), 0);
+			int columnWidth = children.size() == sizedChildren ? 0 : Math.max(((int)size.getWidth() - staticSpace - (this.spacing * (children.size() - 1))) / (children.size() - sizedChildren), 0);
 			for (int i = 0; i < children.size(); i++) {
 				Layout child = children.get(i);
 				if (child.getDisplaySize(size, location) != null) {

@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -19,6 +20,8 @@ public class Toolbar extends View {
 		super();
 		this.setLayout(null);
 		this.setOpaque(false);
+		currentTurn = new CurrentTurn();
+		add(currentTurn);
 		//setBorder(new EmptyBorder(20, 20, 20, 20));
 	}
 
@@ -51,10 +54,7 @@ public class Toolbar extends View {
 		return new Dimension(size.width, DEFAULT_HEIGHT); // temporary hack until layoutManager allows to fill on only 1 dimension
 	}
 
-	/*@Override
-	public Layout layoutThatFits() {
-		return new AlignLayout(AlignLayout.Direction.HORIZONTAL, AlignLayout.Alignment.END, Layout child);
-	}*/
-
 	public static final int DEFAULT_HEIGHT = 50;
+
+	private CurrentTurn currentTurn;
 }

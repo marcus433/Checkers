@@ -17,17 +17,11 @@ public class MainView extends View {
 	public MainView() {
 		this.toolbar = new Toolbar();
 		this.board = new Gameboard();
-		this.board2 = new Gameboard();
-		this.board3 = new Gameboard();
 		this.setBackground(new Color(0xAAD6FD));
 		this.setLayout(null);
 		this.add(toolbar);
 		this.add(board);
-		this.add(board2);
-		this.add(board3);
 		board.setBackground(Color.BLUE);
-		board2.setBackground(Color.GREEN);
-		board3.setBackground(Color.RED);
 		//renderWithSize(new Dimension(800, 800));
 		//addComponentListener(this);
 	}
@@ -35,13 +29,9 @@ public class MainView extends View {
 	@Override
 	public
 	Layout layoutThatFits() {
-		ArrayList<Layout> al = new ArrayList<Layout>();
-		al.add(board);
-		al.add(board2);
-		al.add(board3);
 		ArrayList<Layout> al2 = new ArrayList<Layout>();
 		al2.add(toolbar);
-		al2.add(new StackLayout(StackLayout.Direction.HORIZONTAL, 0, al));
+		al2.add(board);
 		// top left bottom right
 		// new StackLayout(StackLayout.Direction.HORIZONTAL, 0, al)
 		return new InsetLayout(new EdgeInsets(0, PADDING, PADDING, PADDING), 
@@ -53,8 +43,6 @@ public class MainView extends View {
 	
 	private Toolbar toolbar;
 	private Gameboard board;
-	private Gameboard board2;
-	private Gameboard board3;
 	
 	public static final int PADDING = 25;
 }

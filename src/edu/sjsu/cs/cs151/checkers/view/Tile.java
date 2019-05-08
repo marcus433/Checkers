@@ -1,12 +1,13 @@
 package edu.sjsu.cs.cs151.checkers.view;
 
+import edu.sjsu.cs.cs151.checkers.layout.View;
 import edu.sjsu.cs.cs151.checkers.model.Checker;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
-public class Tile extends JPanel {
+public class Tile extends View {
 	public Tile(boolean isDark) {
 		super();
 		if (isDark)
