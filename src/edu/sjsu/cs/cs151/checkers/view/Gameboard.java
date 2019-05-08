@@ -1,6 +1,12 @@
 package edu.sjsu.cs.cs151.checkers.view;
 
 import edu.sjsu.cs.cs151.checkers.model.Size;
+
+import java.awt.GridLayout;
+
+import javax.swing.JPanel;
+
+import edu.sjsu.cs.cs151.checkers.model.Checker;
 import edu.sjsu.cs.cs151.checkers.model.Location;
 /*
 this.setLayout(null);
@@ -25,50 +31,16 @@ for (int row = 0; row < 8; row++) {
 /**
  * Gameboard tracks the positions of each Piece currently in play.
  */
-public class Gameboard {
+public class Gameboard extends JPanel {
 	public Gameboard() {
-		gridSize = DEFAULT_GRID_SIZE;
+		/*gridSize = DEFAULT_GRID_SIZE;
 	  this.pieces = new Piece[gridSize.getWidth() * gridSize.getHeight()];
-		this.currentPiece = new Piece(Piece.Type.KING, Piece.Color.BLACK); // temporary to keep compiler happy
-	}
+		this.currentPiece = new Piece(Piece.Type.KING, Piece.Color.BLACK); // temporary to keep compiler happy*/
 
-	/**
-	 * selectPiece enables players to choose an individual piece on the board to interact with.
-	 * 
-	 * @param location: the Location on the board that the desired piece occupies
-	 */
-	public void selectPiece(Location location) {
-		//TODO: implement selectPiece
-	}
-
-	/**
-	 * isValidMove determines whether an intended destination for the currentPiece is possible.
-	 * 
-	 * @param destination: the desired Location on the board to move currentPiece
-	 * @return true if move is legal; false otherwise
-	 */
-	public boolean isValidMove(Location destination) {
-	   //TODO: implement isValidMove
-	   return false;
-	}
-
-	/**
-	 * movePiece moves the currentPiece from its current Location to a valid destination Location.
-	 * 
-	 * @param destination: the desired Location on the board to move currentPiece
-	 */
-	public void movePiece(Location destination) {
-		//this.currentPiece.setLocation(destination); // TODO: use setter & getter so we can add layout hooks.
+		this.setLayout(new GridLayout(8, 8));
 	}
 	
 	// Getters and Setters
-	/**
-	 * getSize returns the Size of the gameboard.
-	 * @return: the Size object of the board
-	 */
-	public Size getSize() {
-	   return gridSize;
-	}
 	
 	/**
 	 * getPieces returns the array of all pieces in play.
@@ -88,7 +60,6 @@ public class Gameboard {
 	
 	// Private fields
 	
-	private static final Size DEFAULT_GRID_SIZE = new Size(8, 8);
 	private Size gridSize;
 	private Piece[] pieces;
 	private Piece currentPiece;

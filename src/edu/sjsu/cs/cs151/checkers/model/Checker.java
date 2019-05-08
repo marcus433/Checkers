@@ -68,6 +68,10 @@ public class Checker {
 	public void deselect() {
 		this.isSelected = false;
 	}
+
+	public boolean canHoldPiece() {
+		return this.canHoldPiece;
+	}
 	
 	// Private fields
 	

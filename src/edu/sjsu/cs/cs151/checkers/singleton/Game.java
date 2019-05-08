@@ -25,8 +25,8 @@ public class Game {
 	public void reset() {
 		currentColor = Piece.Color.BLACK;
 		//board = new Board(this);
-		redCount = BoardController.PIECES_PER_SIDE;
-		blackCount = BoardController.PIECES_PER_SIDE;
+		redCount = GameController.PIECES_PER_SIDE;
+		blackCount = GameController.PIECES_PER_SIDE;
 	}
 
 	/**
@@ -74,5 +74,5 @@ public class Game {
 	private Piece.Color currentColor;
 	private int redCount;
 	private int blackCount;
-	private BoardController board;
+	private GameController board;
 }
