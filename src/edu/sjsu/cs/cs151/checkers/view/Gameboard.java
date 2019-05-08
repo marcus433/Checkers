@@ -41,8 +41,7 @@ public class Gameboard extends View {
 		this.setOpaque(false);
 		for (int i = 0; i < 64; i++) {
 			Tile tile = new Tile((i + i / 8 % 2) % 2 == 1);
-			System.out.println((int)Math.floor((i + 1) / 8));
-			tile.setRow((int)Math.floor((i + 1) / 8));
+			tile.setRow((int)Math.floor(i / 8));
 			tile.setColumn(i % 8);
 			tiles.add(tile);
 			add(tile);
