@@ -88,6 +88,10 @@ public class Piece extends View {
 	public void setType(Type type) {
 		this.type = type;
 	}
+	
+	public void setColor(Color color) {
+		this.color = color;
+	}
 
 	public Color getColor() {
 	   return color;

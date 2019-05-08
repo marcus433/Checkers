@@ -3,6 +3,7 @@ package edu.sjsu.cs.cs151.checkers.view;
 import edu.sjsu.cs.cs151.checkers.layout.*;
 import edu.sjsu.cs.cs151.checkers.layout.AlignLayout.Alignment;
 import edu.sjsu.cs.cs151.checkers.layout.AlignLayout.Direction;
+import edu.sjsu.cs.cs151.checkers.model.Model;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -36,23 +37,10 @@ public class Toolbar extends View {
 		add(currentTurn);
 		add(skipTurnButton);
 		add(restartButton);
-		//setBorder(new EmptyBorder(20, 20, 20, 20));
 	}
 
-	/*public void updateCurrentPlayer(Player player) {
-		if (player.getColor() == Piece.Color.RED) {
-			// TODO: update toolbar
-		} else {
-			// TODO: update toolbar
-		}
-	}*/
-
-	private void undoMove() {
-		// TODO: from button listener
-	}
-
-	private void resetGame() {
-		// TODO: from button listener
+	public void updateState(Model model) {
+		//
 	}
 
 	@Override

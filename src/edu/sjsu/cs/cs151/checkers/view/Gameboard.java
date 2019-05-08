@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import edu.sjsu.cs.cs151.checkers.model.Checker;
+import edu.sjsu.cs.cs151.checkers.model.Piece;
 /*
 this.setLayout(null);
 setBackground(Color.BLUE);
@@ -28,6 +29,7 @@ for (int row = 0; row < 8; row++) {
 	}
 }
 */
+import edu.sjsu.cs.cs151.checkers.model.Model;
 
 /**
  * Gameboard tracks the positions of each Piece currently in play.
@@ -41,6 +43,25 @@ public class Gameboard extends View {
 			Tile tile = new Tile((i + i / 8 % 2) % 2 == 1);
 			tiles.add(tile);
 			add(tile);
+		}
+	}
+	
+	public void updateState(Model model) {
+		Checker[][] checkers = model.getBoard();
+		for (int row = 0; row < checkers.length; row++) {
+			for (int column = 0; column < checkers.length; column++) {
+				Checker checker = checkers[row][column];
+				edu.sjsu.cs.cs151.checkers.model.Piece piece = checker.getPiece();
+				Tile tile = (Tile) tiles.get(((row + 1) * (column + 1) - 1));
+				edu.sjsu.cs.cs151.checkers.view.Piece pieceView = tile.getPiece();
+				if (piece != null && pieceView != null) {
+					pieceView.setType(piece.isKing() ? edu.sjsu.cs.cs151.checkers.view.Piece.Type.KING : edu.sjsu.cs.cs151.checkers.view.Piece.Type.PAWN);
+					pieceView.setColor(piece.getColor() == edu.sjsu.cs.cs151.checkers.model.Piece.Color.RED ? edu.sjsu.cs.cs151.checkers.view.Piece.Color.RED : edu.sjsu.cs.cs151.checkers.view.Piece.Color.BLACK);
+					pieceView.setVisible(true);
+				} else if (pieceView != null) {
+					pieceView.setVisible(false);
+				}
+			}
 		}
 	}
 	

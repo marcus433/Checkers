@@ -26,8 +26,6 @@ public class Tile extends View {
 				}
 			}
 		});
-		
-		//this.piece.setVisible(false);
 	}
 	
 	@Override
@@ -36,6 +34,10 @@ public class Tile extends View {
 		if (piece == null)
 			return null;
 		return new InsetLayout(new EdgeInsets(5, 5, 5, 5), piece);
+	}
+	
+	public Piece getPiece() {
+		return piece;
 	}
 	
 	// Private fields

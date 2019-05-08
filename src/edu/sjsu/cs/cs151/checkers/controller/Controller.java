@@ -37,6 +37,7 @@ public class Controller {
     * @throws Exception
     */
    public void mainLoop() {
+	  view.updateState(model);
       Valve.ValveResponse response = Valve.ValveResponse.EXECUTED;
       Message message = null;
       
@@ -92,6 +93,7 @@ public class Controller {
          
          // actions in View
          // TODO: highlight valid move destinations
+         view.updateState(model);
          
          return Valve.ValveResponse.EXECUTED;
       }
@@ -112,6 +114,7 @@ public class Controller {
          
          // actions in View
          // TODO: update the game board
+         view.updateState(model);
          
          return Valve.ValveResponse.EXECUTED;
       }
@@ -128,6 +131,7 @@ public class Controller {
          
          // actions in View
          // TODO: reset the game board
+         view.updateState(model);
          
          return Valve.ValveResponse.EXECUTED;
       }
@@ -143,6 +147,7 @@ public class Controller {
          model.switchTurn();
          
          // actions in View
+         view.updateState(model);
          
          return Valve.ValveResponse.EXECUTED;
       }
