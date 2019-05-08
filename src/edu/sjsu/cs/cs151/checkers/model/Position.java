@@ -10,7 +10,9 @@ public class Position {
 			this.row = row;
 			this.column = column;
 		} else {
-			throw new Error("Invalid position"); // TODO: make custom error type
+			this.row = -1;
+			this.column = -1;
+			// TODO: throw an actual error? Or leave it like this?
 		}
 	}
 
@@ -30,6 +32,10 @@ public class Position {
     */
 	public int getColumn() {
 	   return this.column;
+	}
+	
+	public boolean equals(Position pos) {
+	   return (this.row == pos.row && this.column == pos.column);
 	}
 	
 	// Private fields
