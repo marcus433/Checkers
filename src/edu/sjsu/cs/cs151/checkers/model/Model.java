@@ -5,6 +5,7 @@ import edu.sjsu.cs.cs151.checkers.model.Piece.Color;
 public class Model {
    
    public Model() {
+      board = new Checker[DEFAULT_SIZE][DEFAULT_SIZE];
       reset();
    }
 
@@ -14,13 +15,17 @@ public class Model {
     * and populates them with three rows of Pieces for each side.
     */
    public void reset() {
-      this.gridSize = DEFAULT_GRID_SIZE;
       this.remainingBlackPieces = DEFAULT_NUM_PIECES_PER_PLAYER;
       this.remainingRedPieces = DEFAULT_NUM_PIECES_PER_PLAYER;
+      this.blackWon = false;
+      this.redWon = false;
+      this.currentColor = Color.RED;
+      this.origin = null;
+      this.currentPiece = null;
       
       // Checker tile generation loop
-      for (int row = 0; row < gridSize.getHeight(); row++) {
-         for (int col = 0; col < gridSize.getWidth(); col++) {
+      for (int row = 0; row < DEFAULT_SIZE; row++) {
+         for (int col = 0; col < DEFAULT_SIZE; col++) {
             if (row % 2 == 0) {
                if (col % 2 == 0) {
                   board[row][col] = new Checker(true, null);
@@ -40,11 +45,11 @@ public class Model {
          }
       }
       
-      int numPopulatedRows = DEFAULT_NUM_PIECES_PER_PLAYER / (gridSize.getHeight() / 2);
+      int numPopulatedRows = DEFAULT_NUM_PIECES_PER_PLAYER / (DEFAULT_SIZE / 2);
       
       // Black piece generation loop
       for (int row = 0; row < numPopulatedRows; row++) {
-         for (int col = 0; col < gridSize.getWidth(); col++) {
+         for (int col = 0; col < DEFAULT_SIZE; col++) {
             if (board[row][col].isValid()) {
                board[row][col].setPiece(new Piece(Color.BLACK));
             }
@@ -52,8 +57,8 @@ public class Model {
       }
       
       // Red piece generation loop
-      for (int row = gridSize.getHeight() - 1; row >= gridSize.getHeight() - numPopulatedRows; row--) {
-         for (int col = gridSize.getWidth() - 1; col >= 0; col--) {
+      for (int row = DEFAULT_SIZE - 1; row >= DEFAULT_SIZE - numPopulatedRows; row--) {
+         for (int col = DEFAULT_SIZE - 1; col >= 0; col--) {
             if (board[row][col].isValid() && !board[row][col].hasPiece()) {
                board[row][col].setPiece(new Piece(Color.RED));
             }
@@ -67,8 +72,11 @@ public class Model {
     * @param pos - a user selected Position
     */
    public void selectChecker(Position pos) {
-      this.origin = pos;
-      this.currentPiece = board[pos.getRow()][pos.getColumn()].getPiece();
+      if (board[pos.getRow()][pos.getColumn()].hasPiece()
+            && board[pos.getRow()][pos.getColumn()].getPiece().getColor() == currentColor) {
+         this.origin = pos;
+         this.currentPiece = board[pos.getRow()][pos.getColumn()].getPiece();
+      }
    }
    
    /**
@@ -77,6 +85,7 @@ public class Model {
     * @return Position[] validMoves - an array of Positions that correspond to valid Checkers.
     *    0 corresponds to single-space moves.
     *    1, 2, 3, and 4 are jump moves, going from lower left, to lower right, to upper left, to upper right.
+    * @precondition selectChecker has been called previously
     */
    public Position[] determineValidMoves() {
       Position[] validMoves = new Position[5];
@@ -127,6 +136,7 @@ public class Model {
     * movePiece moves a piece from one Position and Checker to another user-specified one.
     * If the selected destination is invalid, movePiece will simply return.
     * @param dest - the user-selected destination Position.
+    * @precondition selectChecker has been called previously
     */
    public void movePiece(Position dest) {
       // Do nothing if the destination isn't valid, or if it's already occupied
@@ -146,7 +156,31 @@ public class Model {
       if (whichMove == -1)
          return;
       
-      // If whichMove corresponds to a jump move, determine where to remove the opponent piece.
+      // Update the current piece's Position and Checker.
+      board[origin.getRow()][origin.getColumn()].clearPiece();
+      board[dest.getRow()][dest.getColumn()].setPiece(currentPiece);
+      
+      // Check if the move was a jump; if it was, remove the correct pieces.
+      if (whichMove > 0 || whichMove <= 4)
+         jump(whichMove, dest);
+      
+      // If the current piece made it all the way to the other side of the board, make it a king.
+      if (dest.getRow() == 0 && currentPiece.getColor() == Color.RED
+            || dest.getRow() == 7 && currentPiece.getColor() == Color.BLACK)
+         currentPiece.makeKing();
+      
+      // Deselect the previous piece and checker.
+      currentPiece = null;
+      origin = null;
+      
+      // Switch player control to the opposite color.
+      switchTurn();
+      
+      // See if a win condition was reached.
+      checkWinCondition();
+   }
+   
+   public void jump(int whichMove, Position dest) {
       switch (whichMove) {
       // Jump, lower left
       case 1: board[dest.getRow() - 1][dest.getColumn() + 1].clearPiece();
@@ -161,28 +195,34 @@ public class Model {
       }
       }
       
-      // Update the current piece's Position and Checker.
-      board[origin.getRow()][origin.getColumn()].clearPiece();
-      board[dest.getRow()][dest.getColumn()].setPiece(currentPiece);
-      
       // All jump moves reduce the total number of pieces on the opponent side.
-      if (whichMove > 0 || whichMove <= 4) {
-         if (currentPiece.getColor() == Color.BLACK)
-            remainingRedPieces--;
-         else // if (currentPiece.getColor() == Color.RED)
-            remainingBlackPieces--;
-      }
-      
+      if (currentColor == Color.BLACK)
+         remainingRedPieces--;
+      else // if (currentColor == Color.RED)
+         remainingBlackPieces--;
+   }
+   
+   public void switchTurn() {
+      currentColor = currentColor == Color.RED ? Color.BLACK : Color.RED;
+   }
+   
+   public void checkWinCondition() {
+      if (remainingRedPieces == 0)
+         blackWon = true;
+      else if (remainingBlackPieces == 0)
+         redWon = true;
    }
    
 // Private fields
    
-   private static final Size DEFAULT_GRID_SIZE = new Size(8, 8);
+   private static final int DEFAULT_SIZE = 8;
    private static final int DEFAULT_NUM_PIECES_PER_PLAYER = 12;
    private int remainingRedPieces;
    private int remainingBlackPieces;
-   private Size gridSize;
    private Position origin;
    private Piece currentPiece;
    private Checker[][] board;
+   private boolean blackWon;
+   private boolean redWon;
+   private Piece.Color currentColor;
 }
