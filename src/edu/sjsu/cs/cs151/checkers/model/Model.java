@@ -2,9 +2,9 @@ package edu.sjsu.cs.cs151.checkers.model;
 
 import edu.sjsu.cs.cs151.checkers.model.Piece.Color;
 
-public class Gameboard {
+public class Model {
    
-   public Gameboard() {
+   public Model() {
       reset();
    }
 
@@ -182,7 +182,6 @@ public class Gameboard {
    private int remainingRedPieces;
    private int remainingBlackPieces;
    private Size gridSize;
-   private Piece[] pieces;
    private Position origin;
    private Piece currentPiece;
    private Checker[][] board;
