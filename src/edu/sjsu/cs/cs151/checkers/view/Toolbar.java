@@ -1,7 +1,12 @@
 package edu.sjsu.cs.cs151.checkers.view;
 
+import edu.sjsu.cs.cs151.checkers.layout.*;
+
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -9,12 +14,11 @@ import javax.swing.border.EmptyBorder;
 /**
  * Toolbar for game
  */
-public class Toolbar extends JPanel {
+public class Toolbar extends View {
 	public Toolbar() {
 		super();
 		this.setLayout(null);
 		this.setOpaque(false);
-		setSize(200, 50);
 		//setBorder(new EmptyBorder(20, 20, 20, 20));
 	}
 
@@ -41,6 +45,16 @@ public class Toolbar extends JPanel {
 		g.fillRoundRect(0, 0, g.getClipBounds().width, g.getClipBounds().height, 50, 50); // x y width height arcWidth arcHeight
 		g.fillRect(0, 0, g.getClipBounds().width, g.getClipBounds().height - 26);
 	}
+	
+	@Override
+	public Dimension getDisplaySize(Dimension size, Point location) {
+		return new Dimension(size.width, DEFAULT_HEIGHT); // temporary hack until layoutManager allows to fill on only 1 dimension
+	}
+
+	/*@Override
+	public Layout layoutThatFits() {
+		return new AlignLayout(AlignLayout.Direction.HORIZONTAL, AlignLayout.Alignment.END, Layout child);
+	}*/
 
 	public static final int DEFAULT_HEIGHT = 50;
 }

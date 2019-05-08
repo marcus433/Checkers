@@ -1,8 +1,11 @@
 package edu.sjsu.cs.cs151.checkers.view;
 
+import edu.sjsu.cs.cs151.checkers.layout.*;
+
 import edu.sjsu.cs.cs151.checkers.model.Size;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
@@ -32,10 +35,10 @@ for (int row = 0; row < 8; row++) {
 /**
  * Gameboard tracks the positions of each Piece currently in play.
  */
-public class Gameboard extends JPanel {
+public class Gameboard extends View {
 	public Gameboard() {
 		this.setLayout(new GridLayout(8, 8));
-		this.setOpaque(false);
+		//this.setOpaque(false);
 		for (int i = 0; i < 64; i++) {
 			this.add(new Tile((i + i / 8 % 2) % 2 == 1));
 		}

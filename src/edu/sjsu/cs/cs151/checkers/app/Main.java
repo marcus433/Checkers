@@ -17,9 +17,8 @@ import edu.sjsu.cs.cs151.checkers.view.Window;
 
 public class Main {
 	public static void main(String[] args) {
-		Window window = new Window("Checkers");
-		MainView view = new MainView();
-		window.getContentPane().add(view);
+		Window window = new Window("Checkers", new MainView());
+		//window.getContentPane().add(view);
 		GameController gc = new GameController();
 		//Gameboard gb = new Gameboard(gc.checkers);
 		//.setMargin(new Insets(0, 0, 0, 0));
