@@ -25,23 +25,7 @@ public class Model {
       // Checker tile generation loop
       for (int row = 0; row < DEFAULT_SIZE; row++) {
          for (int col = 0; col < DEFAULT_SIZE; col++) {
-        	 	board[row][col] = new Checker((((row % 2) + 1) % 2) == 0, null);
-            /*if (row % 2 == 0) {
-               if (col % 2 == 0) {
-                  board[row][col] = new Checker(true, null);
-               }
-               else { // if (col % 2 == 1)
-                  board[row][col] = new Checker(false, null);
-               }
-            }
-            else { // if (row % 2 == 1)
-               if (col % 2 == 0) {
-                  board[row][col] = new Checker(false, null);
-               }
-               else { // if (col % 2 == 1)
-                  board[row][col] = new Checker(true, null);
-               }
-            }*/
+        	 	board[row][col] = new Checker((((row % 2) + col) % 2) == 1, null);
          }
       }
       
@@ -74,6 +58,7 @@ public class Model {
     */
    public boolean selectChecker(Position pos) {
       // If canJumpAgain is true, then lock selectChecker - no other Pieces can be selected other than the current one.
+	   System.out.println(board[pos.getRow()][pos.getColumn()].getPiece().getColor());
       if (canJumpAgain)
          return true;
       else if (board[pos.getRow()][pos.getColumn()].hasPiece()

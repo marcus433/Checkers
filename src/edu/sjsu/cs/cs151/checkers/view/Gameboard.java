@@ -42,7 +42,7 @@ public class Gameboard extends View {
 		for (int i = 0; i < 64; i++) {
 			Tile tile = new Tile((i + i / 8 % 2) % 2 == 1);
 			tile.setRow((int)Math.floor((i + 1) / 8));
-			tile.setColumn(i);
+			tile.setColumn(i % 8);
 			tiles.add(tile);
 			add(tile);
 		}
@@ -54,7 +54,7 @@ public class Gameboard extends View {
 			for (int column = 0; column < checkers[row].length; column++) {
 				Checker checker = checkers[row][column];
 				edu.sjsu.cs.cs151.checkers.model.Piece piece = checker.getPiece();
-				Tile tile = (Tile) tiles.get(((row + 1) * (column + 1) - 1));
+				Tile tile = (Tile) tiles.get((8 * row) + column);
 				edu.sjsu.cs.cs151.checkers.view.Piece pieceView = tile.getPiece();
 				if (piece != null && pieceView != null) {
 					pieceView.setType(piece.isKing() ? edu.sjsu.cs.cs151.checkers.view.Piece.Type.KING : edu.sjsu.cs.cs151.checkers.view.Piece.Type.PAWN);
@@ -62,6 +62,8 @@ public class Gameboard extends View {
 					pieceView.setVisible(true);
 					if (checker.isSelected()) {
 						pieceView.select();
+						//pieceView.repaint();
+						System.out.println("YAY");
 					} else {
 						pieceView.deselect();
 					}
@@ -86,12 +88,12 @@ public class Gameboard extends View {
 	@Override
 	public
 	Layout layoutThatFits() {
-		return new GridLayout(tiles);
+		return new GridLayout(new ArrayList<Layout>(tiles));
 	}
 	
 	// Private fields
 	
-	private ArrayList<Layout> tiles;
+	private ArrayList<Tile> tiles;
 	private Piece currentPiece;
    
 }
