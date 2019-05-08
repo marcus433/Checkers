@@ -175,11 +175,11 @@ public class Model {
          currentPiece.makeKing();
       
       // Deselect the previous piece and checker if done moving.
-      if (!canJumpAgain) 
+      if (!canJumpAgain) {
          deselect();
-      
-      // Switch player control to the opposite color.
-      switchTurn();
+         // Switch player control to the opposite color.
+         switchTurn();
+      }
       
       // See if a win condition was reached.
       checkWinCondition();
