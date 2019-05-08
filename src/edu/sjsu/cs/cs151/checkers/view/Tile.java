@@ -15,6 +15,7 @@ public class Tile extends View {
 		if (isDark) {
 			this.piece = new Piece(Piece.Type.PAWN, Piece.Color.BLACK);
 			this.setBackground(new Color(0x0A2663));
+			this.piece.setVisible(false);
 			add(this.piece);
 		} else {
 			this.setBackground(new Color(0xAAD6FD));
