@@ -2,16 +2,13 @@ package edu.sjsu.cs.cs151.checkers.view;
 
 import edu.sjsu.cs.cs151.checkers.layout.*;
 
-import edu.sjsu.cs.cs151.checkers.model.Size;
-
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
 import edu.sjsu.cs.cs151.checkers.model.Checker;
-import edu.sjsu.cs.cs151.checkers.model.Location;
 /*
 this.setLayout(null);
 setBackground(Color.BLUE);
@@ -37,22 +34,17 @@ for (int row = 0; row < 8; row++) {
  */
 public class Gameboard extends View {
 	public Gameboard() {
-		this.setLayout(new GridLayout(8, 8));
-		//this.setOpaque(false);
+		//this.setLayout(new GridLayout(8, 8));
+		tiles = new ArrayList<>();
+		this.setOpaque(false);
 		for (int i = 0; i < 64; i++) {
-			this.add(new Tile((i + i / 8 % 2) % 2 == 1));
+			Tile tile = new Tile((i + i / 8 % 2) % 2 == 1);
+			tiles.add(tile);
+			add(tile);
 		}
 	}
 	
 	// Getters and Setters
-	
-	/**
-	 * getPieces returns the array of all pieces in play.
-	 * @return: the Piece[] array, pieces
-	 */
-	public Piece[] getPieces() {
-	   return pieces;
-	}
 	
 	/**
 	 * getCurrentPiece returns the current piece selected by the player.
@@ -61,11 +53,16 @@ public class Gameboard extends View {
 	public Piece getCurrentPiece() {
 	   return currentPiece;
 	}
+
+	@Override
+	public
+	Layout layoutThatFits() {
+		return new GridLayout(tiles);
+	}
 	
 	// Private fields
 	
-	private Size gridSize;
-	private Piece[] pieces;
+	private ArrayList<Layout> tiles;
 	private Piece currentPiece;
    
 }
