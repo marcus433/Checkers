@@ -69,10 +69,6 @@ public class Checker {
 		this.isSelected = false;
 	}
 
-	public boolean canHoldPiece() {
-		return this.canHoldPiece;
-	}
-	
 	/**
 	 * isValid returns the boolean field canHoldPiece.
 	 * @return
