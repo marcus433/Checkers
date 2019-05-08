@@ -16,7 +16,7 @@ import javax.swing.border.EmptyBorder;
 public class CurrentTurn extends View {
 	public CurrentTurn() {
 		super();
-		this.setOpaque(true);
+		this.setOpaque(false);
 		piece = new Piece(Piece.Type.PAWN, Piece.Color.RED);
 		currentTurnLabel = new Label("Current Turn");
 		currentTurnLabel.setDisplaySize(currentTurnLabel.getSize());

@@ -23,6 +23,7 @@ import edu.sjsu.cs.cs151.checkers.view.Piece.Type;
 public class Button extends View implements Layout {	
 	public Button(BufferedImage icon) {
 		super();
+		setOpaque(false);
 		usesIcon = true;
 		restartIcon = icon;
 		setBackground(Color.WHITE);
@@ -41,6 +42,7 @@ public class Button extends View implements Layout {
 
 	public Button(String text) {
 		super();
+		setOpaque(false);
 		this.label = new Label(text);
 		this.label.setForeground(Color.WHITE);
 		add(this.label);

@@ -63,9 +63,10 @@ public class Model {
       else if (board[pos.getRow()][pos.getColumn()].hasPiece()
             && board[pos.getRow()][pos.getColumn()].getPiece().getColor() == currentColor) {
          this.origin = pos;
-         /*if (this.currentPiece != null)
-        	 	this.currentPiece.deselect();*/
+         if (this.currentChecker != null)
+        	 	this.currentChecker.deselect();
          this.currentPiece = board[pos.getRow()][pos.getColumn()].getPiece();
+         this.currentChecker = board[pos.getRow()][pos.getColumn()];
          board[pos.getRow()][pos.getColumn()].select();
          return true;
       }
@@ -240,6 +241,7 @@ public class Model {
    public void deselect() {
       origin = null;
       currentPiece = null;
+      currentChecker = null;
    }
    
    /**
@@ -305,6 +307,7 @@ public class Model {
    private int remainingBlackPieces;
    private Position origin;
    private Piece currentPiece;
+   private Checker currentChecker;
    private Checker[][] board;
    private boolean blackWon;
    private boolean redWon;
