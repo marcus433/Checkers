@@ -1,9 +1,11 @@
 package edu.sjsu.cs.cs151.checkers.view;
 
+import edu.sjsu.cs.cs151.checkers.controller.AnimationController;
 import edu.sjsu.cs.cs151.checkers.layout.*;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -49,7 +51,29 @@ public class Gameboard extends View {
 	}
 	
 	public void updateState(Model model) {
+		Point changeOrigin = new Point(0, 0);
+		Point changeDestination = new Point(0, 0);
+		Boolean isChange = false;
+		JPanel view = new JPanel();
 		Checker[][] checkers = model.getBoard();
+		for (int row = 0; row < checkers.length; row++) {
+			for (int column = 0; column < checkers[row].length; column++) {
+				Checker checker = checkers[row][column];
+				edu.sjsu.cs.cs151.checkers.model.Piece piece = checker.getPiece();
+				Tile tile = (Tile) tiles.get((8 * row) + column);
+				edu.sjsu.cs.cs151.checkers.view.Piece pieceView = tile.getPiece();
+				if (pieceView != null && !pieceView.isVisible() && checker.hasPiece()) {
+					changeDestination = tile.getLocation();
+					isChange = true;
+				} else if (pieceView != null && pieceView.isVisible() && !checker.hasPiece()) {
+					changeOrigin = tile.getLocation();
+					view = pieceView;
+					isChange = true;
+				}
+			}
+		}
+		if (isChange)
+			new AnimationController(view).animateTo(1000, changeDestination);
 		for (int row = 0; row < checkers.length; row++) {
 			for (int column = 0; column < checkers[row].length; column++) {
 				Checker checker = checkers[row][column];
