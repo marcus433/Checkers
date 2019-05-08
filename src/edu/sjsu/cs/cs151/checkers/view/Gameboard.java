@@ -2,6 +2,7 @@ package edu.sjsu.cs.cs151.checkers.view;
 
 import edu.sjsu.cs.cs151.checkers.model.Size;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
@@ -33,11 +34,11 @@ for (int row = 0; row < 8; row++) {
  */
 public class Gameboard extends JPanel {
 	public Gameboard() {
-		/*gridSize = DEFAULT_GRID_SIZE;
-	  this.pieces = new Piece[gridSize.getWidth() * gridSize.getHeight()];
-		this.currentPiece = new Piece(Piece.Type.KING, Piece.Color.BLACK); // temporary to keep compiler happy*/
-
 		this.setLayout(new GridLayout(8, 8));
+		this.setOpaque(false);
+		for (int i = 0; i < 64; i++) {
+			this.add(new Tile((i + i / 8 % 2) % 2 == 1));
+		}
 	}
 	
 	// Getters and Setters
