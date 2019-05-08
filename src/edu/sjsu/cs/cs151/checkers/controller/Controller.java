@@ -29,6 +29,11 @@ public class Controller {
       this.view = view;
       this.model = model;
       this.messageQueue = queue;
+      
+      valves.add(new SelectMessageValve());
+      valves.add(new ReleaseMessageValve());
+      valves.add(new ResetMessageValve());
+      valves.add(new SkipTurnMessageValve());
    }
    
    /**

@@ -73,7 +73,10 @@ public class Model {
     * @return true if a valid piece was selected, false otherwise
     */
    public boolean selectChecker(Position pos) {
-      if (board[pos.getRow()][pos.getColumn()].hasPiece()
+      // If canJumpAgain is true, then lock selectChecker - no other Pieces can be selected other than the current one.
+      if (canJumpAgain)
+         return true;
+      else if (board[pos.getRow()][pos.getColumn()].hasPiece()
             && board[pos.getRow()][pos.getColumn()].getPiece().getColor() == currentColor) {
          this.origin = pos;
          this.currentPiece = board[pos.getRow()][pos.getColumn()].getPiece();
