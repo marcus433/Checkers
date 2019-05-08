@@ -227,8 +227,8 @@ public class Model {
       origin = dest;
       Position[] validMoves = determineValidMoves();
       canJumpAgain = false;
-      // validMoves[0] assumes a single space move; start analyzing from i=1.
-      for (int i = 1; i < validMoves.length; i++) {
+      // validMoves contains jump moves on odd numbers; only probe these.
+      for (int i = 1; i < validMoves.length; i+=2) {
          if (validMoves[i] != null)
             canJumpAgain = true;
       }
