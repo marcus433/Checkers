@@ -180,6 +180,14 @@ public class Model {
       checkWinCondition();
    }
    
+   /**
+    * jump() moves a piece by two spaces and jumps over an opponent piece, removing it from play.
+    * It is called exclusively by movePiece in the event that a destination Position requires a jump.
+    * @param whichMove - an int, 1-4, that determines the direction that the piece will jump.
+    *    1 = lower left, 2 = lower right, 3 = upper left, 4 = upper right
+    * @param dest - the destination Position
+    * @precondition 1 <= whichMove <= 4
+    */
    public void jump(int whichMove, Position dest) {
       switch (whichMove) {
       // Jump, lower left
@@ -202,10 +210,17 @@ public class Model {
          remainingBlackPieces--;
    }
    
+   /**
+    * switchTurn alters the game state by switching the color currently in play.
+    */
    public void switchTurn() {
       currentColor = currentColor == Color.RED ? Color.BLACK : Color.RED;
    }
    
+   /**
+    * checkWinCondition checks to see if either color has won by eliminating all opponent pieces.
+    * It sets either blackWon or redWon to true if the opposing remaining__Pieces == 0.
+    */
    public void checkWinCondition() {
       if (remainingRedPieces == 0)
          blackWon = true;
