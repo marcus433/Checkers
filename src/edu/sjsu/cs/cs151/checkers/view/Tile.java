@@ -3,7 +3,6 @@ package edu.sjsu.cs.cs151.checkers.view;
 import edu.sjsu.cs.cs151.checkers.app.Main;
 import edu.sjsu.cs.cs151.checkers.controller.SelectMessage;
 import edu.sjsu.cs.cs151.checkers.layout.*;
-import edu.sjsu.cs.cs151.checkers.model.Checker;
 
 import java.awt.Color;
 import java.awt.Graphics;
