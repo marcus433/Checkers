@@ -183,9 +183,6 @@ public class Model {
          switchTurn();
       }
       
-      // See if a win condition was reached.
-      checkWinCondition();
-      
       // origin.getRow()][origin.getColumn()
       // destination [dest.getRow()][dest.getColumn()]
       return true;
@@ -258,11 +255,16 @@ public class Model {
     * checkWinCondition checks to see if either color has won by eliminating all opponent pieces.
     * It sets either blackWon or redWon to true if the opposing remaining__Pieces == 0.
     */
-   public void checkWinCondition() {
-      if (remainingRedPieces == 0)
+   public Color checkWinCondition() {
+      if (remainingRedPieces == 0) {
          blackWon = true;
-      else if (remainingBlackPieces == 0)
+         return Color.BLACK;
+      }
+      else if (remainingBlackPieces == 0) {
          redWon = true;
+         return Color.RED;
+      }
+      return null;
    }
    
    /**

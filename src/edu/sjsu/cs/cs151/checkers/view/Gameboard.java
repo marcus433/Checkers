@@ -10,8 +10,6 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-//import edu.sjsu.cs.cs151.checkers.model.Checker;
-//import edu.sjsu.cs.cs151.checkers.model.Piece;
 /*
 this.setLayout(null);
 setBackground(Color.BLUE);
@@ -31,7 +29,6 @@ for (int row = 0; row < 8; row++) {
 	}
 }
 */
-//import edu.sjsu.cs.cs151.checkers.model.Model;
 
 /**
  * Gameboard tracks the positions of each Piece currently in play.

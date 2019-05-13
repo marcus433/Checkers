@@ -7,7 +7,6 @@ import edu.sjsu.cs.cs151.checkers.controller.SkipTurnMessage;
 import edu.sjsu.cs.cs151.checkers.layout.*;
 import edu.sjsu.cs.cs151.checkers.layout.AlignLayout.Alignment;
 import edu.sjsu.cs.cs151.checkers.layout.AlignLayout.Direction;
-//import edu.sjsu.cs.cs151.checkers.model.Model;
 
 import java.awt.Color;
 import java.awt.Dimension;

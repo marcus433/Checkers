@@ -171,7 +171,6 @@ public class Controller {
          currentTurn.setColor(Piece.Color.RED);
       else
          currentTurn.setColor(Piece.Color.BLACK);
-      currentTurn.repaint();
    }
    
    private void updateGameboardState() {

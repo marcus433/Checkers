@@ -1,7 +1,6 @@
 package edu.sjsu.cs.cs151.checkers.view;
 
 import edu.sjsu.cs.cs151.checkers.layout.*;
-//import edu.sjsu.cs.cs151.checkers.model.Model;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -46,9 +45,6 @@ public class CurrentTurn extends View {
 	
 	public void setColor(Piece.Color color) {
 	   piece.setColor(color);
-	}
-	
-	public void repaint() {
 	   piece.repaint();
 	}
 
