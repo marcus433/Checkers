@@ -1,11 +1,20 @@
 package edu.sjsu.cs.cs151.checkers.controller;
 
+import edu.sjsu.cs.cs151.checkers.model.Checker;
 import edu.sjsu.cs.cs151.checkers.model.Model;
 import edu.sjsu.cs.cs151.checkers.model.Position;
+import edu.sjsu.cs.cs151.checkers.view.Gameboard;
 import edu.sjsu.cs.cs151.checkers.view.MainView;
+import edu.sjsu.cs.cs151.checkers.view.Piece;
+import edu.sjsu.cs.cs151.checkers.view.Tile;
+
 import java.util.List;
+import java.awt.Point;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.concurrent.BlockingQueue;
+
+import javax.swing.JPanel;
 
 /**
  * Controller acts an intermediary between View and Model, and alters both when either changes.
@@ -41,7 +50,8 @@ public class Controller {
     * @throws Exception
     */
    public void mainLoop() {
-	  view.updateState(model);
+// 	view.updateState(model);
+      updateState();
       Valve.ValveResponse response = Valve.ValveResponse.EXECUTED;
       Message message = null;
       
@@ -104,7 +114,9 @@ public class Controller {
          
          // actions in View
          // TODO: highlight valid move destinations
-         view.updateState(model);
+         
+         //view.updateState(model);
+         updateState();
          
          return Valve.ValveResponse.EXECUTED;
       }
@@ -121,7 +133,9 @@ public class Controller {
          
          // actions in View
          // TODO: reset the game board
-         view.updateState(model);
+         
+         //view.updateState(model);
+         updateState();
          
          return Valve.ValveResponse.EXECUTED;
       }
@@ -137,10 +151,126 @@ public class Controller {
          model.switchTurn();
          
          // actions in View
-         view.updateState(model);
+         
+         //view.updateState(model);
+         updateState();
          
          return Valve.ValveResponse.EXECUTED;
       }
+   }
+   
+   private void updateState() {
+      updateGameboardState();
+      updateToolbarState();
+   }
+   
+   private void updateToolbarState() {
+      edu.sjsu.cs.cs151.checkers.model.Piece.Color color = model.getCurrentColor();
+      edu.sjsu.cs.cs151.checkers.view.CurrentTurn currentTurn = view.getToolbar().getCurrentTurn();
+      if (color == edu.sjsu.cs.cs151.checkers.model.Piece.Color.RED)
+         currentTurn.setColor(Piece.Color.RED);
+      else
+         currentTurn.setColor(Piece.Color.BLACK);
+      currentTurn.repaint();
+   }
+   
+   private void updateGameboardState() {
+      Point changeOrigin = new Point(0, 0);
+      Point changeDestination = new Point(0, 0);
+      Boolean isChange = false;
+      edu.sjsu.cs.cs151.checkers.view.Piece view = null;
+      Tile originTile = null;
+      Checker[][] checkers = model.getBoard();
+      ArrayList<Tile> tiles = this.view.getGameboard().getTiles();
+      
+      for (int row = 0; row < checkers.length; row++) {
+         for (int column = 0; column < checkers[row].length; column++) {
+            Checker checker = checkers[row][column];
+            edu.sjsu.cs.cs151.checkers.model.Piece piece = checker.getPiece();
+            Tile tile = (Tile) tiles.get((8 * row) + column);
+            edu.sjsu.cs.cs151.checkers.view.Piece pieceView = tile.getPiece();
+            if (pieceView != null && !pieceView.isVisible() && checker.hasPiece()) {
+               changeDestination = tile.getLocation();
+               changeDestination = new Point((int)changeDestination.getX() + 5, (int)changeDestination.getY() + 5);
+               isChange = true;
+            } else if (pieceView != null && pieceView.isVisible() && !checker.hasPiece()) {
+               changeOrigin = tile.getLocation();
+               changeOrigin = new Point((int)changeOrigin.getX() + 5, (int)changeOrigin.getY() + 5);
+               view = pieceView;
+               isChange = true;
+               originTile = tile;
+            }
+         }
+      }
+
+      if (isChange && originTile != null && view != null) {
+         view.setVisible(false);
+         final edu.sjsu.cs.cs151.checkers.view.Piece tempView = view.copy();
+         tempView.setVisible(true);
+         tempView.setLocation(changeOrigin);
+         tempView.setSize(view.getSize());
+         this.view.getGameboard().add(tempView, 0);
+         final JPanel _view = view;
+         final Gameboard that = this.view.getGameboard();
+         new AnimationController(tempView)
+            .animateTo(500, changeDestination)
+            .onComplete(new AnimationController.Callback(){
+                  @Override
+                  public void onSuccess() {
+                        that.remove(tempView);
+                     for (int row = 0; row < checkers.length; row++) {
+                        for (int column = 0; column < checkers[row].length; column++) {
+                           Checker checker = checkers[row][column];
+                           edu.sjsu.cs.cs151.checkers.model.Piece piece = checker.getPiece();
+                           Tile tile = (Tile) tiles.get((8 * row) + column);
+                           edu.sjsu.cs.cs151.checkers.view.Piece pieceView = tile.getPiece();
+                           if (piece != null && pieceView != null) {
+                              pieceView.setType(piece.isKing() ? edu.sjsu.cs.cs151.checkers.view.Piece.Type.KING : edu.sjsu.cs.cs151.checkers.view.Piece.Type.PAWN);
+                              pieceView.setColor(piece.getColor() == edu.sjsu.cs.cs151.checkers.model.Piece.Color.RED ? edu.sjsu.cs.cs151.checkers.view.Piece.Color.RED : edu.sjsu.cs.cs151.checkers.view.Piece.Color.BLACK);
+                              pieceView.setVisible(true);
+                              if (checker.isSelected()) {
+                                 pieceView.select();
+                              } else {
+                                 pieceView.deselect();
+                              }
+                           } else if (pieceView != null) {
+                              pieceView.setVisible(false);
+                           }
+                        }
+                     }
+                     that.repaint();
+                  }
+
+                  @Override
+                  public void onError(String err) {
+                        _view.setVisible(true);
+                        that.remove(tempView);
+                      System.out.println(err);
+                  }
+              });
+      } else {
+         for (int row = 0; row < checkers.length; row++) {
+            for (int column = 0; column < checkers[row].length; column++) {
+               Checker checker = checkers[row][column];
+               edu.sjsu.cs.cs151.checkers.model.Piece piece = checker.getPiece();
+               Tile tile = (Tile) tiles.get((8 * row) + column);
+               edu.sjsu.cs.cs151.checkers.view.Piece pieceView = tile.getPiece();
+               if (piece != null && pieceView != null) {
+                  pieceView.setType(piece.isKing() ? edu.sjsu.cs.cs151.checkers.view.Piece.Type.KING : edu.sjsu.cs.cs151.checkers.view.Piece.Type.PAWN);
+                  pieceView.setColor(piece.getColor() == edu.sjsu.cs.cs151.checkers.model.Piece.Color.RED ? edu.sjsu.cs.cs151.checkers.view.Piece.Color.RED : edu.sjsu.cs.cs151.checkers.view.Piece.Color.BLACK);
+                  pieceView.setVisible(true);
+                  if (checker.isSelected()) {
+                     pieceView.select();
+                  } else {
+                     pieceView.deselect();
+                  }
+               } else if (pieceView != null) {
+                  pieceView.setVisible(false);
+               }
+            }
+         }
+      }
+      this.view.getGameboard().repaint();
    }
 }
 

@@ -7,7 +7,7 @@ import edu.sjsu.cs.cs151.checkers.controller.SkipTurnMessage;
 import edu.sjsu.cs.cs151.checkers.layout.*;
 import edu.sjsu.cs.cs151.checkers.layout.AlignLayout.Alignment;
 import edu.sjsu.cs.cs151.checkers.layout.AlignLayout.Direction;
-import edu.sjsu.cs.cs151.checkers.model.Model;
+//import edu.sjsu.cs.cs151.checkers.model.Model;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -61,9 +61,11 @@ public class Toolbar extends View {
 		});
 	}
 
+	/*
 	public void updateState(Model model) {
 		currentTurn.updateState(model);
 	}
+	*/
 
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -89,6 +91,10 @@ public class Toolbar extends View {
 				new StackLayout(StackLayout.Direction.HORIZONTAL, 0, children));
 	}
 
+	public CurrentTurn getCurrentTurn() {
+	   return currentTurn;
+	}
+	
 	public static final int DEFAULT_HEIGHT = 50;
 
 	private CurrentTurn currentTurn;

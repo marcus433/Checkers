@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import edu.sjsu.cs.cs151.checkers.layout.*;
-import edu.sjsu.cs.cs151.checkers.model.Model;
+//import edu.sjsu.cs.cs151.checkers.model.Model;
 
 public class MainView extends View {
 	public MainView() {
@@ -35,9 +35,19 @@ public class MainView extends View {
 										new StackLayout(StackLayout.Direction.VERTICAL, PADDING, children));
 	}
 	
+	/*
 	public void updateState(Model model) {
 		toolbar.updateState(model);
 		board.updateState(model);
+	}
+	*/
+	
+	public Toolbar getToolbar() {
+	   return toolbar;
+	}
+	
+	public Gameboard getGameboard() {
+	   return board;
 	}
 	
 	// Private fields

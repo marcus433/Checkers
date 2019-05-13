@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-import edu.sjsu.cs.cs151.checkers.model.Checker;
-import edu.sjsu.cs.cs151.checkers.model.Piece;
+//import edu.sjsu.cs.cs151.checkers.model.Checker;
+//import edu.sjsu.cs.cs151.checkers.model.Piece;
 /*
 this.setLayout(null);
 setBackground(Color.BLUE);
@@ -31,7 +31,7 @@ for (int row = 0; row < 8; row++) {
 	}
 }
 */
-import edu.sjsu.cs.cs151.checkers.model.Model;
+//import edu.sjsu.cs.cs151.checkers.model.Model;
 
 /**
  * Gameboard tracks the positions of each Piece currently in play.
@@ -51,6 +51,7 @@ public class Gameboard extends View {
 		}
 	}
 	
+	/*
 	public void updateState(Model model) {
 		Point changeOrigin = new Point(0, 0);
 		Point changeDestination = new Point(0, 0);
@@ -148,6 +149,7 @@ public class Gameboard extends View {
 		}
 		repaint();
 	}
+	*/
 	
 	// Getters and Setters
 	
@@ -157,6 +159,10 @@ public class Gameboard extends View {
 	 */
 	public Piece getCurrentPiece() {
 	   return currentPiece;
+	}
+	
+	public ArrayList<Tile> getTiles() {
+	   return tiles;
 	}
 
 	@Override
