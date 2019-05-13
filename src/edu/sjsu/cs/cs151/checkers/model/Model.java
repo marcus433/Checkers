@@ -21,6 +21,8 @@ public class Model {
       this.redWon = false;
       this.currentColor = Color.RED;
       this.canJumpAgain = false;
+      this.origin = null;
+      this.lastOrigin = null;
       
       // Checker tile generation loop
       for (int row = 0; row < DEFAULT_SIZE; row++) {
@@ -63,6 +65,7 @@ public class Model {
       else if (board[pos.getRow()][pos.getColumn()].hasPiece()
             && board[pos.getRow()][pos.getColumn()].getPiece().getColor() == currentColor) {
          this.origin = pos;
+         this.lastOrigin = pos;
          if (this.currentChecker != null)
         	 	this.currentChecker.deselect();
          this.currentPiece = board[pos.getRow()][pos.getColumn()].getPiece();
@@ -182,6 +185,8 @@ public class Model {
          // Switch player control to the opposite color.
          switchTurn();
       }
+
+      origin = dest;
       
       // origin.getRow()][origin.getColumn()
       // destination [dest.getRow()][dest.getColumn()]
@@ -284,7 +289,15 @@ public class Model {
    public Checker[][] getBoard() {
       return board;
    }
+
+   public Position getOrigin() {
+    return this.origin;
+   }
    
+  public Position getLastOrigin() {
+    return this.lastOrigin;
+   }
+
    /**
     * canJumpAgain returns whether a piece that has just previously jumped has remaining jump moves.
     * @return canJumpAgain - whether the currentPiece has any valid jump moves
@@ -302,19 +315,20 @@ public class Model {
       return currentPiece;
    }
    
-// Private fields
+  // Private fields
    
-   private static Model instance;
-   private static final int DEFAULT_SIZE = 8;
-   private static final int DEFAULT_NUM_PIECES_PER_PLAYER = 12;
-   private int remainingRedPieces;
-   private int remainingBlackPieces;
-   private Position origin;
-   private Piece currentPiece;
-   private Checker currentChecker;
-   private Checker[][] board;
-   private boolean blackWon;
-   private boolean redWon;
-   private Piece.Color currentColor;
-   private boolean canJumpAgain;
+  private static Model instance;
+  private static final int DEFAULT_SIZE = 8;
+  private static final int DEFAULT_NUM_PIECES_PER_PLAYER = 12;
+  private int remainingRedPieces;
+  private int remainingBlackPieces;
+  private Position lastOrigin;
+  private Position origin;
+  private Piece currentPiece;
+  private Checker currentChecker;
+  private Checker[][] board;
+  private boolean blackWon;
+  private boolean redWon;
+  private Piece.Color currentColor;
+  private boolean canJumpAgain;
 }

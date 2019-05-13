@@ -37,7 +37,18 @@ public class Position {
 	public boolean equals(Position pos) {
 	   return (this.row == pos.row && this.column == pos.column);
 	}
-	
+
+	public String toString() {
+		return getRow() + ", " + getColumn();
+	}
+
+	@Override
+	public
+	boolean equals(Object o) {
+		Position pos = (Position)o;
+		return this.row == pos.getRow() && this.column == pos.getColumn();
+	}
+ 	
 	// Private fields
 	
 	private static final int MIN_POSITION = 0;

@@ -182,22 +182,44 @@ public class Controller {
       Checker[][] checkers = model.getBoard();
       ArrayList<Tile> tiles = this.view.getGameboard().getTiles();
       
-      for (int row = 0; row < checkers.length; row++) {
-         for (int column = 0; column < checkers[row].length; column++) {
-            Checker checker = checkers[row][column];
-            edu.sjsu.cs.cs151.checkers.model.Piece piece = checker.getPiece();
-            Tile tile = (Tile) tiles.get((8 * row) + column);
-            edu.sjsu.cs.cs151.checkers.view.Piece pieceView = tile.getPiece();
-            if (pieceView != null && !pieceView.isVisible() && checker.hasPiece()) {
-               changeDestination = tile.getLocation();
-               changeDestination = new Point((int)changeDestination.getX() + 5, (int)changeDestination.getY() + 5);
-               isChange = true;
-            } else if (pieceView != null && pieceView.isVisible() && !checker.hasPiece()) {
-               changeOrigin = tile.getLocation();
-               changeOrigin = new Point((int)changeOrigin.getX() + 5, (int)changeOrigin.getY() + 5);
-               view = pieceView;
-               isChange = true;
-               originTile = tile;
+      Position origin = model.getLastOrigin();
+      Position dest = model.getOrigin();
+
+      if (origin != null && dest != null && !origin.equals(dest)) {
+         int row = origin.getRow();
+         int column = origin.getColumn();
+         Checker checker = checkers[row][column];
+         edu.sjsu.cs.cs151.checkers.model.Piece piece = checker.getPiece();
+         Tile tile = (Tile) tiles.get((8 * row) + column);
+         edu.sjsu.cs.cs151.checkers.view.Piece pieceView = tile.getPiece();
+         changeOrigin = tile.getLocation();
+         changeOrigin = new Point((int)changeOrigin.getX() + 5, (int)changeOrigin.getY() + 5);
+         view = pieceView;
+         isChange = true;
+         originTile = tile;
+         row = dest.getRow();
+         column = dest.getColumn();
+         tile = (Tile) tiles.get((8 * row) + column);
+         changeDestination = tile.getLocation();
+         changeDestination = new Point((int)changeDestination.getX() + 5, (int)changeDestination.getY() + 5);
+      } else {
+         for (int row = 0; row < checkers.length; row++) {
+            for (int column = 0; column < checkers[row].length; column++) {
+               Checker checker = checkers[row][column];
+               edu.sjsu.cs.cs151.checkers.model.Piece piece = checker.getPiece();
+               Tile tile = (Tile) tiles.get((8 * row) + column);
+               edu.sjsu.cs.cs151.checkers.view.Piece pieceView = tile.getPiece();
+               if (pieceView != null && !pieceView.isVisible() && checker.hasPiece()) {
+                  changeDestination = tile.getLocation();
+                  changeDestination = new Point((int)changeDestination.getX() + 5, (int)changeDestination.getY() + 5);
+                  isChange = true;
+               } else if (pieceView != null && pieceView.isVisible() && !checker.hasPiece()) {
+                  changeOrigin = tile.getLocation();
+                  changeOrigin = new Point((int)changeOrigin.getX() + 5, (int)changeOrigin.getY() + 5);
+                  view = pieceView;
+                  isChange = true;
+                  originTile = tile;
+               }
             }
          }
       }
@@ -216,7 +238,7 @@ public class Controller {
             .onComplete(new AnimationController.Callback(){
                   @Override
                   public void onSuccess() {
-                        that.remove(tempView);
+                     that.remove(tempView);
                      for (int row = 0; row < checkers.length; row++) {
                         for (int column = 0; column < checkers[row].length; column++) {
                            Checker checker = checkers[row][column];

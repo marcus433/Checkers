@@ -17,7 +17,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import javax.swing.JFrame;
 
 import edu.sjsu.cs.cs151.checkers.controller.Controller;
-import edu.sjsu.cs.cs151.checkers.controller.GameController;
 import edu.sjsu.cs.cs151.checkers.controller.Message;
 import edu.sjsu.cs.cs151.checkers.model.Model;
 import edu.sjsu.cs.cs151.checkers.view.Button;
