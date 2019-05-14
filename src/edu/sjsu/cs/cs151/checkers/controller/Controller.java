@@ -47,7 +47,6 @@ public class Controller {
    /**
     * mainLoop indefinitely monitors queue, accepts Messages from it, and acts accordingly.
     * Method body taken from lecture slides.
-    * @throws Exception
     */
    public void mainLoop() {
 // 	view.updateState(model);
@@ -80,17 +79,27 @@ public class Controller {
    // Valves
    
    private interface Valve {
-      
       enum ValveResponse {
          MISS, EXECUTED, FINISH;
       }
       
+      /**
+       * Executes valve operation
+       * @param message - Params to send to valve.
+       * @return ValveResponse
+       * */
       public ValveResponse execute(Message message);
-
    }
    
+   /**
+    * Valve to Select Piece
+    * */
    private class SelectMessageValve implements Valve {
-      
+      /**
+       * Executes valve operation
+       * @param message - Params to send to valve.
+       * @return ValveResponse
+       * */
       public ValveResponse execute(Message message) {
          if (message.getClass() != SelectMessage.class)
             return Valve.ValveResponse.MISS;
@@ -122,8 +131,15 @@ public class Controller {
       }
    }
    
+   /**
+    * Valve to Reset Game
+    * */
    private class ResetMessageValve implements Valve {
-      
+	   /**
+	    * Executes valve operation
+        * @param message - Params to send to valve.
+        * @return ValveResponse
+        * */
       public ValveResponse execute(Message message) {
          if (message.getClass() != ResetMessage.class)
             return Valve.ValveResponse.MISS;
@@ -141,8 +157,15 @@ public class Controller {
       }
    }
    
+   /**
+    * Valve to Skip Turn
+    * */
    private class SkipTurnMessageValve implements Valve {
-      
+	   /**
+	    * Executes valve operation
+        * @param message - Params to send to valve.
+        * @return ValveResponse
+        * */
       public ValveResponse execute(Message message) {
          if (message.getClass() != SkipTurnMessage.class)
             return Valve.ValveResponse.MISS;
@@ -159,11 +182,17 @@ public class Controller {
       }
    }
    
+   /**
+    * Update GameBoard & Toolbar State
+    * */
    private void updateState() {
       updateGameboardState();
       updateToolbarState();
    }
    
+   /**
+    * Update Toolbar State
+    * */
    private void updateToolbarState() {
       edu.sjsu.cs.cs151.checkers.model.Piece.Color color = model.getCurrentColor();
       edu.sjsu.cs.cs151.checkers.view.CurrentTurn currentTurn = view.getToolbar().getCurrentTurn();
@@ -173,6 +202,9 @@ public class Controller {
          currentTurn.setColor(Piece.Color.BLACK);
    }
    
+   /**
+    * Update GameBoard State
+    * */
    private void updateGameboardState() {
       Point changeOrigin = new Point(0, 0);
       Point changeDestination = new Point(0, 0);

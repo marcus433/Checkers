@@ -17,12 +17,22 @@ import javax.swing.JPanel;
  */
 public class AnimationController implements ActionListener {
 	
+	/**
+	 * Callback for Animation Complete
+	 * */
 	public interface Callback {
+		/**
+		 * When Animation Succeeds
+		 * */
 	    void onSuccess();
+		/**
+		 * When Animation have an error
+		 * @param err - Error String
+		 * */
 	    void onError(String err);
 	}
 	
-	/*
+	/**
 	 * Stores information for an animation
 	 * in a chain
 	 * */
@@ -34,9 +44,9 @@ public class AnimationController implements ActionListener {
 		int duration = 0; // in milliseconds
 	}
 	
-	/*
+	/**
 	 * Setup
-	 * @param view: view to animate
+	 * @param view - The JPanel to animate
 	 * */
 	public AnimationController(JPanel view) {
 		this.view = view;
@@ -46,11 +56,11 @@ public class AnimationController implements ActionListener {
 		queue = new ArrayList<>();
 	}
 	
-	/*
+	/**
 	 * Adds animation to queue
-	 * @param duration: duration of animation in milliseconds
-	 * @param location: target x, y position
-	 * @return self: for animateTo chaining
+	 * @param duration - duration of animation in milliseconds
+	 * @param location - target x, y position
+	 * @return self - for animateTo chaining
 	 * */
 	public AnimationController animateTo(int duration, Point location) {
 		int x = 0;
@@ -75,7 +85,7 @@ public class AnimationController implements ActionListener {
 		return this;
 	}
 	
-	/*
+	/**
 	 * Starts next animation
 	 * */
 	private void startAnimation() {
@@ -89,7 +99,7 @@ public class AnimationController implements ActionListener {
 		}
 	}
 	
-	/*
+	/**
 	 * Ends animation and proceeds down animation chain
 	 * */
 	private void endAnimation() {
@@ -106,13 +116,17 @@ public class AnimationController implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Sets Callback
+	 * @param callback - Callback object
+	 * */
 	public void onComplete(Callback callback) {
 		onComplete = callback;
 	}
 	
-	/*
+	/**
 	 * Calculates and paints animation frame
-	 * @param e: ActionEvent from timer
+	 * @param e - ActionEvent from timer
 	 * */
 	public void actionPerformed(ActionEvent e) {
 		if (timeElapsed >= currentAnimation.duration) {
@@ -133,9 +147,9 @@ public class AnimationController implements ActionListener {
 		timeElapsed += timeIncrement;
 	}
 	
-	/*
+	/**
 	 * Easing Function
-	 * @param p: double between 0 and 1 representing interpolation progress
+	 * @param p - double between 0 and 1 representing interpolation progress
 	 * @return over/under shot progress
 	 * */
 	private double easeInEaseOut(double p) {

@@ -13,7 +13,6 @@ import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-
 import javax.swing.JFrame;
 
 import edu.sjsu.cs.cs151.checkers.controller.Controller;
@@ -27,20 +26,27 @@ import edu.sjsu.cs.cs151.checkers.view.Window;
 /*
  * Handles main JFrame
  * */
-
 public class Main {
+	/**
+	 * Queue for valve tasks
+	 * */
 	public static BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
 	
+	/**
+	 * Instantiates new Window
+	 * with game UI
+	 * @param args - console arguments
+	 * */
 	public static void main(String[] args) {
-		Model model = Model.getInstance();
-		MainView view = new MainView();
-		Window window = new Window("Checkers", view);
-		Controller controller = new Controller(view, model, queue);
-		window.setVisible(true);
+		Model model = Model.getInstance(); // get model instance
+		MainView view = new MainView(); // get main view UI
+		Window window = new Window("Checkers", view); // add view to window
+		Controller controller = new Controller(view, model, queue); // instantiate game controller
+		window.setVisible(true); // make window visible
 		
-		controller.mainLoop();
+		controller.mainLoop(); // start main loop
 
-		window.dispose();
-		queue.clear();
+		window.dispose(); // dispose window
+		queue.clear(); // clear queue
 	}
 }
