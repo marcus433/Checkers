@@ -12,8 +12,7 @@ import javax.swing.Timer;
 import javax.swing.JPanel;
 
 /**
- * Handles animation interpolation
- * easing, and chaining.
+ * Handles animation interpolation, easing, and chaining.
  */
 public class AnimationController implements ActionListener {
 	
@@ -22,9 +21,8 @@ public class AnimationController implements ActionListener {
 	    void onError(String err);
 	}
 	
-	/*
-	 * Stores information for an animation
-	 * in a chain
+	/**
+	 * Stores information for an animation in a chain
 	 * */
 	class AnimationProps {
 		int x = 0;
@@ -34,7 +32,7 @@ public class AnimationController implements ActionListener {
 		int duration = 0; // in milliseconds
 	}
 	
-	/*
+	/**
 	 * Setup
 	 * @param view: view to animate
 	 * */
@@ -46,7 +44,7 @@ public class AnimationController implements ActionListener {
 		queue = new ArrayList<>();
 	}
 	
-	/*
+	/**
 	 * Adds animation to queue
 	 * @param duration: duration of animation in milliseconds
 	 * @param location: target x, y position
@@ -75,7 +73,7 @@ public class AnimationController implements ActionListener {
 		return this;
 	}
 	
-	/*
+	/**
 	 * Starts next animation
 	 * */
 	private void startAnimation() {
@@ -89,7 +87,7 @@ public class AnimationController implements ActionListener {
 		}
 	}
 	
-	/*
+	/**
 	 * Ends animation and proceeds down animation chain
 	 * */
 	private void endAnimation() {
@@ -106,11 +104,16 @@ public class AnimationController implements ActionListener {
 		}
 	}
 	
+	// TODO: documentation for onComplete
+	/**
+	 * 
+	 * @param callback
+	 */
 	public void onComplete(Callback callback) {
 		onComplete = callback;
 	}
 	
-	/*
+	/**
 	 * Calculates and paints animation frame
 	 * @param e: ActionEvent from timer
 	 * */
@@ -133,7 +136,7 @@ public class AnimationController implements ActionListener {
 		timeElapsed += timeIncrement;
 	}
 	
-	/*
+	/**
 	 * Easing Function
 	 * @param p: double between 0 and 1 representing interpolation progress
 	 * @return over/under shot progress
