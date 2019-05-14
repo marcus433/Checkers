@@ -4,7 +4,12 @@ package edu.sjsu.cs.cs151.checkers.model;
  * Checker is a representation of a given tile on the checkerboard. 
  */
 public class Checker {
-
+	
+	/**
+	 * Creates a new checker
+	 * @param canHoldPiece - If this Checker can hold a piece
+	 * @param piece - Piece to initialize with
+	 * */
 	public Checker(boolean canHoldPiece, Piece piece) {
 		this.canHoldPiece = canHoldPiece;
 		this.isSelected = false;
@@ -31,7 +36,7 @@ public class Checker {
 	
 	/**
 	 * getPiece returns the piece that is occupying the current Checker, if any.
-	 * @return: a Piece object, or null if there is no such Piece
+	 * @return - a Piece object, or null if there is no such Piece
 	 */
 	public Piece getPiece() {
 		return this.piece;
@@ -39,7 +44,7 @@ public class Checker {
 
 	/**
 	 * setPiece sets the Piece occupying the current Checker to a different object.
-	 * @param piece: the new piece to be placed on the Checker
+	 * @param piece - the new piece to be placed on the Checker
 	 */
 	public void setPiece(Piece piece) {
 		this.piece = piece;
@@ -47,7 +52,7 @@ public class Checker {
 
 	/**
 	 * isSelected determines whether this particular Checker on the board has been selected.
-	 * @return: 1 if selected, 0 otherwise
+	 * @return - 1 if selected, 0 otherwise
 	 */
 	public boolean isSelected() {
 		return this.isSelected;
@@ -71,7 +76,7 @@ public class Checker {
 
 	/**
 	 * isValid returns the boolean field canHoldPiece.
-	 * @return
+	 * @return boolean
 	 */
 	public boolean isValid() {
 	   return canHoldPiece;

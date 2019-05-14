@@ -9,6 +9,9 @@ import edu.sjsu.cs.cs151.checkers.model.Piece.Color;
  */
 public class Model {
    
+	/**
+	 * Initializes a new model
+	 * */
    private Model() {
       board = new Checker[DEFAULT_SIZE][DEFAULT_SIZE];
       reset();
@@ -61,7 +64,7 @@ public class Model {
     * selectChecker sets the origin and currentPiece private fields.
     * origin currentPiece are used in other methods like movePiece.
     * @param pos - a user selected Position
-    * @return true if a valid piece was selected, false otherwise
+    * @return true - if a valid piece was selected, false otherwise
     */
    public boolean selectChecker(Position pos) {
       // If canJumpAgain is true, then lock selectChecker - no other Pieces can be selected other than the current one.

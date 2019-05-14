@@ -5,6 +5,12 @@ package edu.sjsu.cs.cs151.checkers.model;
  */
 public class Position {
   
+	/**
+	 * Creates a new position
+	 * @param row - Row
+	 * @param column - Column
+	 * @throws Error
+	 * */
    public Position(int row, int column) throws Error {
   	if (row >= this.MIN_POSITION && column >= this.MIN_POSITION) {
 			this.row = row;
@@ -34,14 +40,27 @@ public class Position {
 	   return this.column;
 	}
 	
+	/**
+	 * CHecks equality of 2 positions.
+	 * @param pos - Position to compare to
+	 * @return boolean - If equal
+	 * */
 	public boolean equals(Position pos) {
 	   return (this.row == pos.row && this.column == pos.column);
 	}
-
+	
+	/**
+	 * Converts Position to a String
+	 * */
 	public String toString() {
 		return getRow() + ", " + getColumn();
 	}
-
+	
+	/**
+	 * Checks equality of position & object.
+	 * @param o - Object to compare to
+	 * @return boolean - If equal
+	 * */
 	@Override
 	public
 	boolean equals(Object o) {

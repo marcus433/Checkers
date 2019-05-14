@@ -9,6 +9,10 @@ public class Piece {
 		RED, BLACK
 	}
 
+	/**
+	 * Creates a new piece
+	 * @param color - Color of new piece
+	 * */
 	public Piece(Color color) {
 		this.color = color;
 		this.isKing = false;
