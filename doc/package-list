@@ -1,1 +1,6 @@
+edu.sjsu.cs.cs151.checkers.Tests
+edu.sjsu.cs.cs151.checkers.app
+edu.sjsu.cs.cs151.checkers.controller
+edu.sjsu.cs.cs151.checkers.layout
+edu.sjsu.cs.cs151.checkers.model
 edu.sjsu.cs.cs151.checkers.view
