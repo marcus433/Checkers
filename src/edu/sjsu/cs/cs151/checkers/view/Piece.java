@@ -25,7 +25,12 @@ public class Piece extends View {
 	public enum Type {
 		PAWN, KING
 	}
-
+	
+	/**
+	 * Creates a new piecee view
+	 * @param type - type if piece
+	 * @param color - color of piece
+	 * */
 	public Piece(Type type, Color color) {
 		super();
 		this.type = type;
@@ -40,6 +45,10 @@ public class Piece extends View {
 		}
 	}
 	
+	/**
+	 * Paints piece
+	 * @param g - graphics context
+	 * */
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -70,30 +79,52 @@ public class Piece extends View {
 		}
 	}
 	
+	/**
+	 * Selects piece
+	 * */
 	public void select() {
 		isSelected = true;
 		repaint();
 	}
 	
+	/**
+	 * DeSelects piece
+	 * */
 	public void deselect() {
 		isSelected = false;
 		repaint();
 	}
 	
+	/**
+	 * Copies piece
+	 * @return piece - clone of existing piece
+	 * */
 	public Piece copy() {
 		return new Piece(this.type, this.color);
 	}
 	
 	// Getters and Setters
 	
+	/**
+	 * Sets piece type
+	 * @param type
+	 * */
 	public void setType(Type type) {
 		this.type = type;
 	}
 	
+	/**
+	 * Sets piece color
+	 * @param color
+	 * */
 	public void setColor(Color color) {
 		this.color = color;
 	}
 
+	/**
+	 * Gets piece color
+	 * @return color
+	 * */
 	public Color getColor() {
 	   return color;
 	}

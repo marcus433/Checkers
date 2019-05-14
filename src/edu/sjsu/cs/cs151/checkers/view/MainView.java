@@ -14,7 +14,13 @@ import java.util.Arrays;
 import edu.sjsu.cs.cs151.checkers.layout.*;
 //import edu.sjsu.cs.cs151.checkers.model.Model;
 
+/**
+ * Connects all views together
+ * */
 public class MainView extends View {
+	/**
+	 * Instantiates all views
+	 * */
 	public MainView() {
 		this.toolbar = new Toolbar();
 		this.board = new Gameboard();
@@ -25,6 +31,10 @@ public class MainView extends View {
 		board.setBackground(Color.BLUE);
 	}
 	
+	/**
+	 * Creates new layout nested structure
+	 * @return layout - nested layouts
+	 * */
 	@Override
 	public
 	Layout layoutThatFits() {
@@ -35,17 +45,18 @@ public class MainView extends View {
 										new StackLayout(StackLayout.Direction.VERTICAL, PADDING, children));
 	}
 	
-	/*
-	public void updateState(Model model) {
-		toolbar.updateState(model);
-		board.updateState(model);
-	}
-	*/
-	
+	/**
+	 * Gets current toolbar
+	 * @return toolbar
+	 * */
 	public Toolbar getToolbar() {
 	   return toolbar;
 	}
 	
+	/**
+	 * Gets current gameboard
+	 * @return gameboard
+	 * */
 	public Gameboard getGameboard() {
 	   return board;
 	}

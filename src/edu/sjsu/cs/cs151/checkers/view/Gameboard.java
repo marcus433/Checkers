@@ -34,6 +34,9 @@ for (int row = 0; row < 8; row++) {
  * Gameboard tracks the positions of each Piece currently in play.
  */
 public class Gameboard extends View {
+	/**
+	 * Creates new gameboard
+	 * */
 	public Gameboard() {
 		//this.setLayout(new GridLayout(8, 8));
 		setLayout(null);
@@ -48,120 +51,28 @@ public class Gameboard extends View {
 		}
 	}
 	
-	/*
-	public void updateState(Model model) {
-		Point changeOrigin = new Point(0, 0);
-		Point changeDestination = new Point(0, 0);
-		Boolean isChange = false;
-		edu.sjsu.cs.cs151.checkers.view.Piece view = null;
-		Tile originTile = null;
-		Checker[][] checkers = model.getBoard();
-		
-		for (int row = 0; row < checkers.length; row++) {
-			for (int column = 0; column < checkers[row].length; column++) {
-				Checker checker = checkers[row][column];
-				edu.sjsu.cs.cs151.checkers.model.Piece piece = checker.getPiece();
-				Tile tile = (Tile) tiles.get((8 * row) + column);
-				edu.sjsu.cs.cs151.checkers.view.Piece pieceView = tile.getPiece();
-				if (pieceView != null && !pieceView.isVisible() && checker.hasPiece()) {
-					changeDestination = tile.getLocation();
-					changeDestination = new Point((int)changeDestination.getX() + 5, (int)changeDestination.getY() + 5);
-					isChange = true;
-				} else if (pieceView != null && pieceView.isVisible() && !checker.hasPiece()) {
-					changeOrigin = tile.getLocation();
-					changeOrigin = new Point((int)changeOrigin.getX() + 5, (int)changeOrigin.getY() + 5);
-					view = pieceView;
-					isChange = true;
-					originTile = tile;
-				}
-			}
-		}
-
-		if (isChange && originTile != null && view != null) {
-			view.setVisible(false);
-			final edu.sjsu.cs.cs151.checkers.view.Piece tempView = view.copy();
-			tempView.setVisible(true);
-			tempView.setLocation(changeOrigin);
-			tempView.setSize(view.getSize());
-			add(tempView, 0);
-			final JPanel _view = view;
-			final Gameboard that = this;
-			new AnimationController(tempView)
-				.animateTo(500, changeDestination)
-				.onComplete(new AnimationController.Callback(){
-		            @Override
-		            public void onSuccess() {
-		            		that.remove(tempView);
-			    			for (int row = 0; row < checkers.length; row++) {
-			    				for (int column = 0; column < checkers[row].length; column++) {
-			    					Checker checker = checkers[row][column];
-			    					edu.sjsu.cs.cs151.checkers.model.Piece piece = checker.getPiece();
-			    					Tile tile = (Tile) tiles.get((8 * row) + column);
-			    					edu.sjsu.cs.cs151.checkers.view.Piece pieceView = tile.getPiece();
-			    					if (piece != null && pieceView != null) {
-			    						pieceView.setType(piece.isKing() ? edu.sjsu.cs.cs151.checkers.view.Piece.Type.KING : edu.sjsu.cs.cs151.checkers.view.Piece.Type.PAWN);
-			    						pieceView.setColor(piece.getColor() == edu.sjsu.cs.cs151.checkers.model.Piece.Color.RED ? edu.sjsu.cs.cs151.checkers.view.Piece.Color.RED : edu.sjsu.cs.cs151.checkers.view.Piece.Color.BLACK);
-			    						pieceView.setVisible(true);
-			    						if (checker.isSelected()) {
-			    							pieceView.select();
-			    						} else {
-			    							pieceView.deselect();
-			    						}
-			    					} else if (pieceView != null) {
-			    						pieceView.setVisible(false);
-			    					}
-			    				}
-			    			}
-			    			that.repaint();
-		            }
-
-		            @Override
-		            public void onError(String err) {
-		            		_view.setVisible(true);
-		            		that.remove(tempView);
-		                System.out.println(err);
-		            }
-		        });
-		} else {
-			for (int row = 0; row < checkers.length; row++) {
-				for (int column = 0; column < checkers[row].length; column++) {
-					Checker checker = checkers[row][column];
-					edu.sjsu.cs.cs151.checkers.model.Piece piece = checker.getPiece();
-					Tile tile = (Tile) tiles.get((8 * row) + column);
-					edu.sjsu.cs.cs151.checkers.view.Piece pieceView = tile.getPiece();
-					if (piece != null && pieceView != null) {
-						pieceView.setType(piece.isKing() ? edu.sjsu.cs.cs151.checkers.view.Piece.Type.KING : edu.sjsu.cs.cs151.checkers.view.Piece.Type.PAWN);
-						pieceView.setColor(piece.getColor() == edu.sjsu.cs.cs151.checkers.model.Piece.Color.RED ? edu.sjsu.cs.cs151.checkers.view.Piece.Color.RED : edu.sjsu.cs.cs151.checkers.view.Piece.Color.BLACK);
-						pieceView.setVisible(true);
-						if (checker.isSelected()) {
-							pieceView.select();
-						} else {
-							pieceView.deselect();
-						}
-					} else if (pieceView != null) {
-						pieceView.setVisible(false);
-					}
-				}
-			}
-		}
-		repaint();
-	}
-	*/
-	
 	// Getters and Setters
 	
 	/**
 	 * getCurrentPiece returns the current piece selected by the player.
-	 * @return: the selected Piece object by the current player
+	 * @return - the selected Piece object by the current player
 	 */
 	public Piece getCurrentPiece() {
 	   return currentPiece;
 	}
 	
+	/**
+	 * Gets tiles for view
+	 * @return tiles
+	 * */
 	public ArrayList<Tile> getTiles() {
 	   return tiles;
 	}
-
+	
+	/**
+	 * Creates new layout nested structure
+	 * @return layout - nested layouts
+	 * */
 	@Override
 	public
 	Layout layoutThatFits() {

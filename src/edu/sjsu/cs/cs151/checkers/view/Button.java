@@ -19,8 +19,14 @@ import javax.swing.JLabel;
 import edu.sjsu.cs.cs151.checkers.layout.*;
 import edu.sjsu.cs.cs151.checkers.view.Piece.Type;
 
-// custom button was needed for our use case
+/**
+ * Custom button
+ * using the Layout class*/
 public class Button extends View implements Layout {	
+	/**
+	 * Creates new icon button
+	 * @param icon - BufferedImage
+	 * */
 	public Button(BufferedImage icon) {
 		super();
 		setOpaque(false);
@@ -39,7 +45,11 @@ public class Button extends View implements Layout {
 			}
 		});
 	}
-
+	
+	/**
+	 * Creates new text button
+	 * @param text - Text
+	 * */
 	public Button(String text) {
 		super();
 		setOpaque(false);
@@ -62,12 +72,20 @@ public class Button extends View implements Layout {
 		});
 	}
 
+	/**
+	 * Sets tex for button
+	 * @param text - Button text
+	 * */	
 	public void setText(String text) {
 		this.label.setText(text);
 		this.invalidate();
 		this.repaint();
 	}
-
+	
+	/**
+	 * Paints Button interface
+	 * @param g - Graphics context
+	 * */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -90,8 +108,12 @@ public class Button extends View implements Layout {
 		}
 	}
 	
+	/**
+	 * Renders with a fixed height
+	 * @param size - Parent size
+	 * @param location - Parent location
+	 * */
 	public void renderWithSize(Dimension size, Point location) {
-		//setSize(140, (int)size.getHeight());
 		setLocation(location);
 		if (!usesIcon) {
 			label.setSize(getSize());
@@ -102,24 +124,44 @@ public class Button extends View implements Layout {
 			layout.renderWithSize(size, location);
 	}
 	
+	/**
+	 * Layout structure
+	 * @return nested layout structure
+	 * */
 	public Layout layoutThatFits() {
 		return null;
 	}
 	
+	/**
+	 * Get fixed display size
+	 * @param size - Parent size
+	 * @param location - Parent location
+	 * @return size - Dimension of size
+	 * */
 	@Override
 	public Dimension getDisplaySize(Dimension size, Point location) {
 		return usesIcon ? new Dimension(40, 40) : new Dimension(140, 40);
 	}
 	
+	/**
+	 * Handles actions
+	 * @param e - Mouse event
+	 * */
 	public void actionHandler(java.awt.event.MouseEvent e) {
 
 	}
 	
+	/**
+	 * Repaints on Pressup
+	 * */
 	public void onPressUp() {
 		this.pressed = false;
 		this.repaint();
 	}
 	
+	/**
+	 * Repaints on Pressdown
+	 * */
 	public void onPressDown() {
 		this.pressed = true;
 		this.repaint();

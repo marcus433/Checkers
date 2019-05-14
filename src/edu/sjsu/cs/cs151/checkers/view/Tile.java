@@ -8,7 +8,14 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
+/**
+ * Checker tile for board
+ * */
 public class Tile extends View {
+	/**
+	 * Creates new tile
+	 * @param isDark - determines color of tile
+	 * */
 	public Tile(boolean isDark) {
 		super();
 		if (isDark) {
@@ -32,6 +39,10 @@ public class Tile extends View {
 		});
 	}
 	
+	/**
+	 * Layouts for view
+	 * @return layout - nested layout structure
+	 * */
 	@Override
 	public
 	Layout layoutThatFits() {
@@ -40,22 +51,42 @@ public class Tile extends View {
 		return new InsetLayout(new EdgeInsets(5, 5, 5, 5), piece);
 	}
 	
+	/**
+	 * Gets piece
+	 * @return piece
+	 * */
 	public Piece getPiece() {
 		return piece;
 	}
 	
+	/**
+	 * Gets column
+	 * @return column
+	 * */
 	public int getColumn() {
 		return column;
 	}
 	
+	/**
+	 * Gets row
+	 * @return row
+	 * */
 	public int getRow() {
 		return row;
 	}
 	
+	/**
+	 * Sets column
+	 * @param column
+	 * */
 	public void setColumn(int column) {
 		this.column = column;
 	}
 	
+	/**
+	 * Sets row
+	 * @param row
+	 * */
 	public void setRow(int row) {
 		this.row = row;
 	}

@@ -25,6 +25,9 @@ import javax.swing.border.EmptyBorder;
  * Toolbar for game
  */
 public class Toolbar extends View {
+	/**
+	 * Creates new toolbar
+	 * */
 	public Toolbar() {
 		super();
 		this.setLayout(null);
@@ -60,12 +63,10 @@ public class Toolbar extends View {
 		});
 	}
 
-	/*
-	public void updateState(Model model) {
-		currentTurn.updateState(model);
-	}
-	*/
-
+	/**
+	 * Paints view
+	 * @param g - graphics context
+	 * */
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -74,11 +75,21 @@ public class Toolbar extends View {
 		g.fillRect(0, 0, g.getClipBounds().width, g.getClipBounds().height - 26);
 	}
 	
+	/**
+	 * Gets fixed display size for view
+	 * @param size - Parent sizee
+	 * @param location - Parent location
+	 * @return dimension - size
+	 * */
 	@Override
 	public Dimension getDisplaySize(Dimension size, Point location) {
 		return new Dimension(size.width, DEFAULT_HEIGHT); // temporary hack until layoutManager allows to fill on only 1 dimension
 	}
 	
+	/**
+	 * Layouts for view
+	 * @return layout - nested layout structure for view
+	 * */
 	@Override
 	public
 	Layout layoutThatFits() {
@@ -90,6 +101,10 @@ public class Toolbar extends View {
 				new StackLayout(StackLayout.Direction.HORIZONTAL, 0, children));
 	}
 
+	/**
+	 * Gets the current turn
+	 * @return currentTurn - view
+	 * */
 	public CurrentTurn getCurrentTurn() {
 	   return currentTurn;
 	}

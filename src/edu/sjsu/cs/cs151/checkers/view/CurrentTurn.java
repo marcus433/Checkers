@@ -12,7 +12,13 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * Toolbar CurrentTurn view
+ * */
 public class CurrentTurn extends View {
+	/**
+	 * Creates new current turn
+	 * */
 	public CurrentTurn() {
 		super();
 		this.setOpaque(false);
@@ -23,7 +29,11 @@ public class CurrentTurn extends View {
 		add(piece);
 		add(currentTurnLabel);
 	}
-
+	
+	/**
+	 * Creates new layout nested structure
+	 * @return layout - nested layouts
+	 * */
 	@Override
 	public Layout layoutThatFits() {
 		ArrayList<Layout> children = new ArrayList<>();
@@ -32,17 +42,10 @@ public class CurrentTurn extends View {
 		return new StackLayout(StackLayout.Direction.HORIZONTAL, 10, children);
 	}
 	
-	/*
-	public void updateState(Model model) {
-		edu.sjsu.cs.cs151.checkers.model.Piece.Color color = model.getCurrentColor();
-		if (color == edu.sjsu.cs.cs151.checkers.model.Piece.Color.RED)
-			piece.setColor(Piece.Color.RED);
-		else
-			piece.setColor(Piece.Color.BLACK);
-		piece.repaint();
-	}
-	*/
-	
+	/**
+	 * Set color of view
+	 * @param color - Piece color
+	 * */
 	public void setColor(Piece.Color color) {
 	   piece.setColor(color);
 	   piece.repaint();

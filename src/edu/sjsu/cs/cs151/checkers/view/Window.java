@@ -16,8 +16,18 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/**
+ * JFrame wrapper that 
+ * takes into accoutn aspect ratios
+ * and resizing
+ * */
 public class Window extends JFrame implements ComponentListener {
 
+	/**
+	 * Creates new window
+	 * @param title - window title
+	 * @param view - view to show in window
+	 * */
 	public Window(String title, View view) {
 		super(title);
 		this.view = view;
@@ -38,14 +48,25 @@ public class Window extends JFrame implements ComponentListener {
 		}
 	}
 
+	/**
+	 * Creates new window
+	 * @param title - window title
+	 * */
 	private Window(String title) {
 		super(title);
 	}
 	
+	/**
+	 * Creates new window
+	 * */
 	private Window() {
 		super();
 	}
 	
+	/**
+	 * Called on JFrame resize
+	 * @param event - resize event
+	 * */
 	@Override
 	public void componentResized(ComponentEvent event) {
 		double aspectRatio = aspectRatio();
@@ -55,11 +76,19 @@ public class Window extends JFrame implements ComponentListener {
 		layoutViews();
 	}
 
+	/**
+	 * Renders view layouts
+	 * based on frame size
+	 * */
 	private void layoutViews() {
 		Dimension size = getSize();
 		this.view.renderWithSize(size, new Point(0, 0));
 	}
 	
+	/**
+	 * Gets aspect ratio for screen
+	 * @return ratio
+	 * */
 	private double aspectRatio() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		double relativeDimension = (double)screenSize.height * HEIGHT_RELATIVE;
@@ -68,6 +97,10 @@ public class Window extends JFrame implements ComponentListener {
 		return height / width;
 	}
 	
+	/**
+	 * Clamps dimensions to a min and max
+	 * @return clamped dimension
+	 * */
 	private int clampDimension(int dimension) {
 		return Math.max(Math.min(dimension, MAX_DIMENSION), MIN_DIMENSION);
 	}
@@ -85,6 +118,6 @@ public class Window extends JFrame implements ComponentListener {
 
 	private View view;
 	private static final double HEIGHT_RELATIVE = 0.8;
-	private static final int MAX_DIMENSION = 1000;
+	private static final int MAX_DIMENSION = 900;
 	private static final int MIN_DIMENSION = 700;
 }
