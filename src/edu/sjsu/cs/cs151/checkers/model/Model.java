@@ -2,6 +2,11 @@ package edu.sjsu.cs.cs151.checkers.model;
 
 import edu.sjsu.cs.cs151.checkers.model.Piece.Color;
 
+/**
+ * Model maintains the game state of a single game of Checkers. It monitors Pieces, Checkers (tiles), and their positions on a board.
+ * @author seanz
+ *
+ */
 public class Model {
    
    private Model() {
@@ -290,11 +295,19 @@ public class Model {
       return board;
    }
 
+   /**
+    * getOrigin returns origin, a private field representing a currently selected position on the board.
+    * @return origin - a Position representing the current selected position
+    */
    public Position getOrigin() {
     return this.origin;
    }
    
-  public Position getLastOrigin() {
+   /**
+    * getLastOrigin returns lastOrigin, a private field representing the previously selected position on the board.
+    * @return lastOrigin - a Position representing the previously selected position
+    */
+   public Position getLastOrigin() {
     return this.lastOrigin;
    }
 
@@ -307,10 +320,18 @@ public class Model {
       return canJumpAgain;
    }
    
+   /**
+    * getCurrentColor returns currentColor, a private field representing the current player's turn/color.
+    * @return currentColor - Color.RED or Color.BLACK, depending on whose turn it is
+    */
    public Piece.Color getCurrentColor() {
 	   return currentColor;
    }
    
+   /**
+    * getCurrentPiece returns currentPiece, a private field representing the currently selected Piece.
+    * @return currentPiece - the currently selected Piece, corresponding to the currently selected Position
+    */
    public Piece getCurrentPiece() {
       return currentPiece;
    }

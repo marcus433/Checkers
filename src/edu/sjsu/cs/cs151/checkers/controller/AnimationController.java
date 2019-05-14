@@ -12,8 +12,7 @@ import javax.swing.Timer;
 import javax.swing.JPanel;
 
 /**
- * Handles animation interpolation
- * easing, and chaining.
+ * Handles animation interpolation, easing, and chaining.
  */
 public class AnimationController implements ActionListener {
 	

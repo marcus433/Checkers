@@ -23,9 +23,12 @@ import edu.sjsu.cs.cs151.checkers.view.Gameboard;
 import edu.sjsu.cs.cs151.checkers.view.MainView;
 import edu.sjsu.cs.cs151.checkers.view.Window;
 
-/*
- * Handles main JFrame
- * */
+/**
+ * Main is the central class that is called on any execution of the Checkers program.
+ * It manages the game loop and GUI of any execution of Checkers.
+ * @author seanz
+ *
+ */
 public class Main {
 	/**
 	 * Queue for valve tasks
@@ -33,10 +36,11 @@ public class Main {
 	public static BlockingQueue<Message> queue = new LinkedBlockingQueue<>();
 	
 	/**
-	 * Instantiates new Window
-	 * with game UI
-	 * @param args - console arguments
-	 * */
+	 * main() is responsible for Checkers' core game loop, and also cleanup when exiting the game.
+	 * It instantiates a Model and MainView, and links them with a Window and a Controller.
+	 * It also runs the Controller's main loop, which manages the game's state, graphics, and user input.
+	 * @param args - unused
+	 */
 	public static void main(String[] args) {
 		Model model = Model.getInstance(); // get model instance
 		MainView view = new MainView(); // get main view UI
